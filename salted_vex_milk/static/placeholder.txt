@@ -1,0 +1,1 @@
+Placeholder to ensure that this static file will be added to the project. Django will collect static files and put them in this folder. Isn't that nice.

@@ -1,0 +1,53 @@
+{% extends "clans/base.html" %}
+
+{% block  content %}
+<h2>All aboard the Vex Milk express</h2>
+<p>If you don't have enough salt in your life, Salted Vex Milk will cure what ails ya'! Herein you will find lots of information about the <i>{{clan.name}}</i> Clan.</p>
+<hr/>
+
+  {% if clan  %}
+    <h3>{{clan.name}}: General information about the clan</h3>
+    <ul>
+        <li>
+          <b>Number of members:</b> {{clan.num_members}}
+        </li>
+
+        <li>
+          <b>Motto:</b> {{clan.motto}}
+        </li>
+
+        <li>
+          <b>Call sign:</b> {{clan.call_sign}}
+        </li>
+
+        <li>
+          <b>Creation date:</b> {{clan.creation_date}}
+        </li>
+
+        <li>
+          <b>Founder:</b> The benevolent, omnipotent <i>{{clan.founder}}</i>.
+        </li>
+
+        <li>
+           <b>Clan Description:</b>
+           <p style="white-space: pre-line">{{clan.description}}</p>
+        </li>
+    </ul>
+  {% else %}
+    <p>There is no clan here</p>
+  {% endif %}
+
+<hr/>
+<p>If you want to update clan information, click the button</p>
+<form action = "{% url 'clans:index' %}" method = 'post' class="form">
+  {% csrf_token %}
+  <button type = "submit" class="btn btn-primary">Submit Clan</button>
+</form>
+
+{% if clan.updated %}
+  <i>Last updated: {{clan.updated}}.</i>
+{% else %}
+  <i>Last update: unknown.</i>
+{% endif %}
+
+{% endblock content %}
