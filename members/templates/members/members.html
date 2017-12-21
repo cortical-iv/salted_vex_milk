@@ -1,0 +1,23 @@
+{% extends "clans/base.html" %}
+
+{% block  content %}
+Member information
+
+<ul>
+  {% for member in members %}
+    <li>{{ member.name }}</li>
+  {% empty %}
+    <li>No data for members entered yet</li>
+  {% endfor %}
+</ul>
+
+
+<hr/>
+<p>If you want to update member information, click the button</p>
+<form action = "{% url 'members:members' %}" method = 'post' class="form">
+  {% csrf_token %}
+  <button type = "submit" class="btn btn-primary">Refresh Members</button>
+</form>
+
+
+{% endblock content %}

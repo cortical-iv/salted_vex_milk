@@ -17,6 +17,7 @@ import requests
 import logging
 
 from .constants import BASE_URL, GROUP_ID, BASE_URL_GROUP, D2_HEADERS
+from clans.models import Clan
 #from .forms import SubmitUser
 
 """
@@ -114,6 +115,7 @@ def get_members_of_group_url(group_id):
 HELPER FUNCTIONS
 """
 def extract_clan_info(clan_data):
+    """Returns info needed for Clan form"""
     clan_details = clan_data['detail']
     clan_info = {}
     clan_info['clan_id'] = clan_details['groupId']
@@ -127,22 +129,26 @@ def extract_clan_info(clan_data):
     return clan_info
 
 
-def generate_clan_list(member_data):
+def extract_member_list(member_data):
     """
     Using GetMembersOfGroup end point, create list of member info for clan members.
         Each elt is a dict with username. id, join date. Filters out people not on psn.
+    Each elt of list is ready for MemberForm
     """
     member_data = member_data['results']
-    clan_members_data = []
+    clan = Clan.objects.get(clan_id = GROUP_ID)
+    clan_members = []
     for member in member_data:
         clan_member = {}
         clan_member['membership_type'] = member['destinyUserInfo']['membershipType']
-        if clan_member['membership_type'] == 2:
-            clan_member['name'] = member['destinyUserInfo']['displayName']
-            clan_member['id'] = member['destinyUserInfo']['membershipId']
-            clan_member['date_joined']  = member['joinDate']
-            clan_members_data.append(clan_member)
-    return clan_members_data
+        clan_member['name'] = member['destinyUserInfo']['displayName']
+        clan_member['member_id'] = member['destinyUserInfo']['membershipId']
+        clan_member['date_joined']  = member['joinDate']
+        clan_member['clan'] = clan.id
+        logging.info(clan_member)
+        clan_members.append(clan_member)
+    logging.info("Done with extract_member_list")
+    return clan_members
 
 
 

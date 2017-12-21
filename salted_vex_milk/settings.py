@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     #my apps
     'd2api',
     'clans',
+    'members',
+
 
 ]
 
