@@ -6,9 +6,11 @@ Sorted by join date
 <ul>
   {% for member in members %}
     <li>
-      {{ member.name }}.
+      <b>{{ member.name }}</b>
       Joined {{ member.date_joined }}.
-      Membership type: {{ member.membership_type }}
+      Membership type: {{ member.membership_type }}.
+      ID: {{ member.member_id }}
+      <!--  Has played Destiny 2? {{ member.has_played_d2 }} -->
     </li>
 
   {% empty %}

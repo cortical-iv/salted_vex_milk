@@ -57,7 +57,11 @@ def index(request):
     else:
         logging.debug("GET request in view.index: just display data.")
 
-    clan_instance = Clan.objects.get(clan_id = GROUP_ID)
-    context = {'clan': clan_instance}
+    #need try/except in case object doesn't exist yet
+    try:
+        clan_instance = Clan.objects.get(clan_id = GROUP_ID)
+        context = {'clan': clan_instance}
+    except:
+        context = {}
     return render(request, 'clans/index.html', context) # 'index.html', {'update_clan_form': update_clan_form})
 

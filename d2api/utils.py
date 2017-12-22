@@ -23,7 +23,7 @@ from clans.models import Clan
 """
 Set up logger: for now just print everything to stdout.
 """
-logging.basicConfig(level = logging.INFO,
+logging.basicConfig(level = logging.INFO,  #DEBUG
                     format = '%(asctime)s - %(levelname)s - %(message)s',
                     datefmt =' %m/%d/%y %H:%M:%S')
 logger = logging.getLogger(__name__)
@@ -37,12 +37,17 @@ class BungieError(Exception):
     """Raise when ErrorCode from Bungie is not 1"""
 
 
-def make_request(url, session):
+def make_request(url, session, request_params = None):
     try:
-        response = session.get(url)
+        if request_params:
+            response = session.get(url, params = request_params)
+        else:
+            response = session.get(url)
+
         if not response.ok:
             response.raise_for_status()
-    except requests.exceptions.RequestException as requestException:
+
+    except requests.exceptions.RequestException:
         raise
     else:
         return response
@@ -78,20 +83,29 @@ def process_bungie_response(response):
         return data
 
 
-def destiny2_api_handler(url, session):
-    response = make_request(url, session)
+def destiny2_api_handler(url, session, request_params = None):
+    if request_params:
+        response = make_request(url, session, request_params)
+    else:
+        response = make_request(url, session)
     return process_bungie_response(response)
 
 
 """
 URL generators
 """
-def search_destiny_player_url(user_name):
+def search_destiny_player_url(name):
     """Get user's info card:
         https://bungie-net.github.io/multi/operation_get_Destiny2-SearchDestinyPlayer.html
       Right now it is constrained to ps4 (platform = 2)
     """
-    return BASE_URL + 'SearchDestinyPlayer/2/' + user_name + '/'
+    return BASE_URL + 'SearchDestinyPlayer/2/' + name + '/'
+
+def get_profile_url(member_id, membership_type):
+    """Get information about different aspects of user's character like equipped items.
+        https://bungie-net.github.io/multi/operation_get_Destiny2-GetProfile.html
+    """
+    return BASE_URL + str(membership_type) + '/' + 'Profile/' + str(member_id)
 
 
 def get_group_url(group_id):
@@ -132,7 +146,7 @@ def extract_clan_info(clan_data):
 def extract_member_list(member_data):
     """
     Using GetMembersOfGroup end point, create list of member info for clan members.
-        Each elt is a dict with username. id, join date. Filters out people not on psn.
+        Each elt is a dict with username. id, join date.
     Each elt of list is ready for MemberForm
     """
     member_data = member_data['results']

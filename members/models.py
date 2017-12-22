@@ -10,6 +10,7 @@ class Member(models.Model):
     name = models.CharField(blank=False, null=False, max_length = 16)
     date_joined = models.CharField(max_length = 100)
     membership_type = models.IntegerField()
+    #has_played_d2 = models.BooleanField(default = True)
 
     class Meta:
         unique_together = ('member_id', 'membership_type') #need both to uniquely identify players
