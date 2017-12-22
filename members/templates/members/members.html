@@ -1,23 +1,27 @@
 {% extends "clans/base.html" %}
 
 {% block  content %}
-Member information
-
+<h1>Member list</h1>
+Sorted by join date
 <ul>
   {% for member in members %}
-    <li>{{ member.name }}</li>
+    <li>
+      {{ member.name }}.
+      Joined {{ member.date_joined }}.
+      Membership type: {{ member.membership_type }}
+    </li>
+
   {% empty %}
-    <li>No data for members entered yet</li>
+    <li>No members have been entered yet</li>
   {% endfor %}
 </ul>
 
-
 <hr/>
 <p>If you want to update member information, click the button</p>
-<form action = "{% url 'members:members' %}" method = 'post' class="form">
-  {% csrf_token %}
-  <button type = "submit" class="btn btn-primary">Refresh Members</button>
-</form>
+  <form action = "{% url 'members:members' %}" method = 'post' class="form">
+    {% csrf_token %}
+    <button type = "submit" class="btn btn-primary">Update Members</button>
+  </form>
 
 
 {% endblock content %}

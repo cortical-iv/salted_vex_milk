@@ -40,22 +40,22 @@ def index(request):
                 try:
                     clan_instance = Clan.objects.get(clan_id = clan_info['clan_id'])
                 except Clan.DoesNotExist:
-                    logging.info("Adding clan to db.")
+                    logging.debug("Adding clan to db.")
                     clan_form_bound = ClanForm(clan_info)
                 else:
-                    logging.info("Clan already exists: updating.")
+                    logging.debug("Clan already exists: updating.")
                     clan_form_bound = ClanForm(clan_info, instance = clan_instance)
 
 
                 if clan_form_bound.is_valid():
                     clan_form_bound.save()
-                    logging.info("Clan successfully saved.")
+                    logging.debug("Clan successfully saved.")
                 else:
                     logging.error(f"clan form not valid. error: {clan_form_bound.errors}")
                     raise forms.ValidationError(f"Clan info not valid: {clan_form_bound.errors}")
 
     else:
-        logging.info("GET request in view.index: just display data.")
+        logging.debug("GET request in view.index: just display data.")
 
     clan_instance = Clan.objects.get(clan_id = GROUP_ID)
     context = {'clan': clan_instance}

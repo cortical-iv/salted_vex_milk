@@ -12,7 +12,7 @@ class Member(models.Model):
     membership_type = models.IntegerField()
 
     class Meta:
-        unique_together = ('member_id', 'membership_type')
+        unique_together = ('member_id', 'membership_type') #need both to uniquely identify players
 
     def __str__(self):
         return self.name

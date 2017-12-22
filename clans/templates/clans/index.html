@@ -1,6 +1,7 @@
 {% extends "clans/base.html" %}
 
 {% block  content %}
+<h1>All Aboard the Vexmilk Express!</h1>
 <p>If you don't have enough salt in your life, Salted Vex Milk will cure what ails ya'! Herein you will find lots of information about the <i>{{clan.name}}</i> Clan.</p>
 <hr/>
 
@@ -40,7 +41,7 @@
 <p>If you want to update clan information, click the button</p>
 <form action = "{% url 'clans:index' %}" method = 'post' class="form">
   {% csrf_token %}
-  <button type = "submit" class="btn btn-primary">Submit Clan</button>
+  <button type = "submit" class="btn btn-primary">Update Clan</button>
 </form>
 
 {% if clan.updated %}
