@@ -29,7 +29,7 @@ def members(request):
         with requests.Session() as session:
             session.headers.update(D2_HEADERS)
             #Functionalize the following you will use it for each end poin
-            time_init_memblist = time.process_time()
+            #time_init_memblist = time.process_time()
             members_url = api.get_members_of_group_url(GROUP_ID)
             logging.info(f"Retreiving group members. URL: {members_url}")
             try:
@@ -38,19 +38,21 @@ def members(request):
                 logging.exception(f"Error getting clan members for {GROUP_ID}.\nException: {err}.")
             else:
                 members = api.extract_member_list(members_data)
-                elapsed_time_memblist = time.process_time() - time_init_memblist
-                logging.info(f"Memberlist construction time: {elapsed_time_memblist}")
+                #elapsed_time_memblist = time.process_time() - time_init_memblist
+                #logging.info(f"Memberlist construction time: {elapsed_time_memblist}")
                 #update or insert member data
                 for member in members:
                     time_init_process_member = time.process_time()
                     name = member['name']
-
+                    logging.info(f"Processing {name}.")
 #                    #Determine if user has played d2 or not
 #                    time_init_profile = time.process_time()
 #                    profile_url = api.get_profile_url(member['member_id'], member['membership_type']) #/?components=' + components #200
 #                    profile_params = {'components': '200'}
 #                    try:
 #                        profile_response = api.make_request(profile_url, session, request_params = profile_params)
+#                        logging.info(f"ThrottleSeconds: {profile_response.json()['ThrottleSeconds']}")
+#
 #                        if profile_response.json()['ErrorStatus'] == 'DestinyAccountNotFound':
 #                            member['has_played_d2'] = False
 #                        else:
@@ -66,13 +68,12 @@ def members(request):
                         member_instance = Member.objects.get(member_id = member['member_id'],
                                                              membership_type = member['membership_type'])
                     except Member.DoesNotExist:
-                        logging.info(f"Adding {name} to db.")
                         member_form_bound = MemberForm(member)
                     else:
                         logging.debug(f"{name} already exists: updating.")
                         member_form_bound = MemberForm(member, instance = member_instance)
                     elapsed_time_exists = time.process_time() - time_init_exists
-                    logging.info(f"Check if player instance exists: {elapsed_time_exists}")
+                    logging.debug(f"Check if player instance exists: {elapsed_time_exists}")
 
                     #validate and save form
                     time_init_validate = time.process_time()
@@ -87,10 +88,10 @@ def members(request):
                         logging.error(f"member form not valid. error: {member_form_bound.errors}.\nMember data: {member}")
                         raise forms.ValidationError(f"Member info not valid: {member_form_bound.errors}")
                     elapsed_time_validate = time.process_time() - time_init_validate
-                    logging.info(f"Validation time: {elapsed_time_validate}")
+                    logging.debug(f"Validation time: {elapsed_time_validate}")
 
                     elapsed_time_process_member = time.process_time() - time_init_process_member
-                    logging.info(f"Member add time: {elapsed_time_process_member}\n")
+                    logging.info(f"{name} add time: {elapsed_time_process_member}\n")
 
 
     else:
