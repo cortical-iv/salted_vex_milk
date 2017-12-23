@@ -4,20 +4,20 @@ Processing clans in D2 with Django 2.0.
 ## Goal
 Front page will have basic information about the clan. There will be pages for clan leaderboards, individual clan member stats, including what each player is currently doing.  Allow for sorting by stats. Another page for links and content (link to official clan site, to slack channel, youtube channel, strategy channels, etc).
 
-### Apps
-|-- d2api/    (core app used to make/process requests)
-|   |-- utils.py    (api handlers and helper functions for processing responses)
-|   |-- constants.py (parameters like secret keys, headers)
-|    
-|-- clans/    (app for Clan model: generic clan info like motto, num members)
-|   |-- models.py    (the Clan model)
-|   |-- forms.py    (the ModelForm for Clan, used to consume end points)
-|   |-- urls.py    (includes the main page for the site, index.html)
-|
-|-- members/    (app for Member model: generic info like id, date joined)   
-    |-- models.py    (the Member model)
-    |-- forms.py    (ModelForm for Member model)
-    |-- urls.py    (main page for members is /members.html)
+### App structure
+    |-- d2api/  (core app to make/process requests)   
+    |   |-- utils.py  (api handlers/helper functions for processing responses)    
+    |   |-- constants.py  (parameters like secret keys, headers)    
+    |       
+    |-- clans/  (app for Clan model: generic clan info like motto)    
+    |   |-- models.py  (the Clan model)    
+    |   |-- forms.py  (the ModelForm for Clan)    
+    |   |-- urls.py  (includes home page index.html)    
+    |    
+    |-- members/  (app for Member model: generic info like id)     
+        |-- models.py  (the Member model)    
+        |-- forms.py  (ModelForm for Member model)    
+        |-- urls.py  (main page for members is /members.html)     
 
 
 ## To do
