@@ -46,21 +46,21 @@ def members(request):
                     name = member['name']
                     logging.info(f"Processing {name}.")
 #                    #Determine if user has played d2 or not
-#                    time_init_profile = time.process_time()
-#                    profile_url = api.get_profile_url(member['member_id'], member['membership_type']) #/?components=' + components #200
-#                    profile_params = {'components': '200'}
-#                    try:
-#                        profile_response = api.make_request(profile_url, session, request_params = profile_params)
-#                        logging.info(f"ThrottleSeconds: {profile_response.json()['ThrottleSeconds']}")
-#
-#                        if profile_response.json()['ErrorStatus'] == 'DestinyAccountNotFound':
-#                            member['has_played_d2'] = False
-#                        else:
-#                            member['has_played_d2'] = True
-#                    except:
-#                        logging.error(f"No profile data for {name}. URL: {profile_url}")
-#                    elapsed_time_profile = time.process_time() - time_init_profile
-#                    logging.info(f"Check if has played time: {elapsed_time_profile}")
+                    time_init_profile = time.process_time()
+                    profile_url = api.get_profile_url(member['member_id'], member['membership_type']) #/?components=' + components #200
+                    profile_params = {'components': '200'}
+                    try:
+                        profile_response = api.make_request(profile_url, session, request_params = profile_params)
+                        logging.info(f"ThrottleSeconds: {profile_response.json()['ThrottleSeconds']}")
+
+                        if profile_response.json()['ErrorStatus'] == 'DestinyAccountNotFound':
+                            member['has_played_d2'] = False
+                        else:
+                            member['has_played_d2'] = True
+                    except:
+                        logging.error(f"No profile data for {name}. URL: {profile_url}")
+                    elapsed_time_profile = time.process_time() - time_init_profile
+                    logging.info(f"Check if has played time: {elapsed_time_profile}")
 
                     #determine if member exists or not, and update/insert accordingly
                     time_init_exists = time.process_time()

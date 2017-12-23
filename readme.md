@@ -1,27 +1,38 @@
 # Salted Vex Milk
-Processing clans in D2.
+Processing clans in D2 with Django 2.0.
 
 ## Goal
 Front page will have basic information about the clan. There will be pages for clan leaderboards, individual clan member stats, including what each player is currently doing.  Allow for sorting by stats. Another page for links and content (link to official clan site, to slack channel, youtube channel, strategy channels, etc).
 
+### Apps
+|-- d2api/    (core app used to make/process requests)
+|   |-- utils.py    (api handlers and helper functions for processing responses)
+|   |-- constants.py (parameters like secret keys, headers)
+|    
+|-- clans/    (app for Clan model: generic clan info like motto, num members)
+|   |-- models.py    (the Clan model)
+|   |-- forms.py    (the ModelForm for Clan, used to consume end points)
+|   |-- urls.py    (includes the main page for the site, index.html)
+|
+|-- members/    (app for Member model: generic info like id, date joined)   
+    |-- models.py    (the Member model)
+    |-- forms.py    (ModelForm for Member model)
+    |-- urls.py    (main page for members is /members.html)
+
+
 ## To do
 ### General
-- has-Played_d2 causes timeout of requests :(
-- Push upsert logic into model or form rather than view. Functionalize it too.
-- Automate updates: right now they are triggered by a button press (clan/member)
+- Create management functions to pull data in.
+- Automate the updates (heroku scheduler?)
 - logging is different across multiple modules (utils and views):
     integrate logging settings into a central module?
 
 ### Clan
-- Refactor utils and view: GROUP_ID is acting as a global rather than getting passed. E.g., headers, base_url (in utils, and views, and forms: check on this). In views, clan_instance =  .... (clan_id=GROUP_ID). This seems smelly. In utils.extract_member_list:     
-    clan = Clan.objects.get(clan_id = GROUP_ID)
-also smelly.
+- Refactor utils and view (e.g., GROUP_ID is acting as a global).
 
 ### Member
-- How to store date the Member data was updated? Put in clan? With each player? They can be updated at different times, after all. But really I want to just display the last datetime the entire list was updated, not each member.
-- What if user tries to update members if they haven't saved clan data yet? That will break this.
-- Refactor view: best use of 2 endpoints in model?
-- Seems I should integrate this in but if there is a different endpoint for this how to best combine with the member-list endpoint?
+- Store datetime the member list was last updated.
+- Breaks if user tries to update members when no clan exists.
 - Give option of sorting alphabetically, join date, membership type, other info.
     - Current activity (there is an 'isOnline' in the get group member endpoint), or if not online, last login.
     - Stats
@@ -36,8 +47,8 @@ also smelly.
 
 ## In ideal world
 - Should work for multiple clans, so user can enter their clan id and get this information.
-- Learn how to develop on windows and linux machine?
+- Develop on both windows and linux machine?
 
 ## Things to remember
-- When setting field (e.g., clan) in model (member) that is tethered to another model as foreign key (e.g., Member instance has Clan foreign key), you don't set the field to model instance, but to model_instance.id. Otherwise you end up in a world of hurt with errors like "That choice is not one of the available choices."
+- When setting field (e.g., clan) in model (member) that is tethered to another model as foreign key (e.g., Member instance has Clan foreign key), you set field to model_instance.id. O
 - Docs for sessions: http://docs.python-requests.org/en/master/api/#request-sessions

@@ -11,4 +11,4 @@ from .models import Member
 class MemberForm(forms.ModelForm):
     class Meta:
         model = Member
-        fields =  ['clan', 'member_id', 'name', 'date_joined', 'membership_type'] #, 'has_played_d2']
+        fields =  ['clan', 'member_id', 'name', 'date_joined', 'membership_type', 'has_played_d2']
