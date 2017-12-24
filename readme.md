@@ -13,6 +13,9 @@ Front page will have basic information about the clan. There will be pages for c
     |   |-- models.py  (the Clan model)    
     |   |-- forms.py  (the ModelForm for Clan)    
     |   |-- urls.py  (includes home page index.html)    
+    |   |-- management/  (management function to refresh clan)
+    |      |-- commands/  (each file inside contains a command)
+    |          |-- refresh_clans.py  (post request updates clan info)
     |    
     |-- members/  (app for Member model: generic info like id)     
         |-- models.py  (the Member model)    
@@ -22,13 +25,20 @@ Front page will have basic information about the clan. There will be pages for c
 
 ## To do
 ### General
-- Create management functions to pull data in.
-- Automate the updates (heroku scheduler?)
-- logging is different across multiple modules (utils and views):
-    integrate logging settings into a central module?
+- Automate clan update
+    - Create clan management function to pull data in.
+    - Automate the updates (heroku scheduler?)
+- Automate members update
+    - Create members management function to pull data
+    - Automate that update
+- Create response object like Jessamyn recommended:
+    https://github.com/jessamynsmith/django-getting-started
+- logging is different across multiple modules (utils and views and management
+   functions: integrate into a central module?
 
 ### Clan
-- Refactor utils and view (e.g., GROUP_ID is acting as a global).
+- Refactor utils and view (e.g., GROUP_ID is acting as a global in
+    refresh_clans and probably other places.
 
 ### Member
 - Store datetime the member list was last updated.
