@@ -1,12 +1,13 @@
 # Salted Vex Milk
 Processing clans in D2 with Django 2.0.
 
-## Goal
-Front page will have basic information about the clan. There will be pages for clan leaderboards, individual clan member stats, including what each player is currently doing.  Allow for sorting by stats. Another page for links and content (link to official clan site, to slack channel, youtube channel, strategy channels, etc).
+Front page will have basic information about the clan and clan members. Should include leaderboards, individual clan member stats, including what each player is currently doing. Another page for links and content (link to official clan site, to slack channel, youtube channel, strategy channels, etc).
 
-### App structure
+Currently it's just a stub that shows basic clan information and member information (e.g., join date), as I work out the basic architecture.
+
+### Applications
     |-- d2api/  (core app to make/process requests)   
-    |   |-- utils.py  (api handlers/helper functions for processing responses)    
+    |   |-- utils.py  (functions for building/processing requests)    
     |   |-- constants.py  (parameters like secret keys, headers)    
     |       
     |-- clans/  (app for Clan model: generic clan info like motto)    
