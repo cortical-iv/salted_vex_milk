@@ -26,7 +26,7 @@ Currently it's just a stub that shows basic clan information and member informat
           |-- commands/
               |-- refresh_members.py  (post request updates member info)
 
-## To do
+## To do (shorter term)
 - Check heroku logs next few days make sure scheduler worked (12/24/17).
 - In footer of members.html, show datetime the list was last updated
     - Set as a class attribute ((*not* instance attribute)
@@ -40,13 +40,16 @@ Currently it's just a stub that shows basic clan information and member informat
         - Current activity (there is an 'isOnline' in the get group member endpoint), or if not online, last login.
         - Stats
     - Link in members.html to each member's page with all their stats.
-- Work on front end make it less ugly bootstrap.
 - Centralize logger settings: they are defined separately in
     utils/views/management
+- Add stats! CurrentActivity, PvP, PvE, raid.
+
+## To do (longer term)
+- Work on front end (bootstrap)
 
 ## In ideal world
 - Should work for multiple clans, so user can enter their clan id and get this information.
-- How to set up to develop on both windows and linux machine?
+- Set up to develop on multiple computers.
 
 ## Things to remember
 - When setting field (e.g., clan) in model (member) that is tethered to another model as foreign key (e.g., Member instance has Clan foreign key), set field to model_instance.id.
