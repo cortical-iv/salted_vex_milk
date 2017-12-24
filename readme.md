@@ -26,35 +26,27 @@ Front page will have basic information about the clan. There will be pages for c
                |-- refresh_members.py  (post request updates member info)
 
 ## To do
-- Check heroku logs next few says make sure scheduler worked.
-- Remove buttons form pages.
-- Remove manager commands from views: they aren't needed anymore.
-- Create response object:
-    https://github.com/jessamynsmith/django-getting-started
-- logging is different across multiple modules (utils and views and management
-   functions: integrate into a central module?
-- Email log files?
-    https://stackoverflow.com/a/6187851/9072894
-- In footer of members.html, sho datetime the list was last updated
+- Check heroku logs next few days make sure scheduler worked (12/24/17).
+- In footer of members.html, show datetime the list was last updated
     - Set as a class attribute ((*not* instance attribute)
     - Put in template
+- Resuscitate response object:
+    https://github.com/jessamynsmith/django-getting-started
 - GROUP_ID is acting as a global (views and management fncts): fix this
-
-### Member to do
-- Breaks if user tries to update members when no clan exists.
-- Give option of sorting alphabetically, join date, membership type, other info.
-    - Current activity (there is an 'isOnline' in the get group member endpoint), or if not online, last login.
-    - Stats
-- Link in members.html to each member's page with all their stats.
-- constants.MEMBERSHIP_ENUM not being used.
-
-### Make it look non-ugly
-- Bootstrap it
+- Refactor member class/view
+    - Breaks if user tries to update members when no clan exists.
+    - Give option of sorting alphabetically, join date, membership type, other info.
+        - Current activity (there is an 'isOnline' in the get group member endpoint), or if not online, last login.
+        - Stats
+    - Link in members.html to each member's page with all their stats.
+- Work on front end make it less ugly bootstrap.
+- Centralize logger settings: they are defined separately in
+    utils/views/management
 
 ## In ideal world
 - Should work for multiple clans, so user can enter their clan id and get this information.
-- Develop on both windows and linux machine?
+- How to set up to develop on both windows and linux machine?
 
 ## Things to remember
-- When setting field (e.g., clan) in model (member) that is tethered to another model as foreign key (e.g., Member instance has Clan foreign key), you set field to model_instance.id. O
+- When setting field (e.g., clan) in model (member) that is tethered to another model as foreign key (e.g., Member instance has Clan foreign key), set field to model_instance.id.
 - Docs for sessions: http://docs.python-requests.org/en/master/api/#request-sessions

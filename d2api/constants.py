@@ -14,4 +14,4 @@ BASE_URL_GROUP = 'https://bungie.net/Platform/GroupV2/'
 D2_KEY = settings.D2_KEY
 D2_HEADERS = {"X-API-Key": D2_KEY}
 
-MEMBERSHIP_ENUM = {0: 'none', 1: 'xbox',  2: 'psn', 4: 'pc', -1: 'all' }
+# MEMBERSHIP_ENUM = {0: 'none', 1: 'xbox',  2: 'psn', 4: 'pc', -1: 'all' }  #to be used someday
