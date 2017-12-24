@@ -5,26 +5,26 @@ Front page will have basic information about the clan and clan members. Should i
 
 Currently it's just a stub that shows basic clan information and member information (e.g., join date), as I work out the basic architecture.
 
-### Applications
-    |-- d2api/  (core app to make/process requests)   
-    |   |-- utils.py  (functions for building/processing requests)    
-    |   |-- constants.py  (parameters like secret keys, headers)    
-    |       
-    |-- clans/  (app for Clan model: generic clan info like motto)    
-    |   |-- models.py  (the Clan model)    
-    |   |-- forms.py  (the ModelForm for Clan)    
-    |   |-- urls.py  (includes home page index.html)    
-    |   |-- management/  (management function to refresh clan)
-    |      |-- commands/  
-    |          |-- refresh_clans.py  (post request updates clan info)
-    |    
-    |-- members/  (app for Member model: generic info like id)     
-        |-- models.py  (the Member model)    
-        |-- forms.py  (ModelForm for Member model)    
-        |-- urls.py  (main page for members is /members.html)     
-        |-- management/  (management function to refresh members)
-           |-- commands/
-               |-- refresh_members.py  (post request updates member info)
+### Structure of apps
+    d2api/  (core app to make/process requests)   
+      |-- utils.py  (the business logic)    
+      |-- constants.py  (parameters like secret keys, headers)    
+
+    clans/  (app for Clan model: generic clan info like motto)    
+      |-- models.py  (the Clan model)    
+      |-- forms.py  (the ModelForm for Clan)    
+      |-- urls.py  (includes home page index.html)    
+      |-- management/  (management function to refresh clan)
+          |-- commands/  
+              |-- refresh_clans.py  (post request updates clan info)
+
+    members/  (app for Member model: generic info like id)     
+      |-- models.py  (the Member model)    
+      |-- forms.py  (ModelForm for Member model)    
+      |-- urls.py  (main page for members is /members.html)     
+      |-- management/  (management function to refresh members)
+          |-- commands/
+              |-- refresh_members.py  (post request updates member info)
 
 ## To do
 - Check heroku logs next few days make sure scheduler worked (12/24/17).
