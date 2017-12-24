@@ -34,17 +34,17 @@ Currently it's just a stub that shows basic clan information and member informat
 - Resuscitate response object:
     https://github.com/jessamynsmith/django-getting-started
 - GROUP_ID is acting as a global (views and management fncts): fix this
-- Refactor member class/view
+- Refactor the business logic in management functions.
     - Breaks if user tries to update members when no clan exists.
     - Give option of sorting alphabetically, join date, membership type, other info.
         - Current activity (there is an 'isOnline' in the get group member endpoint), or if not online, last login.
-        - Stats
     - Link in members.html to each member's page with all their stats.
 - Centralize logger settings: they are defined separately in
     utils/views/management
-- Add stats! CurrentActivity, PvP, PvE, raid.
+
 
 ## To do (longer term)
+- Add stats! PvP, PvE, raid (will want manifest for this)
 - Work on front end (bootstrap)
 
 ## In ideal world
