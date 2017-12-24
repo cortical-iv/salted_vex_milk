@@ -10,7 +10,7 @@ Sorted by join date
       Joined {{ member.date_joined }}.
       Membership type: {{ member.membership_type }}.
       ID: {{ member.member_id }}
-      Has played Destiny 2? {{ member.has_played_d2 }} 
+      Has played Destiny 2? {{ member.has_played_d2 }}
     </li>
 
   {% empty %}
@@ -19,11 +19,5 @@ Sorted by join date
 </ul>
 
 <hr/>
-<p>If you want to update member information, click the button</p>
-  <form action = "{% url 'members:members' %}" method = 'post' class="form">
-    {% csrf_token %}
-    <button type = "submit" class="btn btn-primary">Update Members</button>
-  </form>
-
-
+<!-- Clan list last updated put here -->
 {% endblock content %}

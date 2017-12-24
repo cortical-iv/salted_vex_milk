@@ -1,8 +1,6 @@
 import logging
 
 from django.shortcuts import render
-from django.core import management
-
 from .models import Member
 
 
@@ -18,12 +16,7 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 def members(request):
-    """Home page for salted vex milk"""
-    if request.method == 'POST':
-        management.call_command('refresh_members')
-    else:
-        logging.debug("GET request in members/members.html: just display data.")
-
+    """Page showing member information"""
     all_members = Member.objects.all().order_by('date_joined')
     context = {'members': all_members}
-    return render(request, 'members/members.html', context) # 'index.html', {'update_clan_form': update_clan_form})
+    return render(request, 'members/members.html', context)
