@@ -21,9 +21,9 @@ Front page will have basic information about the clan. There will be pages for c
         |-- models.py  (the Member model)    
         |-- forms.py  (ModelForm for Member model)    
         |-- urls.py  (main page for members is /members.html)     
-        |   |-- management/  (management function to refresh members)
-        |      |-- commands/
-        |          |-- refresh_members.py  (post request updates clan info)
+        |-- management/  (management function to refresh members)
+           |-- commands/
+               |-- refresh_members.py  (post request updates clan info)
 
 ## To do
 ### General
