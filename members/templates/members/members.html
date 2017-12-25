@@ -19,5 +19,10 @@ Sorted by join date
 </ul>
 
 <hr/>
-<!-- Clan list last updated put here -->
+{% if updated %}
+  <i>Last updated {{updated}}.</i>
+{% else %}
+  <i>Last update unknown.</i>
+{% endif %}
+
 {% endblock content %}

@@ -28,9 +28,6 @@ Currently it's just a stub that shows basic clan information and member informat
 
 ## To do (shorter term)
 - Check heroku logs next few days make sure scheduler worked (12/24/17).
-- In footer of members.html, show datetime the list was last updated
-    - Set as a class attribute ((*not* instance attribute)
-    - Put in template
 - Resuscitate response object:
     https://github.com/jessamynsmith/django-getting-started
 - GROUP_ID is acting as a global (views and management fncts): fix this

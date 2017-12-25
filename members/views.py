@@ -18,5 +18,8 @@ logger = logging.getLogger(__name__)
 def members(request):
     """Page showing member information"""
     all_members = Member.objects.all().order_by('date_joined')
-    context = {'members': all_members}
+    updated = all_members.last().updated
+
+    context = {'members': all_members, 'updated': updated}
+    logging.info(f"member view Member.updated: {Member.updated}")
     return render(request, 'members/members.html', context)

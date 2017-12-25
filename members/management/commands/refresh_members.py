@@ -9,6 +9,7 @@ import requests
 import logging
 import time
 
+from django.utils import timezone
 from django import forms
 from django.core.management.base import BaseCommand #, CommandError
 from django.db.utils import IntegrityError
@@ -97,3 +98,5 @@ class Command(BaseCommand):
                     elapsed_time_process_member = time.process_time() - time_init_process_member
                     logging.debug(f"{name} add time: {elapsed_time_process_member}\n")
         logging.info("Done refreshing members")
+        Member.updated = timezone.now()
+        logging.info(f"Member.updated: {Member.updated}")
