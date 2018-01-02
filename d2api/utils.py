@@ -26,7 +26,7 @@ Set up logger: for now just print everything to stdout.
 logging.basicConfig(level = logging.INFO,  #DEBUG
                     format = '%(asctime)s - %(levelname)s - %(message)s',
                     datefmt =' %m/%d/%y %H:%M:%S')
-logger = logging.getLogger(__name__)
+logger_d2api_utils = logging.getLogger(__name__)
 
 
 """
@@ -81,6 +81,7 @@ def process_bungie_response(response):
         raise BungieError(msg) from keyError
     else:
         return data
+
 
 
 def destiny2_api_handler(url, session, request_params = None):
@@ -160,7 +161,7 @@ def extract_member_list(member_data):
         clan_member['date_joined']  = member['joinDate']
         clan_member['clan'] = clan.id
         clan_members.append(clan_member)
-    logging.debug("Done with extract_member_list")
+    logger_d2api_utils.debug("Done with extract_member_list")
     return clan_members
 
 
