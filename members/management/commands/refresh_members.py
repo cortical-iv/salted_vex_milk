@@ -7,96 +7,66 @@ Created on Sat Dec 23 20:34:57 2017
 """
 import requests
 import logging
-import time
 
-from django.utils import timezone
-from django import forms
 from django.core.management.base import BaseCommand #, CommandError
-from django.db.utils import IntegrityError
+from django.core import management
 import d2api.utils as api
 from members.forms import MemberForm
 from members.models import Member
+from clans.models import Clan
 from d2api.constants import GROUP_ID, D2_HEADERS
 
 
 """
-Set up logger_member_refresh: for now just print everything to stdout.
+Set up logger: for now just print everything to stdout.
 """
-logging.basicConfig(level = logging.INFO,
-                    format = '%(asctime)s - %(levelname)s - %(message)s',
+logging.basicConfig(format = '%(asctime)s - %(levelname)s - %(message)s',
                     datefmt =' %m/%d/%y %H:%M:%S')
-logger_member_refresh = logging.getLogger(__name__)
-
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 
 
 class Command(BaseCommand):
-    help = 'Refreshes member list'
+    help = 'Refreshes Member model with all members of clan'
 
     def handle(self, *args, **options):
-
         with requests.Session() as session:
             session.headers.update(D2_HEADERS)
-            #Functionalize the following you will use it for each end poin
-            members_url = api.get_members_of_group_url(GROUP_ID)
-            logger_member_refresh.info(f"Retreiving group members. URL: {members_url}")
+            #Check to see if clan exists. If it doesn't, add it
             try:
-                members_data = api.destiny2_api_handler(members_url, session)
-            except Exception as err:
-                logger_member_refresh.exception(f"Error getting clan members for {GROUP_ID}.\nException: {err}.")
-            else:
-                members = api.extract_member_list(members_data)
-                #update or insert member data
-                for member in members:
-                    time_init_process_member = time.process_time()
-                    name = member['name']
-                    logger_member_refresh.debug(f"Processing {name}.")
-#                    #Determine if user has played d2 or not
-                    time_init_profile = time.process_time()
-                    profile_url = api.get_profile_url(member['member_id'], member['membership_type']) #/?components=' + components #200
-                    profile_params = {'components': '200'}
-                    try:
-                        profile_response = api.make_request(profile_url, session, request_params = profile_params)
-                        logger_member_refresh.debug(f"ThrottleSeconds: {profile_response.json()['ThrottleSeconds']}")
+                Clan.objects.get(clan_id = GROUP_ID)
+            except Clan.DoesNotExist:
+                logger.warning("refresh_members: clan not in database. Running refresh_clans().")
+                management.call_command('refresh_clans')
 
-                        if profile_response.json()['ErrorStatus'] == 'DestinyAccountNotFound':
-                            member['has_played_d2'] = False
-                        else:
-                            member['has_played_d2'] = True
-                    except:
-                        logger_member_refresh.error(f"No profile data for {name}. URL: {profile_url}")
-                    elapsed_time_profile = time.process_time() - time_init_profile
-                    logger_member_refresh.debug(f"Check if has played time: {elapsed_time_profile}")
+            #Add all members of clan to db
+            logger.info("refresh_members: Retreiving group members.")
+            members_urlargs = {'group_id': GROUP_ID}
+            members = api.GetMembersOfGroup(D2_HEADERS, url_arguments = members_urlargs)
+            #update or insert member data
+            for member in members.member_list:
+                name = member['name']
+                membership_type = member['membership_type']
+                logger.debug(f"Processing {name}.")
 
-                    #determine if member exists or not, and update/insert accordingly
-                    time_init_exists = time.process_time()
-                    try:
-                        member_instance = Member.objects.get(member_id = member['member_id'],
-                                                             membership_type = member['membership_type'])
-                    except Member.DoesNotExist:
-                        member_form_bound = MemberForm(member)
-                    else:
-                        logger_member_refresh.debug(f"{name} already exists: updating.")
-                        member_form_bound = MemberForm(member, instance = member_instance)
-                    elapsed_time_exists = time.process_time() - time_init_exists
-                    logger_member_refresh.debug(f"Check if player instance exists: {elapsed_time_exists}")
+                #Add has_played_d2 attribute to member
+                get_profile_params = {'components': '100'}
+                get_profile_urlargs = {'membership_type': membership_type, 'member_id': member['member_id']}
+                profile = api.GetProfile(D2_HEADERS, url_arguments = get_profile_urlargs, \
+                                     request_parameters = get_profile_params)
+                member['has_played_d2'] = profile.played_d2
+                logger.debug(f"{name} profile processing seconds: {profile.request_duration}")
+                #Validate and save member to db
+                instance_kwargs = {'member_id': member['member_id'], 'membership_type': member['membership_type']}
+                try:
+                    api.bind_and_save(Member, member, MemberForm, **instance_kwargs)
+                except Exception as e:
+                    msg = f"refresh_members in bind_and_save. Exception: {e}."
+                    logger.exception(msg)
+                    raise
+            logger.info("Done updating members.")
 
-                    #validate and save form
-                    time_init_validate = time.process_time()
-                    if member_form_bound.is_valid():
-                        try:
-                            member_form_bound.save()
-                        except IntegrityError as err:
-                            logger_member_refresh.error(f"Integrity error: {err}")
-                        else:
-                            logger_member_refresh.debug(f"{name} successfully saved.")
-                    else:
-                        logger_member_refresh.error(f"member form not valid. error: {member_form_bound.errors}.\nMember data: {member}")
-                        raise forms.ValidationError(f"Member info not valid: {member_form_bound.errors}")
-                    elapsed_time_validate = time.process_time() - time_init_validate
-                    logger_member_refresh.debug(f"Validation time: {elapsed_time_validate}")
 
-                    elapsed_time_process_member = time.process_time() - time_init_process_member
-                    logger_member_refresh.debug(f"{name} add time: {elapsed_time_process_member}\n")
-        logger_member_refresh.info("Done refreshing members")
-        Member.updated = timezone.now()
-        logger_member_refresh.info(f"Member.updated: {Member.updated}")
+
+
+

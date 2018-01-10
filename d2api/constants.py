@@ -7,9 +7,9 @@ Created on Tue Dec  5 22:12:46 2017
 """
 from django.conf import settings
 
-GROUP_ID = '623172'  #this could be expanded to multiple ids easily but now is not the time
-BASE_URL = 'https://bungie.net/Platform/Destiny2/'
-BASE_URL_GROUP = 'https://bungie.net/Platform/GroupV2/'
+GROUP_ID = '623172'  #you could set this as env variable if you want
+BASE_URL = 'https://www.bungie.net/Platform/Destiny2/'
+BASE_URL_GROUP = 'https://www.bungie.net/Platform/GroupV2/'
 
 D2_KEY = settings.D2_KEY
 D2_HEADERS = {"X-API-Key": D2_KEY}

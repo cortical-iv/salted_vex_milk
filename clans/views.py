@@ -9,8 +9,7 @@ from d2api.constants import GROUP_ID
 """
 Set up logger: for now just print everything to stdout.
 """
-logging.basicConfig(level = logging.INFO,
-                    format = '%(asctime)s - %(levelname)s - %(message)s',
+logging.basicConfig(format = '%(asctime)s - %(levelname)s - %(message)s',
                     datefmt =' %m/%d/%y %H:%M:%S')
 logger_clanview = logging.getLogger(__name__)
 logger_clanview.setLevel(logging.INFO)
