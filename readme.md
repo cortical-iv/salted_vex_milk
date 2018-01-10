@@ -27,9 +27,9 @@ Currently it's just a stub that shows basic clan information and member informat
               |-- refresh_members.py  (updates member info)
 
 ## To do (shorter term)
-- Response objects
-    - Test locally and deploy. (M)
-- Start adding stats! (W)
+- Add characters, classes, and light levels (in components 200--so use componenets 200 to find if they have played d2).
+- Start adding stats!
+- Plan out models (see project_planning.md -> Models and Fields)
     - First add generic stats: light level(s), last time played, total hours played. Maybe pull with refresh members (both are part of profile 100). Put link on each player so you can pull this info for them?
     - PvP net
 	- "LIve" stats (where are they now or most recently--for whole clan this would take a loading page)

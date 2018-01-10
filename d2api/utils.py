@@ -31,64 +31,6 @@ logging.basicConfig(format = '%(asctime)s - %(levelname)s - %(message)s',
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-"""
-CORE CODE: the api handler
-Make requests, and extract data from response
-"""
-class BungieError(Exception):
-    """Raise when ErrorCode from Bungie is not 1"""
-
-def make_request(url, session, request_params = None):
-    try:
-        if request_params:
-            response = session.get(url, params = request_params)
-        else:
-            response = session.get(url)
-
-        #Raise error for responses with 200 status that are errors
-        if not response.ok:
-            response.raise_for_status()
-        else:
-            logger.debug(f"make_request: URL: {url}. Elapsed: {response.elapsed}")
-
-    except requests.exceptions.RequestException as requestErr:
-        msg = f"RequestException in make_request. Error from bungie:\n -{requestErr}"
-        raise BungieError(msg) from requestErr
-    else:
-        return response
-
-
-def process_bungie_response(response):
-    """Examines response from d2 if you got status_code 200, throws
-    BungieError exception if bungie ErrorCode is not 1. For list of error
-    codes, see:
-        https://bungie-net.github.io/multi/schema_Exceptions-PlatformErrorCodes.html#schema_Exceptions-PlatformErrorCodes
-    """
-    response_url = response.url    #If you sent it something that can't be json'd
-    response_json = response.json() #don't need jsondecodeerror b/c you used raise_for_status
-
-    try:
-        data = response_json['Response']
-    except KeyError as keyError:
-        error_code = response_json['ErrorCode']
-        error_status = response_json['ErrorStatus']
-        error_message = response_json['Message']
-        msg1 = f"KeyError in 'process_bungie_response'.\nURL: {response_url}.\n"
-        msg2 = f"Bungie error code {error_code}: {error_status}.\nMessage: {error_message}.\n"
-        msg = msg1 + msg2
-        raise BungieError(msg) from keyError
-    else:
-        return data
-
-
-
-def destiny2_api_handler(url, session, request_params = None):
-    if request_params:
-        response = make_request(url, session, request_params)
-    else:
-        response = make_request(url, session)
-    return process_bungie_response(response)
-
 
 """
 ENDPOINT CLASSES
@@ -96,8 +38,17 @@ ENDPOINT CLASSES
 
 class Endpoint:
     """
-    Abstract end point class: this is never used directly.
-    Specific endpoint classes inherit from this.
+    Abstract endpoint class: this is never used directly: specific endpoint classes
+    inherit from this and need to reimplement make_url, which returns None.
+
+    Call:
+        endpoint_instance = Endpoint(headers, url_arguments=None, request_parameters = None)
+
+    Parameters:
+        headers: dictionary for requests:  {"X-API-Key": <your d2 key>}
+        url_arguments: dictionary of url-specific parameters. E.g., {'member_id': '4611686018437883438'}
+        request_parameters: querystring for request, if needed. E.g., {'components': '200'}
+
     """
     def __init__(self, headers, url_arguments = None, request_parameters = None):
         self.url_arguments = url_arguments
@@ -134,6 +85,7 @@ class Endpoint:
         try:
             response_json = self.response.json()
         except json.JSONDecodeError as jsonError:
+            #Response is not json coded: probably server error
             msg1 = f"JSONDecodeError in Endpoint.get_data()."
             msg2 = "Response does not contain json-encoded data.\n"
             msg3 = f"URL: {self.url}.\nError: '{jsonError}'"
@@ -144,6 +96,7 @@ class Endpoint:
         try:
             data = response_json['Response']
         except KeyError as keyError:
+            #Response key is not defined: return rest of response it contains details
             error_code = response_json['ErrorCode']
             error_status = response_json['ErrorStatus']
             error_message = response_json['Message']
@@ -159,12 +112,41 @@ class Endpoint:
         return "Endpoint instance."
 
 
+class SearchDestinyPlayer(Endpoint):
+    """
+    User card: minimal info like id and date joined. This is where you can get id from name.
+      https://bungie-net.github.io/multi/operation_get_Destiny2-SearchDestinyPlayer.html
+
+    Example call:
+        headers = {"X-API-Key": <your d2 key>}
+        search_arguments = {'membership_type': '2', 'name: 'cortical_iv'}
+        my_profile = GetProfile(headers, url_arguments = search_arguments)
+    """
+    def __init__(self, headers, url_arguments = None, request_parameters = None):
+        super().__init__(headers, url_arguments, request_parameters)
+
+    def make_url(self):
+        membership_type = str(self.url_arguments['membership_type'])
+        name = self.url_arguments['name']
+        url = f"{BASE_URL}SearchDestinyPlayer/{membership_type}/{name}/"
+        return url
+
+    def __repr__(self):
+        return f"GetProfile instance.\nURL: {self.url}"
+
+
 class GetProfile(Endpoint):
     """
-    Get information about user's character(s): the required components querystring
-    params specify the components to request.
+    Get information about user's character(s): the required 'components' querystring
+    request_parameters specifies the components to request.
       Endpoint:  https://bungie-net.github.io/multi/operation_get_Destiny2-GetProfile.html
       Component types:  https://bungie-net.github.io/multi/schema_Destiny-DestinyComponentType.html
+
+    Example call:
+        headers = {"X-API-Key": <your d2 key>}
+        profile_arguments = {'membership_type': '2', 'member_id': '4611686018459314819'}
+        components = {'components': '200'}
+        my_profile = GetProfile(headers, url_arguments = profile_arguments, request_parameters = components)
     """
     def __init__(self, headers, url_arguments = None, request_parameters = None):
         super().__init__(headers, url_arguments, request_parameters)
@@ -193,27 +175,15 @@ class GetProfile(Endpoint):
         return f"GetProfile instance.\nURL: {self.url}"
 
 
-class SearchDestinyPlayer(Endpoint):
-    """
-    User card: minimal info like id and date joined
-      https://bungie-net.github.io/multi/operation_get_Destiny2-SearchDestinyPlayer.html
-    """
-    def __init__(self, headers, url_arguments = None, request_parameters = None):
-        super().__init__(headers, url_arguments, request_parameters)
-
-    def make_url(self):
-        membership_type = str(self.url_arguments['membership_type'])
-        name = self.url_arguments['name']
-        url = f"{BASE_URL}SearchDestinyPlayer/{membership_type}/{name}/"
-        return url
-
-    def __repr__(self):
-        return f"GetProfile instance.\nURL: {self.url}"
-
 class GetGroup(Endpoint):
     """
     Generic info about clan, like motto:
       https://bungie-net.github.io/multi/operation_get_GroupV2-GetGroup.html
+
+    Example call:
+        headers = {"X-API-Key": <your d2 key>}
+        group_arguments = {'group_id': '623172'}
+        my_profile = GetProfile(headers, url_arguments = group_arguments)
     """
     def __init__(self, headers, url_arguments = None, request_parameters = None):
         super().__init__(headers, url_arguments, request_parameters)
@@ -246,7 +216,12 @@ class GetGroup(Endpoint):
 class GetMembersOfGroup(Endpoint):
     """
     Info about each member of clan.
-    https://bungie-net.github.io/multi/operation_get_GroupV2-GetMembersOfGroup.html
+      https://bungie-net.github.io/multi/operation_get_GroupV2-GetMembersOfGroup.html
+
+    Example call:
+        headers = {"X-API-Key": <your d2 key>}
+        members_arguments = {'group_id': '623172'}
+        my_profile = GetProfile(headers, url_arguments = members_arguments)
     """
     def __init__(self, headers, url_arguments = None, request_parameters = None):
         super().__init__(headers, url_arguments, request_parameters)
@@ -258,6 +233,10 @@ class GetMembersOfGroup(Endpoint):
         return url
 
     def make_clan_list(self):
+        """
+        Makes list of dictionaries, one for each member: this is for insertion
+        of user data into a form.
+        """
         try:
             self.data['results']
         except KeyError:
@@ -277,7 +256,7 @@ class GetMembersOfGroup(Endpoint):
         return member_list
 
     def print_clan_list(self):
-        """Mostly for testing purposes: prints each member in clan_list."""
+        """Useful for debugging"""
         try:
             self.members
         except AttributeError:
@@ -299,15 +278,14 @@ class GetMembersOfGroup(Endpoint):
         return f"GetMembersOfGroup instance.\nURL: {self.url}"
 
 
-
 """
-ABSTRACT HELPER FUNCTIONS
+HELPER FUNCTIONS
 """
 def bind_and_save(Model, data, Form, **instance_kwargs):
     """
-    Determine if model instance exists (using instance_kwargs. a dictionary of
-    unique identifiers).  Bind data to form, using instance if instance exists.
-    Validate and save data into Model.
+    Bind 'data' to django 'Form' corresponding to 'Model' class.
+    Then validate, and save. If model instance (uniquely specified
+    by '**instance_kwargs') exists, update row; otherwise create row.
     """
     try:
         model_instance = Model.objects.get(**instance_kwargs)
@@ -329,9 +307,6 @@ def bind_and_save(Model, data, Form, **instance_kwargs):
         logger.error(err_msg)
         raise forms.ValidationError(err_msg)
 
-"""
-MODEL-SPECIFIC HELPER FUNCTIONS
-"""
 
 
 
