@@ -29,7 +29,7 @@ Set up logger: for now just print everything to stdout.
 logging.basicConfig(format = '%(asctime)s - %(levelname)s - %(message)s',
                     datefmt =' %m/%d/%y %H:%M:%S')
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 """
 CORE CODE: the api handler
