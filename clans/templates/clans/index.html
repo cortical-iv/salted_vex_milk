@@ -1,51 +1,49 @@
 {% extends "clans/base.html" %}
+{% block header %}
+
+  <!-- Jumbotron -->
+  <div>
+    <video id="video-background" preload muted autoplay loop>
+      <source src="/static/clans/vexmilk_waterfall_smooth.mp4" type="video/mp4">
+    </video>
+    <div class="container">
+      <h1  style="margin-top:12%;">Salted Vex Milk</h1>
+      An {{clan.name}} Clan Companion Site
+    </div>
+  </div>
+
+
+{% endblock header %}
 
 {% block  content %}
-<h1>All Aboard the Vexmilk Express!</h1>
-<p>If you don't have enough salt in your life, Salted Vex Milk will cure what ails ya'! Herein you will find lots of information about the <i>{{clan.name}}</i> Clan.</p>
-<hr/>
+    {% if clan  %}
+      <div class="row">
 
-  {% if clan  %}
-    <h3>{{clan.name}}: General information about the clan</h3>
-    <ul>
-        <li>
-          <b>Number of members:</b> {{clan.num_members}}
-        </li>
+       <div class="col-sm-8">
+         <h3 style="margin-top:5px;">Clan Description</h3>
+         <p style="white-space: pre-line">{{clan.description}}</p>
+       </div>
 
-        <li>
-          <b>Motto:</b> {{clan.motto}}
-        </li>
+       <div class="col-sm-4">
+           <p  style="margin-top:20%;"><b>Number of members:</b> {{clan.num_members}}</p>
+           <p><b>Motto:</b> {{clan.motto}}</p>
+           <p><b>Call sign:</b> {{clan.call_sign}}</p>
+           <p><b>Creation date:</b> {{clan.creation_date}}</p>
+           <p><b>Founder:</b> The benevolent, omnipotent <i>{{clan.founder}}</i>.</p>
+           <p><b>Clan ID#:</b> <i>{{clan.clan_id}}</i></p>
+       </div>
 
-        <li>
-          <b>Call sign:</b> {{clan.call_sign}}
-        </li>
+      </div>
 
-        <li>
-          <b>Creation date:</b> {{clan.creation_date}}
-        </li>
+    {% else %}
+      <p>There is no clan here</p>
+    {% endif %}
 
-        <li>
-          <b>Founder:</b> The benevolent, omnipotent <i>{{clan.founder}}</i>.
-        </li>
-
-        <li>
-          <b>ID#:</b> <i>{{clan.clan_id}}
-        </li>
-
-        <li>
-           <b>Clan Description:</b>
-           <p style="white-space: pre-line">{{clan.description}}</p>
-        </li>
-    </ul>
+  <hr/>
+  {% if clan.updated %}
+    <i>Latest update {{clan.updated}}.</i>
   {% else %}
-    <p>There is no clan here</p>
+    <i>Latest update unknown.</i>
   {% endif %}
-
-<hr/>
-{% if clan.updated %}
-  <i>Latest update {{clan.updated}}.</i>
-{% else %}
-  <i>Latest update unknown.</i>
-{% endif %}
 
 {% endblock content %}

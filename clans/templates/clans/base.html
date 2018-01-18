@@ -1,7 +1,111 @@
-<p>
-  <a href ="{% url 'clans:index' %}">Salted Vex Milk</a>  -
-  <a href ="{% url 'members:members' %}">Members</a>  -
-</p>
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Salted Vex Milk</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+   <!-- jQuery library -->
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+   <!-- Popper JS -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+   <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 
+  <style>
+    #video-background {
+      overflow: hidden;
+      z-index: -100;
+      width:100%;
+      height: 100%;
+    }
 
-{% block content %}{% endblock content %}
+    .container {
+      position: absolute;
+      top: 50px;
+    }
+  </style>
+
+</head>
+
+  <body style="padding-top:40px">
+
+    <!-- Navbar (expands vertically on small screens) -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
+      <!-- Brand (home button outside the collapsible part) -->
+      <a class="navbar-brand" href="{% url 'clans:index' %}">Home</a>
+
+      <!-- Collapsible hambumberg button to show, when relevant -->
+      <button class = "navbar-toggler" type="button"
+              data-toggle="collapse" data-target="#collapsibleNavbar"
+              aria-controls="navbarSupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation">>
+              <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Rest of navbar that can goes into the button, when narrow, -->
+      <div class = "collapse navbar-collapse" id = "collapsibleNavbar">
+        <ul class="navbar-nav mr-auto">  <!-- mr-auto = margin-right auto -->
+          <!-- Members (will be dropdown) -->
+          <li class="nav-item">
+            <a class="nav-link" href="#">Members</a> <!-- {% url 'members:members' %} -->
+          </li>
+
+          <!-- clan dropdown -->
+          <li class="nav-item dropdown">
+            <a class = "nav-link dropdown-toggle" id="clanDropdown" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               ImHelping</a>
+            <div class = "dropdown-menu" aria-labelledby="clanDropdown">
+              <a class = "dropdown-item"
+                 href ="https://www.the100.io/groups/372"
+                 target="_blank">The100</a>
+              <a class = "dropdown-item"
+                 href ="https://ec59.slack.com/"
+                 target = "_blank">Slack Channel</a>
+              <a class = "dropdown-item"
+              href ="https://www.youtube.com/channel/UCuoWqSDZ2vz9g8rXjLR7ihw"
+              target = "_blank">Youtube Channel</a>
+            </div>
+          </li>
+
+          <!-- Generic destiny stuff (will be dropdown) -->
+          <li class="nav-item dropdown">
+            <a class = "nav-link dropdown-toggle" id="d2Dropdown" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Destiny2</a>
+            <div class = "dropdown-menu" aria-labelledby="d2Dropdown">
+              <a class = "dropdown-item"
+                 href ="https://www.bungie.net"
+                 target="_blank">Bungie</a>
+             <a class = "dropdown-item"
+                href ="https://destinyitemmanager.com/"
+                target = "_blank">Destiny Item Manager</a>
+              <a class = "dropdown-item"
+                 href ="https://www.reddit.com/r/DestinyTheGame/"
+                 target = "_blank">/r/DTG: The salt mine</a>
+             <a class = "dropdown-item"
+                href ="https://www.reddit.com/r/LowSodiumDestiny/"
+                target = "_blank">/r/LowSodiumDestiny</a>
+
+            </div>
+          </li>
+
+        </ul>
+      </div> <!-- collapsible part -->
+    </nav><!-- Navbar -->
+
+    <div class = "container-fluid">
+      <div class = "page-header">
+        {% block header %} {% endblock header %}
+      </div>
+
+      <div>
+        {% block content %}{% endblock content %}
+      </div>
+    </div> <!-- /container 2 for main page -->
+
+  </body>
+</html>

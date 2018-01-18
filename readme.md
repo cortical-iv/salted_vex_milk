@@ -7,7 +7,7 @@ Currently it's just a stub that shows basic clan information and member informat
 
 ### Structure of apps
     d2api/  (core app: library for creating/processing requests)   
-      |-- utils.py  (the business logic)    
+      |-- utils.py  (the business logic, esp the api handler)    
       |-- constants.py  (parameters like secret keys, headers)    
 
     clans/  (app for Clan model: generic clan info like motto)    
@@ -27,27 +27,43 @@ Currently it's just a stub that shows basic clan information and member informat
               |-- refresh_members.py  (updates member info)
 
 ## To do (shorter term)
+- Date display type is shit.
+- Add vexmilk icon to brand?
+- Add footer: https://www.w3schools.com/bootstrap/bootstrap_panels.asp
+- Members page
+    -Table: https://www.w3schools.com/bootstrap/bootstrap_tables.asp
+    -Footer (should I make last updated footer in base?)
+- Clan dropdown menu: clan info, the100, youtube, slack
+- Fix <p> spacking: right now it is probably 1em, but should be 0.5 between paras.
+https://stackoverflow.com/questions/819161/what-is-the-default-padding-and-or-margin-for-a-p-element-reset-css
+
+- Center stuff vertically in grid elements. This is actually a pain in the ass. Dear god it should work out of the box.
+https://stackoverflow.com/questions/20005278/twitter-bootstrap-3-vertically-center-content
+https://stackoverflow.com/questions/20547819/vertical-align-with-bootstrap-3
+The solutions there don't seem responsive.
+
+- Once basic front-end is working, plan how you want this organized in terms of models/pages etc (project_planning.md)
+
 - Add characters, classes, and light levels (in components 200--so use componenets 200 to find if they have played d2).
 - Start adding stats!
 - Plan out models (see project_planning.md -> Models and Fields)
     - First add generic stats: light level(s), last time played, total hours played. Maybe pull with refresh members (both are part of profile 100). Put link on each player so you can pull this info for them?
     - PvP net
-	- "LIve" stats (where are they now or most recently--for whole clan this would take a loading page)
+	- "LIve" stats (where are they now or most recently--for whole clan this would take a loading page): https://www.reddit.com/r/django/comments/4m49r8/showing_a_loading_gif_or_message_to_the_user/
     - PvE net
     - Raid net
 
+- Note using the suggested bootstrap-->javascript stack from bootstrap site, navbar didn't work, so used w3c versions!
 
-## To do (longer term)
-- Work on front end (bootstrap)
-- Testing. Make some urls that will generate different types of errors for unit testing. Note you can use httpbin.org too:
-    - make_request
+## To do (long term)
+- Start adding some tests. See eggtimer app. Make some urls that will generate different types of errors for unit testing. Note you can use httpbin.org too:
         - InvalidUrl: 'foo'
         - InvalidHttp: 'foo.com'
         - 400: https://bungie.net/Platform/Destiny2/SearchDestinyPlayer/2/&-@#/
         - 500: https://www.bungie.net/admin/
-    - process_bungie_request:
-        - KeyError: need a way to produce a bungie error
+        - bungie error: just enter user that hasn't played d2 yet
     - refresh_clans
+- Give user option for different 'shaders'. Pick col
 
 ## To do in a perfect world
 - Logging tune-up:
@@ -61,7 +77,7 @@ Currently it's just a stub that shows basic clan information and member informat
     - Would be nice to have local and production configurations that I didn't have to manually change every time I wanted to go to production.
 - Set up to develop on multiple computers (windows and ubuntu).
 - add concurrent.futures to process multiple requests simultaneously (e.g., refresh_members)
-- Make 'clans' app 'clan', as it is baked into this app that there is one clan. this is actually sort of a pain in the ass and not important.
+
 
 
 
