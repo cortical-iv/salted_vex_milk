@@ -136,9 +136,10 @@ STATIC_URL = '/static/'
 
 #Static asset configuration [new from https://devcenter.heroku.com/articles/django-assets]
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(BASE_DIR, "static/") #PROJECT_ROOT, 'staticfiles')  #'staticfiles'
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')  #'staticfiles'
 STATICFILES_DIRS = (
         os.path.join(PROJECT_ROOT, 'static'),
+        os.path.join(PROJECT_ROOT, '../clans/static/')
         )
 
 #Heroku settings
