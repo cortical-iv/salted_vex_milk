@@ -154,5 +154,5 @@ if cwd == '/app' or cwd[:4] == '/tmp':
     #Allow only Heroku to host the project
     ALLOWED_HOSTS =  ['*'] #['tell-jeeves.herokuapp.com']
     DEBUG = False
-    STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+    #STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
