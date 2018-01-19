@@ -150,7 +150,7 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')  #'staticfiles'
 logger.debug(f"static_root: {STATIC_ROOT}")
 STATICFILES_DIRS = (
         os.path.join(PROJECT_ROOT, 'static'),
-        os.path.join(PROJECT_ROOT, '../clans/static/')
+        os.path.join(BASE_DIR, 'clans/static/clans/')
         )
 logger.debug(f"staticfiles_dirs: {STATICFILES_DIRS}")
 
