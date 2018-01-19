@@ -27,23 +27,19 @@ Currently it's just a stub that shows basic clan information and member informat
               |-- refresh_members.py  (updates member info)
 
 ## To do (shorter term)
-- Date display type is shit.
-- Add vexmilk icon to brand?
+- Get movie to display at heroku it isn't working. See heroku starter template:
+https://github.com/heroku/heroku-django-template
+- Date display type is bad.
 - Add footer: https://www.w3schools.com/bootstrap/bootstrap_panels.asp
 - Members page
     -Table: https://www.w3schools.com/bootstrap/bootstrap_tables.asp
-    -Footer (should I make last updated footer in base?)
-- Clan dropdown menu: clan info, the100, youtube, slack
-- Fix <p> spacking: right now it is probably 1em, but should be 0.5 between paras.
+    -Footer (should I make last updated footer in base.html?)
+- Fix <p> spacing in right grid on index.html: right now it is probably 1em, but should be 0.5 between paras. Probably need to design a special style?
 https://stackoverflow.com/questions/819161/what-is-the-default-padding-and-or-margin-for-a-p-element-reset-css
+- Center stuff vertically in grid elements: this shouldn't be too bad in bootstrap 4, this is the whole reason I switched to bs4.
+- Create a project-specific style sheet for stuff like movie, these special paragraphs, etc, so you don't have them distributed all over the place in the project.
 
-- Center stuff vertically in grid elements. This is actually a pain in the ass. Dear god it should work out of the box.
-https://stackoverflow.com/questions/20005278/twitter-bootstrap-3-vertically-center-content
-https://stackoverflow.com/questions/20547819/vertical-align-with-bootstrap-3
-The solutions there don't seem responsive.
-
-- Once basic front-end is working, plan how you want this organized in terms of models/pages etc (project_planning.md)
-
+- Once the above stuff (i.e., basic front-end) is working, plan how you want this organized in terms of models/pages etc (project_planning.md). For instance:
 - Add characters, classes, and light levels (in components 200--so use componenets 200 to find if they have played d2).
 - Start adding stats!
 - Plan out models (see project_planning.md -> Models and Fields)

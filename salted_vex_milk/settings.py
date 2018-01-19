@@ -67,6 +67,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -145,12 +146,12 @@ STATIC_URL = '/static/'
 
 #Static asset configuration [new from https://devcenter.heroku.com/articles/django-assets]
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-logger.debug(f"project_root: {PROJECT_ROOT}")
+#logger.debug(f"project_root: {PROJECT_ROOT}")
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')  #'staticfiles'
 logger.debug(f"static_root: {STATIC_ROOT}")
+#Extra places for collectstatic to find static files
 STATICFILES_DIRS = (
         os.path.join(PROJECT_ROOT, 'static'),
-        os.path.join(BASE_DIR, 'clans/static/clans/')
         )
 logger.debug(f"staticfiles_dirs: {STATICFILES_DIRS}")
 
