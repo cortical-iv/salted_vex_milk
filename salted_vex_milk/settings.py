@@ -145,13 +145,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 #Static asset configuration [new from https://devcenter.heroku.com/articles/django-assets]
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+#PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 #logger.debug(f"project_root: {PROJECT_ROOT}")
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')  #'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #PROJECT_ROOT, 'staticfiles')  #'staticfiles'
 logger.debug(f"static_root: {STATIC_ROOT}")
 #Extra places for collectstatic to find static files
 STATICFILES_DIRS = (
-        os.path.join(PROJECT_ROOT, 'static'),
+        os.path.join(BASE_DIR, 'static') #PROJECT_ROOT, 'static'),
         )
 logger.debug(f"staticfiles_dirs: {STATICFILES_DIRS}")
 
@@ -168,5 +168,5 @@ if cwd == '/app' or cwd[:4] == '/tmp':
     #Allow only Heroku to host the project
     ALLOWED_HOSTS =  ['*'] #['tell-jeeves.herokuapp.com']
     DEBUG = False
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
