@@ -11,10 +11,19 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import logging
 from django.core.exceptions import ImproperlyConfigured
+
+
+
+logging.basicConfig(format = '%(asctime)s - %(levelname)s - %(message)s',
+                    datefmt =' %m/%d/%y %H:%M:%S')
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+logger.debug(f"base_dir: {BASE_DIR}")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 def get_env_variable(var_name):
@@ -136,11 +145,15 @@ STATIC_URL = '/static/'
 
 #Static asset configuration [new from https://devcenter.heroku.com/articles/django-assets]
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+logger.debug(f"project_root: {PROJECT_ROOT}")
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')  #'staticfiles'
+logger.debug(f"static_root: {STATIC_ROOT}")
 STATICFILES_DIRS = (
         os.path.join(PROJECT_ROOT, 'static'),
         os.path.join(PROJECT_ROOT, '../clans/static/')
         )
+logger.debug(f"staticfiles_dirs: {STATICFILES_DIRS}")
+
 
 #Heroku settings
 cwd = os.getcwd()
