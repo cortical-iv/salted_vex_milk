@@ -140,20 +140,32 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
+## Static files (CSS, JavaScript, Images)
+## https://docs.djangoproject.com/en/1.11/howto/static-files/
+#STATIC_URL = '/static/'
+#
+##Static asset configuration [new from https://devcenter.heroku.com/articles/django-assets]
+##PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+##logger.debug(f"project_root: {PROJECT_ROOT}")
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #PROJECT_ROOT, 'staticfiles')  #'staticfiles'
+#logger.debug(f"static_root: {STATIC_ROOT}")
+##Extra places for collectstatic to find static files
+#STATICFILES_DIRS = (
+#        os.path.join(BASE_DIR, 'static') #PROJECT_ROOT, 'static'),
+#        )
+#logger.debug(f"staticfiles_dirs: {STATICFILES_DIRS}")
+
+
+## Static files (CSS, JavaScript, Images)
+## https://docs.djangoproject.com/en/1.11/howto/static-files/
 STATIC_URL = '/static/'
 
 #Static asset configuration [new from https://devcenter.heroku.com/articles/django-assets]
-#PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-#logger.debug(f"project_root: {PROJECT_ROOT}")
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #PROJECT_ROOT, 'staticfiles')  #'staticfiles'
-logger.debug(f"static_root: {STATIC_ROOT}")
-#Extra places for collectstatic to find static files
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')  #'staticfiles'
 STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static') #PROJECT_ROOT, 'static'),
+        os.path.join(PROJECT_ROOT, 'static'),
         )
-logger.debug(f"staticfiles_dirs: {STATICFILES_DIRS}")
 
 
 #Heroku settings
