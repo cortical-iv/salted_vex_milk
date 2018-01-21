@@ -27,10 +27,8 @@ Currently it's just a stub that shows basic clan information and member informat
               |-- refresh_members.py  (updates member info)
 
 ## To do (shorter term)
-- be sure to remove django-datatables2 from virtualenv
 - Members page:
     - Why do I need to add spacing to header?
-    - Work with django-tables2 formatting, centering, filtering out data, etc
 - Index    
     - Fix <p> spacing in right grid on index.html: right now it is probably 1em, but should be 0.5 between paras. Probably need to design a special style?
     https://stackoverflow.com/questions/819161/what-is-the-default-padding-and-or-margin-for-a-p-element-reset-css
@@ -46,8 +44,6 @@ Currently it's just a stub that shows basic clan information and member informat
 	- "LIve" stats (where are they now or most recently--for whole clan this would take a loading page): https://www.reddit.com/r/django/comments/4m49r8/showing_a_loading_gif_or_message_to_the_user/
     - PvE net
     - Raid net
-
-- Note using the suggested bootstrap-->javascript stack from bootstrap site, navbar didn't work, so used w3c versions!
 
 ## Static files
 -Try running collectstatic dry run and it seems fine.
