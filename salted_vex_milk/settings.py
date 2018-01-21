@@ -167,5 +167,6 @@ if cwd == '/app' or cwd[:4] == '/tmp':
     #Allow only Heroku to host the project
     ALLOWED_HOSTS =  ['*'] #['tell-jeeves.herokuapp.com']
     DEBUG = False
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    #following yields 500 error at heroku
+    #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
