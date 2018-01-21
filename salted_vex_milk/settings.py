@@ -179,7 +179,7 @@ if cwd == '/app' or cwd[:4] == '/tmp':  #can just get rid of this: use one sent 
     SECURE_PROXY_SSL_HEADER = {'HTTP_X_FORWARDED_PROTO', 'https'}  #can be on localhost
 
     #Allow only Heroku to host the project
-    ALLOWED_HOSTS =  ['localhost'] #['tell-jeeves.herokuapp.com']  #make list of valid things, not *
+    ALLOWED_HOSTS =  ['localhost', 'saltedvexmilk.herokuapp.com'] #['tell-jeeves.herokuapp.com']  #make list of valid things, not *
     DEBUG = False  #make this an environment variable (so you can set it at heroku quickly if you need it)
     #following yields 500 error at heroku
     #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
