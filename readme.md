@@ -46,6 +46,8 @@ Currently it's just a stub that shows basic clan information and member informat
 	- "LIve" stats (where are they now or most recently--for whole clan this would take a loading page): https://www.reddit.com/r/django/comments/4m49r8/showing_a_loading_gif_or_message_to_the_user/
     - PvE net
     - Raid net
+- I don't love the font covering SVM, would like to do something like this, on top right of image, that is responsive (not just fixed boundaries): white translucent bg with black text.
+https://graphicdesign.stackexchange.com/a/29260
 
 ## Static files
 -Try running collectstatic dry run and it seems fine.
