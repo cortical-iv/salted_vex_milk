@@ -2,7 +2,10 @@
 {% load render_table from django_tables2 %}
 
 {% block header %}
-<div class = "row" style="margin-top:30px;"><h2>Members of ImHelping</h2></div>{% endblock header %}
+<div class = "row" style="margin-top:25px; margin-left:4px;">
+  <h3>ImHelping: Full Member List</h3>
+</div>
+{% endblock header %}
 
 {% block  content %}
         {% render_table member_table %}

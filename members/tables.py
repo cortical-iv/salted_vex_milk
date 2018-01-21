@@ -14,5 +14,5 @@ class MemberTable(tables.Table):
     class Meta:
         model = Member
         template = 'django_tables2/bootstrap.html'
-        attrs = {'class': 'table table-striped table-hover'}
+        attrs = {'class': 'table table-striped table-hover table-sm'}
         fields =  ['name', 'date_joined', 'has_played_d2', 'member_id']
