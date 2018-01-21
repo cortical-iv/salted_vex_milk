@@ -169,16 +169,18 @@ logger.debug(f"BASE_DIR: {BASE_DIR}")
 
 #Heroku settings
 cwd = os.getcwd()
-if cwd == '/app' or cwd[:4] == '/tmp':
-    import dj_database_url
+if cwd == '/app' or cwd[:4] == '/tmp':  #can just get rid of this: use one sent in docs
+
+    import dj_database_url  #uses url in lieu of above if given settings usse configs sent!
     DATABASES = {
             'default': dj_database_url.config(default = 'postgres://localhost')}
+
     #Honor the 'X-Forwarded-Proto' header for request.is_secure().
-    SECURE_PROXY_SSL_HEADER = {'HTTP_X_FORWARDED_PROTO', 'https'}
+    SECURE_PROXY_SSL_HEADER = {'HTTP_X_FORWARDED_PROTO', 'https'}  #can be on localhost
 
     #Allow only Heroku to host the project
-    ALLOWED_HOSTS =  ['*'] #['tell-jeeves.herokuapp.com']
-    DEBUG = False
+    ALLOWED_HOSTS =  ['localhost'] #['tell-jeeves.herokuapp.com']  #make list of valid things, not *
+    DEBUG = False  #make this an environment variable (so you can set it at heroku quickly if you need it)
     #following yields 500 error at heroku
     #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 

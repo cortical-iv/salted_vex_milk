@@ -27,8 +27,10 @@ Currently it's just a stub that shows basic clan information and member informat
               |-- refresh_members.py  (updates member info)
 
 ## To do (shorter term)
+- Implement jessamyn's suggestions about heroku settings.py bits.
 - Members page:
     - Why do I need to add spacing to header?
+    - Ultimately each element of name will be link using LinkColumn() (just like hasplayedd2 is a booleancolumn) or a URLColumn which renders URLs as links.
 - Index    
     - Fix <p> spacing in right grid on index.html: right now it is probably 1em, but should be 0.5 between paras. Probably need to design a special style?
     https://stackoverflow.com/questions/819161/what-is-the-default-padding-and-or-margin-for-a-p-element-reset-css

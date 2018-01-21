@@ -9,8 +9,8 @@
       <source src="{% static 'clans/vexmilk_waterfall_smooth.mp4' %}" type="video/mp4">
     </video>
     <div class="container">
-      <h1  style="margin-top:12%;">Salted Vex Milk</h1>
-      Stats and more for the {{clan.name}} Clan
+      <h1  class="white_shadow" style="margin-top:15%;">Salted Vex Milk</h1>
+      <h7 class="white_shadow">{{clan.name}} stats and more</h7>
     </div>
   </div>
 
@@ -22,12 +22,13 @@
       <div class="row">
 
        <div class="col-sm-8">
-         <h3 style="margin-top:5px;">Clan Description</h3>
+         <h3 style="margin-top:5px;">Description</h3>
          <p style="white-space: pre-line">{{clan.description}}</p>
        </div>
 
        <div class="col-sm-4">
-           <p  style="margin-top:20%;"><b>Number of members:</b> {{clan.num_members}}</p>
+          <h3 style = "margin-top:5px;">Info</h3>
+           <p><b>Number of members:</b> {{clan.num_members}}</p>
            <p><b>Motto:</b> {{clan.motto}}</p>
            <p><b>Call sign:</b> {{clan.call_sign}}</p>
            <p><b>Creation date:</b> {{clan.creation_date}}</p>
