@@ -8,7 +8,7 @@ class Member(models.Model):
     clan = models.ForeignKey(Clan, on_delete = models.CASCADE)
     member_id = models.CharField(unique=True, max_length = 20)
     name = models.CharField(blank=False, null=False, max_length = 16)
-    date_joined = models.CharField(max_length = 100)
+    date_joined = models.DateTimeField(max_length = 100)
     membership_type = models.IntegerField()
     has_played_d2 = models.BooleanField(default = False)
     updated = models.DateTimeField(auto_now=True)

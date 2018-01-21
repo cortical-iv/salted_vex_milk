@@ -26,11 +26,18 @@
       position: absolute;
       top: 50px;
     }
+
+    /* following because fixed-top navbar */
+    body { padding-top: 40px; }
+
+    .table {
+      display: block !important;
+    }
   </style>
 
 </head>
 
-  <body style="padding-top:40px">
+  <body>
 
     <!-- Navbar (expands vertically on small screens) -->
     <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
@@ -50,7 +57,7 @@
         <ul class="navbar-nav mr-auto">  <!-- mr-auto = margin-right auto -->
           <!-- Members (will be dropdown) -->
           <li class="nav-item">
-            <a class="nav-link" href="#">Members</a> <!-- {% url 'members:members' %} -->
+            <a class="nav-link" href={% url 'members:members' %}>Members</a>
           </li>
 
           <!-- clan dropdown -->

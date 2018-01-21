@@ -2,10 +2,12 @@
 {% load static %}
 {% block header %}
 
-  <!-- Jumbotron -->
+  <!-- Image home -->
   <div>
 
-    <img src = "{% static 'twoscoops.png' %}">
+    <video id="video-background" preload muted autoplay loop>
+      <source src="{% static 'clans/vexmilk_waterfall_smooth.mp4' %}" type="video/mp4">
+    </video>
     <div class="container">
       <h1  style="margin-top:12%;">Salted Vex Milk</h1>
       Stats and more for the {{clan.name}} Clan

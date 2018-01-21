@@ -15,6 +15,8 @@ Utilities for restit/d2_api app.
 import requests
 import logging
 import json
+import dateutil.parser
+
 
 from django import forms
 from django.db.utils import IntegrityError
@@ -201,7 +203,7 @@ class GetGroup(Endpoint):
         clan_info['clan_id'] = clan_details['groupId']
         clan_info['name'] = clan_details['name']
         clan_info['call_sign'] = clan_details['clanInfo']['clanCallsign']
-        clan_info['creation_date'] = clan_details['creationDate']
+        clan_info['creation_date'] = dateutil.parser.parse(clan_details['creationDate'])
         clan_info['description'] = clan_details['about']
         clan_info['motto'] = clan_details['motto']
         clan_info['num_members'] = clan_details['memberCount']
@@ -251,7 +253,7 @@ class GetMembersOfGroup(Endpoint):
             clan_member['membership_type'] = member['destinyUserInfo']['membershipType']
             clan_member['name'] = member['destinyUserInfo']['displayName']
             clan_member['member_id'] = member['destinyUserInfo']['membershipId']
-            clan_member['date_joined']  = member['joinDate']
+            clan_member['date_joined']  = dateutil.parser.parse(member['joinDate'])
             member_list.append(clan_member)
         return member_list
 

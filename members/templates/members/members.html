@@ -1,22 +1,40 @@
 {% extends "clans/base.html" %}
+{% load render_table from django_tables2 %}
+
+{% block header %}
+<div class = "row" style="margin-top:30px;"><h2>Members of ImHelping</h2></div>{% endblock header %}
 
 {% block  content %}
-<h1>Member list</h1>
-Sorted by join date
-<ul>
-  {% for member in members %}
-    <li>
-      <b>{{ member.name }}</b>
-      Joined {{ member.date_joined }}.
-      Membership type: {{ member.membership_type }}.
-      ID: {{ member.member_id }}
-      Has played Destiny 2? {{ member.has_played_d2 }}
-    </li>
+        {% render_table member_table %}
 
-  {% empty %}
-    <li>No members have been entered yet</li>
-  {% endfor %}
-</ul>
+<!--
+<table class = "table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Join Date</th>
+      <th>Has played D2</th>
+      <th>ID#</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for member in members %}
+      <tr>
+        <td>{{member.name}}</td>
+        <td>{{member.date_joined}}</td>
+        {% if member.has_played_d2 %}
+          <td class="text-center">Yes</td>
+        {% else %}
+          <td class="text-center">No</td>
+        {% endif %}
+        <td>{{member.member_id}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+-->
+
 
 <hr/>
 {% if updated %}

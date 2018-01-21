@@ -27,17 +27,15 @@ Currently it's just a stub that shows basic clan information and member informat
               |-- refresh_members.py  (updates member info)
 
 ## To do (shorter term)
-- Get movie to display at heroku it isn't working. See heroku starter template:
-https://github.com/heroku/heroku-django-template
-- Date display type is bad.
-- Add footer: https://www.w3schools.com/bootstrap/bootstrap_panels.asp
-- Members page
-    -Table: https://www.w3schools.com/bootstrap/bootstrap_tables.asp
-    -Footer (should I make last updated footer in base.html?)
-- Fix <p> spacing in right grid on index.html: right now it is probably 1em, but should be 0.5 between paras. Probably need to design a special style?
-https://stackoverflow.com/questions/819161/what-is-the-default-padding-and-or-margin-for-a-p-element-reset-css
-- Center stuff vertically in grid elements: this shouldn't be too bad in bootstrap 4, this is the whole reason I switched to bs4.
-- Create a project-specific style sheet for stuff like movie, these special paragraphs, etc, so you don't have them distributed all over the place in the project.
+- be sure to remove django-datatables2 from virtualenv
+- Members page:
+    - Why do I need to add spacing to header?
+    - Work with django-tables2 formatting, centering, filtering out data, etc
+- Index    
+    - Fix <p> spacing in right grid on index.html: right now it is probably 1em, but should be 0.5 between paras. Probably need to design a special style?
+    https://stackoverflow.com/questions/819161/what-is-the-default-padding-and-or-margin-for-a-p-element-reset-css
+    - Center stuff vertically in grid elements: this shouldn't be too bad in bootstrap 4, this is the whole reason I switched to bs4.
+    - Create a project-specific style sheet for stuff like movie, these special paragraphs, etc, so you don't have them distributed all over the place in the project.
 
 - Once the above stuff (i.e., basic front-end) is working, plan how you want this organized in terms of models/pages etc (project_planning.md). For instance:
 - Add characters, classes, and light levels (in components 200--so use componenets 200 to find if they have played d2).
@@ -50,6 +48,16 @@ https://stackoverflow.com/questions/819161/what-is-the-default-padding-and-or-ma
     - Raid net
 
 - Note using the suggested bootstrap-->javascript stack from bootstrap site, navbar didn't work, so used w3c versions!
+
+## Static files
+-Try running collectstatic dry run and it seems fine.
+    heroku run python manage.py collectstatic --dry-run --noinput
+First followed instructions here, and put movie in project folder instead of app folder:
+    https://devcenter.heroku.com/articles/django-assets
+It made no difference, so I went back to app folder way, which seems better.
+Note had to comment this out because I get 500 error when it is in there:
+    #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+https://devcenter.heroku.com/articles/django-app-configuration
 
 ## To do (long term)
 - Start adding some tests. See eggtimer app. Make some urls that will generate different types of errors for unit testing. Note you can use httpbin.org too:

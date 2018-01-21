@@ -9,7 +9,7 @@ class Clan(models.Model):
     clan_id = models.IntegerField(unique=True, blank=False, null=False)
     name = models.CharField(unique=True, blank=False, null=False, max_length = 200)
     call_sign = models.CharField(max_length = 10, null=True)
-    creation_date = models.CharField(max_length = 100) #DateTimeField()
+    creation_date = models.DateTimeField() #DateTimeField()
     description = models.TextField()
     motto = models.CharField(max_length = 200)
     num_members = models.IntegerField()
