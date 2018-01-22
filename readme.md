@@ -28,9 +28,12 @@ Currently it's just a stub that shows basic clan information and member informat
 
 ## To do (shorter term)
 - Members page:
-    - Why do I need to add spacing to header?
+    - Why do I need to add spacing to header? And is it different in firefox deployed? Why are fonts rendered differently in firefox@heroku but not chrome?
 - Implement jessamyn's suggestions about heroku settings.py bits.
-- Once the above stuff (i.e., basic front-end) is working, plan how you want this organized in terms of models/pages etc (project_planning.md). For instance:
+-  Create style sheet and link to it.
+- That hamburger people will not know what to do with it. Need a 'how to' for the site?
+
+- Once the above stuff (i.e., basic front-end for two pages) is working, plan how you want this organized in terms of models/pages etc (project_planning.md). For instance:
 - Add characters, classes, and light levels (in components 200--so use componenets 200 to find if they have played d2).
 - Start adding stats!
 - Plan out models (see project_planning.md -> Models and Fields)
@@ -39,27 +42,10 @@ Currently it's just a stub that shows basic clan information and member informat
 	- "LIve" stats (where are they now or most recently--for whole clan this would take a loading page): https://www.reddit.com/r/django/comments/4m49r8/showing_a_loading_gif_or_message_to_the_user/
     - PvE net
     - Raid net
--  Create style sheet and link to it.
 
-## Static files
--Try running collectstatic dry run and it seems fine.
-    heroku run python manage.py collectstatic --dry-run --noinput
-First followed instructions here, and put movie in project folder instead of app folder:
-    https://devcenter.heroku.com/articles/django-assets
-It made no difference, so I went back to app folder way, which seems better.
-Note had to comment this out because I get 500 error when it is in there:
-    #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-https://devcenter.heroku.com/articles/django-app-configuration
 
-## To do (long term)
-- Start adding some tests. See eggtimer app. Make some urls that will generate different types of errors for unit testing. Note you can use httpbin.org too:
-        - InvalidUrl: 'foo'
-        - InvalidHttp: 'foo.com'
-        - 400: https://bungie.net/Platform/Destiny2/SearchDestinyPlayer/2/&-@#/
-        - 500: https://www.bungie.net/admin/
-        - bungie error: just enter user that hasn't played d2 yet
-    - refresh_clans
-- Give user option for different 'shaders'. Pick col
+## To do (longer term)
+- How to do good vid in opening page?
 
 ## To do in a perfect world
 - Logging tune-up:
@@ -74,6 +60,15 @@ https://devcenter.heroku.com/articles/django-app-configuration
 - Set up to develop on multiple computers (windows and ubuntu).
 - add concurrent.futures to process multiple requests simultaneously (e.g., refresh_members)
 
+## Static files
+-Try running collectstatic dry run and it seems fine.
+    heroku run python manage.py collectstatic --dry-run --noinput
+First followed instructions here, and put movie in project folder instead of app folder:
+    https://devcenter.heroku.com/articles/django-assets
+It made no difference, so I went back to app folder way, which seems better.
+Note had to comment this out because I get 500 error when it is in there:
+    #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+https://devcenter.heroku.com/articles/django-app-configuration
 
 
 
