@@ -2,41 +2,45 @@
 {% load static %}
 {% block header %}
 
-  <!-- Image home -->
-  <div>
-
+<!-- Image header -->
+ <div>
     <video id="video-background" preload muted autoplay loop>
       <source src="{% static 'clans/vexmilk_waterfall_smooth.mp4' %}" type="video/mp4">
     </video>
-    <div class="container">
-      <h2  style="margin-top:10%;"><span class="back_white">Salted Vex Milk</span></h2>
-      <h7><span class="back_white">Stats+ for the {{clan.name}} clan</span></h7>
+
+    <div class="vid_container">
+      <h2  style="margin-top:25%; margin-left:5%;">
+        <span class="back_white">Salted Vex Milk</span>
+      </h2>
+      <h7>
+        <span class="back_white" style="margin-left:5%;">Stats+ for the {{clan.name}} clan</span>
+      </h7>
     </div>
   </div>
+
+
 
 
 {% endblock header %}
 
 {% block  content %}
     {% if clan  %}
-      <div class="row">
+        <div class="row">
+           <div class="col-sm-8">
+             <h3 style="margin-top:5px;">Description</h3>
+             <p style="white-space: pre-line">{{clan.description}}</p>
+           </div>
 
-       <div class="col-sm-8">
-         <h3 style="margin-top:5px;">Description</h3>
-         <p style="white-space: pre-line">{{clan.description}}</p>
-       </div>
-
-       <div class="col-sm-4">
-          <h3 style = "margin-top:5px;">Info</h3>
-           <p><b>Number of members:</b> {{clan.num_members}}</p>
-           <p><b>Motto:</b> {{clan.motto}}</p>
-           <p><b>Call sign:</b> {{clan.call_sign}}</p>
-           <p><b>Creation date:</b> {{clan.creation_date}}</p>
-           <p><b>Founder:</b> The benevolent, omnipotent <i>{{clan.founder}}</i>.</p>
-           <p><b>Clan ID#:</b> <i>{{clan.clan_id}}</i></p>
-       </div>
-
-      </div>
+           <div class="col-sm-4">
+              <h3 style = "margin-top:5px;">Info</h3>
+               <p class="closer"><b>Number of members:</b> {{clan.num_members}}</p>
+               <p class="closer"><b>Motto:</b> {{clan.motto}}</p>
+               <p class="closer"><b>Call sign:</b> {{clan.call_sign}}</p>
+               <p class="closer"><b>Creation date:</b> {{clan.creation_date}}</p>
+               <p class="closer"><b>Founder:</b> {{clan.founder}}</p>
+               <p class="closer"><b>Clan ID#:</b> <i>{{clan.clan_id}}</i></p>
+           </div>
+        </div> <!-- row -->
 
     {% else %}
       <p>There is no clan here</p>

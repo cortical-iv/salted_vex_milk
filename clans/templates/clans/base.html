@@ -22,7 +22,8 @@
       height: 100%;
     }
 
-    .container {
+    /* for use in video */
+    .vid_container {
       position: absolute;
       top: 50px;
     }
@@ -30,31 +31,15 @@
     /* following because fixed-top navbar */
     body { padding-top: 40px; }
 
-    .stroked_font2
-    {
-      color: black;
-      text-shadow: 1px 1px 0px #ffffff}
-
-    /* x-offset, y-offset, blur, color; */
-    .white_shadow
-    {
-      color: white;
-      text-shadow: 2px 2px 3px black,
-                   -2px -2px 3px black;
-    }
-
-    .black_shadow
-    {
-      color: black;
-      text-shadow: 2px 2px 2px white,
-                   -2px -2px 2px white;
+    p.closer {
+      margin-bottom: 0.25em;
     }
 
     .back_white {
-      background-color: rgba(255, 255, 255, 0.3);
+      background-color: rgba(255, 255, 255, 0.2);
     }
     /* Portrait phones and smaller */
-    @media (max-width: 450px) {
+    @media (max-width: 468px) {
       .back_white {background-color: rgba(255, 255, 255, 0.5);}
     }
 
@@ -64,7 +49,8 @@
 
   <body>
 
-    <!-- Navbar (expands vertically on small screens) -->
+   <!-- Navbar (expands vertically on small screens) -->
+   <div class="container-fluid">
     <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
       <!-- Brand (home button outside the collapsible part) -->
       <a class="navbar-brand" href="{% url 'clans:index' %}">Home</a>
@@ -128,16 +114,17 @@
         </ul>
       </div> <!-- collapsible part -->
     </nav><!-- Navbar -->
+   </div>
+
+
+    <div class = "page-header">
+      {% block header %} {% endblock header %}
+    </div>
 
     <div class = "container-fluid">
-      <div class = "page-header">
-        {% block header %} {% endblock header %}
-      </div>
-
-      <div>
         {% block content %}{% endblock content %}
-      </div>
-    </div> <!-- /container 2 for main page -->
+   </div>
+
 
   </body>
 </html>

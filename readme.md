@@ -27,27 +27,19 @@ Currently it's just a stub that shows basic clan information and member informat
               |-- refresh_members.py  (updates member info)
 
 ## To do (shorter term)
-- Implement jessamyn's suggestions about heroku settings.py bits.
 - Members page:
     - Why do I need to add spacing to header?
-    - Ultimately each element of name will be link using LinkColumn() (just like hasplayedd2 is a booleancolumn) or a URLColumn which renders URLs as links.
-- Index    
-    - Fix <p> spacing in right grid on index.html: right now it is probably 1em, but should be 0.5 between paras. Probably need to design a special style?
-    https://stackoverflow.com/questions/819161/what-is-the-default-padding-and-or-margin-for-a-p-element-reset-css
-    - Center stuff vertically in grid elements: this shouldn't be too bad in bootstrap 4, this is the whole reason I switched to bs4.
-    - Create a project-specific style sheet for stuff like movie, these special paragraphs, etc, so you don't have them distributed all over the place in the project.
-
+- Implement jessamyn's suggestions about heroku settings.py bits.
 - Once the above stuff (i.e., basic front-end) is working, plan how you want this organized in terms of models/pages etc (project_planning.md). For instance:
 - Add characters, classes, and light levels (in components 200--so use componenets 200 to find if they have played d2).
 - Start adding stats!
 - Plan out models (see project_planning.md -> Models and Fields)
-    - First add generic stats: light level(s), last time played, total hours played. Maybe pull with refresh members (both are part of profile 100). Put link on each player so you can pull this info for them?
+    - First add generic stats: light level(s), last time played, total hours played. Maybe pull with refresh members (both are part of profile 100). Put link on each player so you can pull this info for them? If so, in members use LinkColumn() (just like hasplayedd2 is a booleancolumn) or a URLColumn which renders URLs as links.
     - PvP net
 	- "LIve" stats (where are they now or most recently--for whole clan this would take a loading page): https://www.reddit.com/r/django/comments/4m49r8/showing_a_loading_gif_or_message_to_the_user/
     - PvE net
     - Raid net
-- I don't love the font covering SVM, would like to do something like this, on top right of image, that is responsive (not just fixed boundaries): white translucent bg with black text.
-https://graphicdesign.stackexchange.com/a/29260
+-  Create style sheet and link to it.
 
 ## Static files
 -Try running collectstatic dry run and it seems fine.
