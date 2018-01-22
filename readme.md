@@ -27,11 +27,16 @@ Currently it's just a stub that shows basic clan information and member informat
               |-- refresh_members.py  (updates member info)
 
 ## To do (shorter term)
+- That hamburger people will not know what to do with it. Need a 'how to' for the site? Put link other than home in collapsed version. Change it to say "menu", or just show the menus you only have like four right now. progressively collapsing navigations (maybre scrollable). tabs with a 'more' section that basically is a dropdown menu to remaining tabs. Good article:
+https://medium.com/@kollinz/hamburger-menu-alternatives-for-mobile-navigation-a3a3beb555b8
+Principles I want to follow:
+-Words not icons.
+-Have everything there don't make them scroll. So...dropdown menu with 'more' (e.g., about, etc)
+- At some point handle video size better: make it depend on size of viewing window: have two sizes. 480, and then 620 for viewing windows larger than 700 or whatever.
 - Members page:
     - Why do I need to add spacing to header? And is it different in firefox deployed? Why are fonts rendered differently in firefox@heroku but not chrome?
 - Implement jessamyn's suggestions about heroku settings.py bits.
 -  Create style sheet and link to it.
-- That hamburger people will not know what to do with it. Need a 'how to' for the site?
 
 - Once the above stuff (i.e., basic front-end for two pages) is working, plan how you want this organized in terms of models/pages etc (project_planning.md). For instance:
 - Add characters, classes, and light levels (in components 200--so use componenets 200 to find if they have played d2).
@@ -45,7 +50,7 @@ Currently it's just a stub that shows basic clan information and member informat
 
 
 ## To do (longer term)
-- How to do good vid in opening page?
+
 
 ## To do in a perfect world
 - Logging tune-up:

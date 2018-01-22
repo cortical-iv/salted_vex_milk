@@ -18,16 +18,31 @@
     #video-background {
       overflow: hidden;
       z-index: -100;
-      width:480px;
-      height: 270px;
+      width:700px;
+    }
+    @media (max-width: 700px) {
+      #video-background {
+        overflow: hidden;
+        z-index: -100;
+        width:480px;
+        height: 270px;
+      }
     }
 
-    /* for use in video */
+    /* for displaying text over video */
     .vid_container {
       position: absolute;
-      top: 80px;
-      left: 20px;
+      top: 120px;
+      left: 50px;
       width: 400px;
+    }
+    @media (max-width: 700px) {
+      .vid_container {
+        position: absolute;
+        top: 90px;
+        left: 20px;
+        width: 400px;
+      }
     }
 
     /* following because fixed-top navbar */
@@ -38,10 +53,7 @@
     }
 
     .back_white {background-color: rgba(255, 255, 255, 0.1);}
-    /* Previously needed this when expanded
-    @media (max-width: 468px) {
-      .back_white {background-color: rgba(255, 255, 255, 0.5);}
-    }  */
+
 
   </style>
 
