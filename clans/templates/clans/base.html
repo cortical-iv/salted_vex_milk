@@ -15,35 +15,40 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 
   <style>
+    /* Properties of the background video */
     #video-background {
       overflow: hidden;
       z-index: -100;
-      width:700px;
+      width:55vw;
+      height:auto;
     }
-    @media (max-width: 700px) {
+    @media (max-width: 828px) {
       #video-background {
         overflow: hidden;
         z-index: -100;
         width:480px;
-        height: 270px;
+        height: auto;
       }
     }
 
     /* for displaying text over video */
-    .vid_container {
+    .vidtext_container {
       position: absolute;
-      top: 120px;
-      left: 50px;
+      top: 20%; /* 110px; */
+      left: 5%; /* 50px; */
       width: 400px;
     }
-    @media (max-width: 700px) {
-      .vid_container {
+    @media (max-width: 828px) {
+      .vidtext_container {
         position: absolute;
-        top: 90px;
-        left: 20px;
+        top: 55px;
+        left: 40px;
         width: 400px;
       }
     }
+
+    /* transluscent text background over images/videos */
+    .back_white {background-color: rgba(255, 255, 255, 0.1);}
 
     .table_title {
       margin-top:25px;
@@ -57,8 +62,6 @@
       margin-bottom: 0.25em;
     }
 
-    /* transluscent text background over images/videos */
-    .back_white {background-color: rgba(255, 255, 255, 0.1);}
 
 
   </style>
@@ -136,9 +139,9 @@
    </div>
 
 
-    <div class = "page-header">
+    <!-- <div class = "page-header"> -->
       {% block header %} {% endblock header %}
-    </div>
+    <!-- </div>  -->
 
     <div class = "container-fluid">
         {% block content %}{% endblock content %}

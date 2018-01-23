@@ -15,8 +15,11 @@ Currently it's just a stub that shows basic clan information and member informat
       |-- forms.py  (the ModelForm for Clan)    
       |-- urls.py  (includes home page index.html)    
       |-- management/  (management function to refresh clan)
-          |-- commands/  
-              |-- refresh_clans.py  (updates clan info)
+      |   |-- commands/  
+      |       |-- refresh_clans.py  (updates clan info)
+      |-- static/  
+          |-- clans/
+              |-- saltedvexmilk_smooth.mp4 (movie for index.html)
 
     members/  (app for Member model: generic info like id)     
       |-- models.py  (the Member model)    
@@ -27,11 +30,17 @@ Currently it's just a stub that shows basic clan information and member informat
               |-- refresh_members.py  (updates member info)
 
 ## To do (shorter term)
-- Members page:
-    - Why are fonts rendered differently in firefox@heroku but not chrome?
+- Probably shouldn't be forcing them to watch a video:
+https://ux.stackexchange.com/questions/69680/background-video-on-tablet-phone-or-still-image
+Consider replacing it with a screenshot in color. But really..you need to just move on!
+-  Create style sheet and link to it. How to break up style sheets for different pages?
+https://stackoverflow.com/questions/25386868/django-templates-use-different-css-for-pages
+This looks like very good discusison,a nd excellente discusion of the settings.py handing of settings paths:
+https://scotch.io/tutorials/working-with-django-templates-static-files
 - Implement jessamyn's suggestions about heroku settings.py bits.
--  Create style sheet and link to it.
-- Fix directory structure in readme to include static files etc..
+- At heroku, why are fonts rendered differently in firefox@heroku but not chrome?
+- Perhaps related? Why is movie large on chrome? (But that is even at localhost)
+ https://stackoverflow.com/questions/48394074/chrome-is-expanding-movie-on-web-page-by-about-60
 
 - Once the above stuff (i.e., basic front-end for two pages) is working, plan how you want this organized in terms of models/pages etc (project_planning.md). For instance:
 - Add characters, classes, and light levels (in components 200--so use componenets 200 to find if they have played d2).
@@ -82,3 +91,4 @@ https://devcenter.heroku.com/articles/django-app-configuration
 - When setting field (e.g., clan) in model (member) that is tethered to another model as foreign key (e.g., Member instance has Clan foreign key), set field to clan.id, not the full clan instance.
 - See  api_private_example_2 (not version controlled) for more bad url examples if you need them for testing.
 - Good discussion of position: https://developer.mozilla.org/en-US/docs/Web/CSS/position
+- Excellent intro to CSS: http://www.tangowithdjango.com/book/chapters/css_intro.html

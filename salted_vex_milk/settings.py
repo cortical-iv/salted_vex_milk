@@ -148,19 +148,22 @@ USE_TZ = True
 #STATIC_URL = '/static/'
 #
 ##Static asset configuration [new from https://devcenter.heroku.com/articles/django-assets]
-#PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 #STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')  #'staticfiles'
 #STATICFILES_DIRS = (
 #        os.path.join(PROJECT_ROOT, 'static'),
 #        )
 
-# Static files (CSS, JavaScript, Images)
+# Static files (CSS, JavaScript, Images) are collected and put here
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 logger.debug(f"BASE_DIR: {BASE_DIR}")
+logger.debug(f"project_root: {PROJECT_ROOT}")
+logger.debug(f"static_root: {STATIC_ROOT}")
 
-# Extra places for collectstatic to find static files.
+# Extra places for collectstatic to find static files if you aren't putting them
+#in the usual places.
 #STATICFILES_DIRS = (
 #    os.path.join(BASE_DIR, 'static'),
 #)
