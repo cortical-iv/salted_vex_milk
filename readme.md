@@ -27,16 +27,11 @@ Currently it's just a stub that shows basic clan information and member informat
               |-- refresh_members.py  (updates member info)
 
 ## To do (shorter term)
-- That hamburger people will not know what to do with it. Need a 'how to' for the site? Put link other than home in collapsed version. Change it to say "menu", or just show the menus you only have like four right now. progressively collapsing navigations (maybre scrollable). tabs with a 'more' section that basically is a dropdown menu to remaining tabs. Good article:
-https://medium.com/@kollinz/hamburger-menu-alternatives-for-mobile-navigation-a3a3beb555b8
-Principles I want to follow:
--Words not icons.
--Have everything there don't make them scroll. So...dropdown menu with 'more' (e.g., about, etc)
-- At some point handle video size better: make it depend on size of viewing window: have two sizes. 480, and then 620 for viewing windows larger than 700 or whatever.
 - Members page:
-    - Why do I need to add spacing to header? And is it different in firefox deployed? Why are fonts rendered differently in firefox@heroku but not chrome?
+    - Why are fonts rendered differently in firefox@heroku but not chrome?
 - Implement jessamyn's suggestions about heroku settings.py bits.
 -  Create style sheet and link to it.
+- Fix directory structure in readme to include static files etc..
 
 - Once the above stuff (i.e., basic front-end for two pages) is working, plan how you want this organized in terms of models/pages etc (project_planning.md). For instance:
 - Add characters, classes, and light levels (in components 200--so use componenets 200 to find if they have played d2).
@@ -84,7 +79,6 @@ https://devcenter.heroku.com/articles/django-app-configuration
 - To update the information about X (e.g., clan, members), at command line enter `python manage.py refresh_X`, where 'X' can be 'clan' or 'members' right now. This is also the command you would enter in your scheduler (right now it configured to deploy at Heroku).
 
 ## Useful things
-- In extract_member_info, be sure to use mke_request, and not the api_handler, as the latter doesn't differentiate between bungie errors and server errors, and you use the bungie error to tell if user has played d2.
 - When setting field (e.g., clan) in model (member) that is tethered to another model as foreign key (e.g., Member instance has Clan foreign key), set field to clan.id, not the full clan instance.
-- Docs for sessions: http://docs.python-requests.org/en/master/api/#request-sessions
-- See  api_private_example_2 (not version controlled) for more bad url examples.
+- See  api_private_example_2 (not version controlled) for more bad url examples if you need them for testing.
+- Good discussion of position: https://developer.mozilla.org/en-US/docs/Web/CSS/position
