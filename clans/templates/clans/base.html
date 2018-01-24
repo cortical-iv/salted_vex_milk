@@ -15,6 +15,20 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 
   <style>
+
+    /* to fix navbar button going off to side on cell phone:
+     https://stackoverflow.com/questions/35881998/bootstrap-mobile-menu-button-goes-off-screen-on-phones*/
+    html,body
+    {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+        overflow-x: hidden;
+    }
+
+
+
     /* Properties of the background video */
     #video-background {
       overflow: hidden;
