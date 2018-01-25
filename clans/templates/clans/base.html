@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang = "en">
 <head>
@@ -14,81 +16,81 @@
    <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 
-  <style>
 
-    /* to fix navbar button going off to side on cell phone:
-     https://stackoverflow.com/questions/35881998/bootstrap-mobile-menu-button-goes-off-screen-on-phones*/
-    html,body
-    {
-        width: 100%;
-        height: 100%;
-        margin: 0px;
-        padding: 0px;
-        overflow-x: hidden;
-    }
+  <!--
+  <link rel="stylesheet" type="text/css" href="{% static 'salted_vex_milk/style.css' %}">
+-->
 
+<style>
+  /* to fix navbar button going off to side on cell phone:
+   https://stackoverflow.com/questions/35881998/bootstrap-mobile-menu-button-goes-off-screen-on-phones*/
+  html,body
+  {
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+      padding: 0px;
+      overflow-x: hidden;
+  }
 
-
-    /* Properties of the background video */
+  /* Properties of the background video : note VID IS 720 px x 404 */
+  #video-background {
+    overflow: hidden;
+    z-index: -100;
+    width:720px;
+    height:auto;
+  }
+  @media (max-width: 720px) {
     #video-background {
       overflow: hidden;
       z-index: -100;
-      width:55vw;
-      height:auto;
+      width:480px;
+      height: auto;
     }
-    @media (max-width: 828px) {
-      #video-background {
-        overflow: hidden;
-        z-index: -100;
-        width:450px;
-        height: auto;
-      }
+  }
+  @media (max-width: 480px) {
+    #video-background {
+      overflow: hidden;
+      z-index: -100;
+      width:100%;
+      height: auto;
     }
-    @media (max-width: 480px) {
-      #video-background {
-        overflow: hidden;
-        z-index: -100;
-        width:100%;
-        height: auto;
-      }
-    }
+  }
 
-    /* for displaying text over video */
-    .vidtext_container {
-      position: absolute;
-      top: 20%; /* 110px; */
-      left: 5%; /* 50px; */
-      width: 400px;
-    }
+  /* for displaying text over video */
+  .vidtext_container {
+    position: absolute;
+    top: 22%; /* 110px; */
+    left: 4%; /* 50px; */
+    width: 400px;
+  }
 
-    /*
-    @media (max-width: 828px) {
-      .vidtext_container {
-        position: absolute;
-        top: 55px;
-        left: 40px;
-        width: 400px;
-      }
-    } */
 
-    /* transluscent text background over images/videos */
-    .back_white {background-color: rgba(255, 255, 255, 0.1);}
-
-    .table_title {
-      margin-top:25px;
-      margin-left:20px;
-    }
-
-    /* following because fixed-top navbar */
-    body { padding-top: 40px; }
-
-    p.closer {
-      margin-bottom: 0.25em;
+  /* transluscent text background over images/videos */
+  .back_white {background-color: rgba(255, 255, 255, 0.1);}
+  @media (max-width: 480px) {
+    .back_white {background-color: rgba(255, 255, 255, 0.3);}
     }
 
 
+  .table_title {
+    margin-top:25px;
+    margin-left:20px;
+  }
 
-  </style>
+  /* following because fixed-top navbar */
+  body { padding-top: 40px; }
+
+  p.closer {
+    margin-bottom: 0.25em;
+  }
+
+</style>
+
+
+
+
+
 
 </head>
 

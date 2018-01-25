@@ -38,12 +38,10 @@ def get_env_variable(var_name):
 
 SECRET_KEY = get_env_variable('SECRET_KEY')
 D2_KEY =  get_env_variable('D2_KEY')
+DEBUG = get_env_variable('DEBUG')
 
+logger.debug(f"Debug setting: {DEBUG}")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -142,7 +140,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+"""
+#PREVIOUS WAY: not great
 ### Static files (CSS, JavaScript, Images)
 ### https://docs.djangoproject.com/en/1.11/howto/static-files/
 #STATIC_URL = '/static/'
@@ -153,37 +152,40 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 #STATICFILES_DIRS = (
 #        os.path.join(PROJECT_ROOT, 'static'),
 #        )
+logger.debug(f"project_root: {PROJECT_ROOT}")
+"""
 
+##########################
 # Static files (CSS, JavaScript, Images) are collected and put here
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 logger.debug(f"BASE_DIR: {BASE_DIR}")
-logger.debug(f"project_root: {PROJECT_ROOT}")
 logger.debug(f"static_root: {STATIC_ROOT}")
-
+#
 # Extra places for collectstatic to find static files if you aren't putting them
-#in the usual places.
+#in the usual places for apps.
 #STATICFILES_DIRS = (
 #    os.path.join(BASE_DIR, 'static'),
 #)
 #logger.debug(f"STATIFILES_DIRS: {STATICFILES_DIRS}")
 
 
-#Heroku settings
-cwd = os.getcwd()
-if cwd == '/app' or cwd[:4] == '/tmp':  #can just get rid of this: use one sent in docs
+################
+#Server settings
+ALLOWED_HOSTS =  ['localhost', 'saltedvexmilk.herokuapp.com']
+#Honor the 'X-Forwarded-Proto' header for request.is_secure().
+SECURE_PROXY_SSL_HEADER = {'HTTP_X_FORWARDED_PROTO', 'https'}  #can be on localhost
 
-    import dj_database_url  #uses url in lieu of above if given settings usse configs sent!
-    DATABASES = {
-            'default': dj_database_url.config(default = 'postgres://localhost')}
+# Update database configuration with $DATABASE_URL.
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
-    #Honor the 'X-Forwarded-Proto' header for request.is_secure().
-    SECURE_PROXY_SSL_HEADER = {'HTTP_X_FORWARDED_PROTO', 'https'}  #can be on localhost
 
-    #Allow only Heroku to host the project
-    ALLOWED_HOSTS =  ['localhost', 'saltedvexmilk.herokuapp.com'] #['tell-jeeves.herokuapp.com']  #make list of valid things, not *
-    DEBUG = False  #make this an environment variable (so you can set it at heroku quickly if you need it)
-    #following yields 500 error at heroku
-    #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+#Following generates 500 error when not commented out :()
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 

@@ -19,7 +19,7 @@ Currently it's just a stub that shows basic clan information and member informat
       |       |-- refresh_clans.py  (updates clan info)
       |-- static/  
           |-- clans/
-              |-- saltedvexmilk_smooth.mp4 (movie for index.html)
+              |-- waterfall_movie.mp4 (movie for index.html)
 
     members/  (app for Member model: generic info like id)     
       |-- models.py  (the Member model)    
@@ -30,17 +30,13 @@ Currently it's just a stub that shows basic clan information and member informat
               |-- refresh_members.py  (updates member info)
 
 ## To do (shorter term)
-- Probably shouldn't be forcing them to watch a video:
-https://ux.stackexchange.com/questions/69680/background-video-on-tablet-phone-or-still-image
-Consider replacing it with a screenshot in color. But really..you need to just move on!
--  Create style sheet and link to it. How to break up style sheets for different pages?
-https://stackoverflow.com/questions/25386868/django-templates-use-different-css-for-pages
-This looks like very good discusison,a nd excellente discusion of the settings.py handing of settings paths:
-https://scotch.io/tutorials/working-with-django-templates-static-files
-- Implement jessamyn's suggestions about heroku settings.py bits.
 - At heroku, why are fonts rendered differently in firefox@heroku but not chrome?
-- Perhaps related? Why is movie large on chrome? (But that is even at localhost)
- https://stackoverflow.com/questions/48394074/chrome-is-expanding-movie-on-web-page-by-about-60
+- Video prep is actually a whole thing:
+https://developer.mozilla.org/en-US/Apps/Fundamentals/Audio_and_video_delivery/cross_browser_video_player
+- Show image instead of text if movie doesn't work in a browser.
+- Do x-browser testing:
+    https://developer.mozilla.org/en-US/Apps/Fundamentals/Audio_and_video_delivery/cross_browser_video_player
+- Clean up project_planning.md
 
 - Once the above stuff (i.e., basic front-end for two pages) is working, plan how you want this organized in terms of models/pages etc (project_planning.md). For instance:
 - Add characters, classes, and light levels (in components 200--so use componenets 200 to find if they have played d2).
@@ -52,6 +48,13 @@ https://scotch.io/tutorials/working-with-django-templates-static-files
     - PvE net
     - Raid net
 
+- Read this:
+https://dlo.me/archives/2013/01/14/how-to-serve-static-files-django/
+
+Questions for Jessamyn:
+- How to get style sheet working? Would like to do it in clan app but seems to not work.
+    https://tutorial.djangogirls.org/en/template_extending/
+- load static versus load staticfiles in a template?
 
 ## To do (longer term)
 
