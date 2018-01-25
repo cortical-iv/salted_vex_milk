@@ -30,11 +30,6 @@ Currently it's just a stub that shows basic clan information and member informat
               |-- refresh_members.py  (updates member info)
 
 ## To do (shorter term)
-- Video prep is actually a whole thing:
-    -https://developer.mozilla.org/en-US/Apps/Fundamentals/Audio_and_video_delivery/cross_browser_video_player
-    - Show image instead of text if movie doesn't work in a browser.
-OMG amazing video generation site even has code on how to serve it on your html!
-http://converterpoint.com/
 
 - Once you have decent video setup, do x-browser testing:
     https://developer.mozilla.org/en-US/Apps/Fundamentals/Audio_and_video_delivery/cross_browser_video_player
@@ -98,3 +93,5 @@ https://devcenter.heroku.com/articles/django-app-configuration
 - See  api_private_example_2 (not version controlled) for more bad url examples if you need them for testing.
 - Good discussion of position: https://developer.mozilla.org/en-US/docs/Web/CSS/position
 - Excellent intro to CSS: http://www.tangowithdjango.com/book/chapters/css_intro.html
+- Great video conversion site: https://www.online-convert.com/
+- Good for compression: https://compressify.herokuapp.com/
