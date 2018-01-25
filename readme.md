@@ -30,11 +30,13 @@ Currently it's just a stub that shows basic clan information and member informat
               |-- refresh_members.py  (updates member info)
 
 ## To do (shorter term)
-- At heroku, why are fonts rendered differently in firefox@heroku but not chrome?
 - Video prep is actually a whole thing:
-https://developer.mozilla.org/en-US/Apps/Fundamentals/Audio_and_video_delivery/cross_browser_video_player
-- Show image instead of text if movie doesn't work in a browser.
-- Do x-browser testing:
+    -https://developer.mozilla.org/en-US/Apps/Fundamentals/Audio_and_video_delivery/cross_browser_video_player
+    - Show image instead of text if movie doesn't work in a browser.
+OMG amazing video generation site even has code on how to serve it on your html!
+http://converterpoint.com/
+
+- Once you have decent video setup, do x-browser testing:
     https://developer.mozilla.org/en-US/Apps/Fundamentals/Audio_and_video_delivery/cross_browser_video_player
 - Clean up project_planning.md
 
@@ -48,11 +50,12 @@ https://developer.mozilla.org/en-US/Apps/Fundamentals/Audio_and_video_delivery/c
     - PvE net
     - Raid net
 
-- Read this:
+- For static/css stuff, check out:
 https://dlo.me/archives/2013/01/14/how-to-serve-static-files-django/
+https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Deployment
 
 Questions for Jessamyn:
-- How to get style sheet working? Would like to do it in clan app but seems to not work.
+- How to get style sheet working? Would like to do it in svm app but seems to not work.
     https://tutorial.djangogirls.org/en/template_extending/
 - load static versus load staticfiles in a template?
 
