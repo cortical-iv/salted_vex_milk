@@ -43,7 +43,6 @@ DEBUG = get_env_variable('DEBUG')
 logger.debug(f"Debug setting: {DEBUG}")
 
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -147,21 +146,24 @@ USE_TZ = True
 #STATIC_URL = '/static/'
 #
 ##Static asset configuration [new from https://devcenter.heroku.com/articles/django-assets]
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 #STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')  #'staticfiles'
-#STATICFILES_DIRS = (
-#        os.path.join(PROJECT_ROOT, 'static'),
-#        )
 logger.debug(f"project_root: {PROJECT_ROOT}")
 """
 
 ##########################
 # Static files (CSS, JavaScript, Images) are collected and put here
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#"The default is to look in all locations defined in STATICFILES_DIRS and
+#in the 'static' directory of apps specified by the INSTALLED_APPS setting."
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  #where they will be saved for serving
 STATIC_URL = '/static/'
+#PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+        ) #where it will get any extras
 logger.debug(f"BASE_DIR: {BASE_DIR}")
 logger.debug(f"static_root: {STATIC_ROOT}")
+logger.debug(f"staticfiles_dirs: {STATICFILES_DIRS}")
 #
 # Extra places for collectstatic to find static files if you aren't putting them
 #in the usual places for apps.
@@ -173,17 +175,16 @@ logger.debug(f"static_root: {STATIC_ROOT}")
 
 ################
 #Server settings
+################
 ALLOWED_HOSTS =  ['localhost', 'saltedvexmilk.herokuapp.com']
 #Honor the 'X-Forwarded-Proto' header for request.is_secure().
 SECURE_PROXY_SSL_HEADER = {'HTTP_X_FORWARDED_PROTO', 'https'}  #can be on localhost
 
-# Update database configuration with $DATABASE_URL.
+# Update database configuration with $DATABASE_URL, as recommended at:
+# https://devcenter.heroku.com/articles/django-app-configuration
 import dj_database_url
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
-
-
-
 #Following generates 500 error when not commented out :()
 #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
