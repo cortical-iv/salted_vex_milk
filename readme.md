@@ -31,8 +31,10 @@ Currently it's just a stub that shows basic clan information and member informat
 
 ## To do (shorter term)
 
-- Once you have decent video setup, do x-browser testing:
-    https://developer.mozilla.org/en-US/Apps/Fundamentals/Audio_and_video_delivery/cross_browser_video_player
+- Switch to cyborg theme: https://bootswatch.com/cyborg/
+(Bonus: will have white text on movie without having to do anything)
+Or FFS can I just switch to black bg and white text? Is it really that complicated? Do I have to change every fucking thing?
+- Want table to get smaller without going to multioline, and while showing horiz scrolling. Really want to sort out tables looking nice!
 - Clean up project_planning.md
 
 - Once the above stuff (i.e., basic front-end for two pages) is working, plan how you want this organized in terms of models/pages etc (project_planning.md). For instance:
@@ -58,6 +60,8 @@ Questions for Jessamyn:
 
 
 ## To do in a perfect world
+- x-browser testing:
+    https://developer.mozilla.org/en-US/Apps/Fundamentals/Audio_and_video_delivery/cross_browser_video_player
 - Logging tune-up:
     - I don't need same `logging.basicConfig` in following files do I?
         d2api: utils
