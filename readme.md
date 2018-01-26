@@ -1,9 +1,9 @@
 # Salted Vex Milk
-Processing clans in D2 with Django 2.0.
+Stats and more for the ImHelping clan in D2, displayed using Django 2.0 for the back end, and bootstrap4 for the front end.
 
-Front page will have basic information about the clan and clan members. Should include leaderboards, individual clan member stats, including what each player is currently doing. Another page for links and content (link to official clan site, to slack channel, youtube channel, strategy channels, etc).
+The site includes basic information about the clan as a whole, individual clan members, and links to helpful stuff (like the100). Right now it is showing generic information about the clan and players, and I am adding the stats.
 
-Currently it's just a stub that shows basic clan information and member information (e.g., join date), as I work out the basic architecture.
+Uses the third-party bootstrap4 theme [Cyborg](https://bootswatch.com/cyborg/), and for rendering sortable tables uses  [django-tables2](https://django-tables2.readthedocs.io/en/latest/pages/tutorial.html).
 
 ### Structure of apps
     d2api/  (core app: library for creating/processing requests)   
@@ -30,10 +30,6 @@ Currently it's just a stub that shows basic clan information and member informat
               |-- refresh_members.py  (updates member info)
 
 ## To do (shorter term)
-
-- Switch to cyborg theme: https://bootswatch.com/cyborg/
-(Bonus: will have white text on movie without having to do anything)
-Or FFS can I just switch to black bg and white text? Is it really that complicated? Do I have to change every fucking thing?
 - Want table to get smaller without going to multioline, and while showing horiz scrolling. Really want to sort out tables looking nice!
 - Clean up project_planning.md
 
@@ -55,6 +51,7 @@ Questions for Jessamyn:
 - How to get style sheet working? Would like to do it in svm app but seems to not work.
     https://tutorial.djangogirls.org/en/template_extending/
 - load static versus load staticfiles in a template?
+- When do I need urls for static files ()
 
 ## To do (longer term)
 
@@ -74,23 +71,23 @@ Questions for Jessamyn:
 - Set up to develop on multiple computers (windows and ubuntu).
 - add concurrent.futures to process multiple requests simultaneously (e.g., refresh_members)
 
-## Static files
--Try running collectstatic dry run and it seems fine.
+## Static files stuff
+Generally follow the instructions here:
+    https://devcenter.heroku.com/articles/django-app-configuration
+Tips and tricks include: try running collectstatic dry run to see how it *would* run
     heroku run python manage.py collectstatic --dry-run --noinput
-First followed instructions here, and put movie in project folder instead of app folder:
-    https://devcenter.heroku.com/articles/django-assets
-It made no difference, so I went back to app folder way, which seems better.
-Note had to comment this out because I get 500 error when it is in there:
+To see if static file is found:
+    python manage.py findstatic bootstrap.min.css --first
+Note had to comment the following out because I get 500 error when it is in there:
     #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-https://devcenter.heroku.com/articles/django-app-configuration
 
 
 
 ## Some setup information
-- Store your django secret key and destiny 2 api key as environment variables (named `SECRET_KEY` and `D2_KEY`, respectively, which are retrieved in `settings.py` using the `get_env_variable` function).
-- In `/d2api/constants.py`, set the `GROUP_ID` to the value of the clan you want to build for. It is currently set to cortical_iv's clan.
+- Project expects your your django secret key, destiny 2 api key, and debug variable as environment variables (named `SECRET_KEY`, `D2_KEY`, and `DEBUG` respectively), which are retrieved in `settings.py` using the `get_env_variable` function).
+- In `/d2api/constants.py`, set the `GROUP_ID` to the value of the clan you want to build for. It is currently set to the 'ImHelping' clan.
 - Set up database settings in `settings.py`, and create database for local use, if needed. Currently uses postgres.
-- To update the information about X (e.g., clan, members), at command line enter `python manage.py refresh_X`, where 'X' can be 'clan' or 'members' right now. This is also the command you would enter in your scheduler (right now it configured to deploy at Heroku).
+- To update the information about X (e.g., clan, members), at command line enter `python manage.py refresh_X`, where 'X' can be 'clan' or 'members' or whatever model you are updating. This is also the command you would enter in your scheduler (right now it configured to deploy at Heroku).
 
 ## Useful things
 - When setting field (e.g., clan) in model (member) that is tethered to another model as foreign key (e.g., Member instance has Clan foreign key), set field to clan.id, not the full clan instance.

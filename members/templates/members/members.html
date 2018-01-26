@@ -2,12 +2,11 @@
 {% load render_table from django_tables2 %}
 
 {% block header %}
-  <h4 class = "table_title">ImHelping Members</h4>
+  <h5 class = "table_title">ImHelping Members</h5>
 {% endblock header %}
 
 {% block  content %}
-        {% render_table member_table %}
-
+   {% render_table member_table %}
 <!--
 <table class = "table table-striped table-hover">
   <thead>
