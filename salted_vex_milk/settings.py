@@ -176,7 +176,7 @@ logger.debug(f"staticfiles_dirs: {STATICFILES_DIRS}")
 ################
 #Server settings
 ################
-ALLOWED_HOSTS =  ['localhost', 'saltedvexmilk.herokuapp.com']
+ALLOWED_HOSTS =  ['localhost', 'svm-dev.herokuapp.com', 'saltedvexmilk.herokuapp.com']
 #Honor the 'X-Forwarded-Proto' header for request.is_secure().
 SECURE_PROXY_SSL_HEADER = {'HTTP_X_FORWARDED_PROTO', 'https'}  #can be on localhost
 

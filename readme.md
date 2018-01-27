@@ -30,8 +30,12 @@ Uses the third-party bootstrap4 theme [Cyborg](https://bootswatch.com/cyborg/), 
               |-- refresh_members.py  (updates member info)
 
 ## To do (shorter term)
-- Want table to get smaller without going to multioline, and while showing horiz scrolling. Really want to sort out tables looking nice!
+- Switch to new project on heroku (svmdev.herokuapp and don't even worry about updating nightly), and use that to test so people don't see it.
+- Switch to cards fro front page: display clan 'about' and basic information on right. Seems bettere than these columns! Also could add footer, no? Note w3c has footer examples, and your bootstrap template cyborg may have footers built in.
+- Look at how others have implemented leaderboards, e.g., destinydashboard.
+- Get tables looking nice! Let tables get smaller a) without going to multiline, and b) while showing horiz scrolling. Really want to sort out tables looking nice!
 - Clean up project_planning.md
+
 
 - Once the above stuff (i.e., basic front-end for two pages) is working, plan how you want this organized in terms of models/pages etc (project_planning.md). For instance:
 - Add characters, classes, and light levels (in components 200--so use componenets 200 to find if they have played d2).
