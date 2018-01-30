@@ -26,3 +26,4 @@ def members(request):
 
     context = {'member_table': member_table, 'updated': latest_update}
     return render(request, 'members/members.html', context)
+

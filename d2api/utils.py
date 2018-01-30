@@ -21,8 +21,9 @@ import dateutil.parser
 from django import forms
 from django.db.utils import IntegrityError
 
-from .constants import BASE_URL, GROUP_ID, BASE_URL_GROUP
+from .constants import BASE_URL, GROUP_ID, BASE_URL_GROUP, CLASS_ENUM, GENDER_ENUM, RACE_ENUM
 from clans.models import Clan
+from members.models import Member
 #from .forms import SubmitUser
 
 """
@@ -152,7 +153,6 @@ class GetProfile(Endpoint):
     """
     def __init__(self, headers, url_arguments = None, request_parameters = None):
         super().__init__(headers, url_arguments, request_parameters)
-        self.played_d2 = self.has_played_d2()
 
     def make_url(self):
         membership_type = str(self.url_arguments['membership_type'])
@@ -164,7 +164,7 @@ class GetProfile(Endpoint):
         try:
             error_status = self.response.json()['ErrorStatus']
         except AttributeError:
-            logger.error("GetProfile.has_played_d2(): no response data")
+            logger.error("Error in GetProfile.has_played_d2().")
             raise
         else:
             if error_status == 'DestinyAccountNotFound':
@@ -173,8 +173,50 @@ class GetProfile(Endpoint):
             else:
                 return True
 
-    def __repr__(self):
-        return f"GetProfile instance.\nURL: {self.url}"
+    def extract_character_info(self):
+        """For compontents==200 (characters), will extract stuff for Character model:
+            """
+        if self.request_params['components'] is not '200':
+            msg = ('GetProfile.extract_character_info() only works with character component (200)')
+            logger.error(msg)
+            raise TypeError(msg)
+        elif not self.has_played_d2():
+            logger.info('Character has not played d2, so no characters.')
+            return None
+        else:
+            member = Member.objects.get(member_id = self.url_arguments['member_id']) #foreign key
+            user_characters = self.data['characters']['data']
+            #print(user_characters)
+            num_chars = len(user_characters)
+            logger.debug(f"Extracting info for {num_chars} characters.")
+            character_ids = list(user_characters.keys())
+            character_list = []
+            character_times = []
+            character_lights = []
+            character_last_played = []
+            for character_id in character_ids:
+                data = user_characters[character_id]
+                character_info = {}
+                character_info['member'] = member.id
+                character_info['character_id'] = character_id
+                character_info['race'] = RACE_ENUM[data['raceType']]
+                character_info['gender'] = GENDER_ENUM[data['genderType']]
+                character_info['character_class'] = CLASS_ENUM[data['classType']]
+                character_info['light'] = data['light']
+                character_info['level'] = data['levelProgression']['level']
+                character_info['emblem_path'] = data['emblemPath']
+                character_info['date_last_played'] = dateutil.parser.parse(data['dateLastPlayed'])
+                character_info['minutes_played'] = data['minutesPlayedTotal']
+                character_list.append(character_info)
+                character_times.append(int(data['minutesPlayedTotal']))
+                character_lights.append(int(data['light']))
+                character_last_played.append(character_info['date_last_played'])
+                logger.debug(f"character_info: {character_info}")
+            total_time = sum(character_times)
+            max_light = max(character_lights)
+            date_last_played = max(character_last_played)
+            return (character_list, total_time, max_light, date_last_played)
+
 
 
 class GetGroup(Endpoint):
@@ -287,7 +329,8 @@ def bind_and_save(Model, data, Form, **instance_kwargs):
     """
     Bind 'data' to django 'Form' corresponding to 'Model' class.
     Then validate, and save. If model instance (uniquely specified
-    by '**instance_kwargs') exists, update row; otherwise create row.
+    by '**instance_kwargs' dictionary) exists, update row; otherwise create row.
+    E.g., **instance_kwargs could be {clan_id: '12323'}
     """
     try:
         model_instance = Model.objects.get(**instance_kwargs)

@@ -12,12 +12,8 @@
     </video>
 
     <div class="vidtext_container">
-      <h3  style="margin-botton:0em;" class="movie_text">
-         Salted Vex Milk
-      </h3>
-      <h6>
-        Stats and more for the {{clan.name}} clan
-      </h6>
+      <h3  style="margin-botton:0em;">Salted Vex Milk</h3>
+      <h6>Stats and more for the {{clan.name}} clan</h6>
     </div>
   </div>
 
@@ -25,32 +21,40 @@
 
 {% block  content %}
     {% if clan  %}
-        <div class="row">
-           <div class="col-sm-7">
-             <h3 style="margin-top:5px;">Description</h3>
-             <p style="white-space: pre-line">{{clan.description}}</p>
-           </div>
 
-           <div class="col-sm-5">
-              <h3 style = "margin-top:5px;">Info</h3>
-               <p class="closer"><b>Number of members:</b> {{clan.num_members}}</p>
-               <p class="closer"><b>Motto:</b> {{clan.motto}}</p>
-               <p class="closer"><b>Call sign:</b> {{clan.call_sign}}</p>
-               <p class="closer"><b>Creation date:</b> {{clan.creation_date}}</p>
-               <p class="closer"><b>Founder:</b> {{clan.founder}}</p>
-               <p class="closer"><b>Clan ID#:</b> <i>{{clan.clan_id}}</i></p>
+    <div class="row">
+       <div class="col-sm-7">
+         <h3>Description</h3>
+         <p style="white-space: pre-line">{{clan.description}}</p>
+       </div>
+
+       <div class="col-sm-5">
+         <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+           <div class="card-body">
+             <h4 class="card-title">Info</h4>
+             <p class="closer"><b>Number of members:</b> {{clan.num_members}}</p>
+             <p class="closer"><b>Motto:</b> {{clan.motto}}</p>
+             <p class="closer"><b>Call sign:</b> {{clan.call_sign}}</p>
+             <p class="closer"><b>Creation date:</b> {{clan.creation_date}}</p>
+             <p class="closer"><b>Founder:</b> {{clan.founder}}</p>
+             <p class="closer"><b>Clan ID#:</b> <i>{{clan.clan_id}}</i></p>
            </div>
-        </div> <!-- row -->
+         </div>
+
+       </div>
+    </div> <!-- row -->
 
     {% else %}
       <p>There is no clan here</p>
     {% endif %}
 
-  <hr/>
-  {% if clan.updated %}
-    <i>Latest update {{clan.updated}}.</i>
-  {% else %}
-    <i>Latest update unknown.</i>
-  {% endif %}
+  <footer>
+    {% if clan.updated %}
+      <i>Latest update {{clan.updated}}.</i>
+    {% else %}
+      <i>Latest update unknown.</i>
+    {% endif %}
+  </footer>
+
 
 {% endblock content %}

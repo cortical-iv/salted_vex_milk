@@ -1,0 +1,77 @@
+/* to fix navbar button going off to side on cell phone:
+ https://stackoverflow.com/questions/35881998/bootstrap-mobile-menu-button-goes-off-screen-on-phones*/
+html,body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+}
+
+/* Make a nice footer to show dates etc */
+footer {
+ margin-top: 20px;
+ background-color: rgba(20, 20, 20, 1);
+ font-style:italic;
+ color:rgba(100, 100, 100, 1);
+ text-align:center;
+
+}
+
+/* Properties of the background video : note VID IS 720 px x 480 */
+#video-background {
+  overflow: hidden;
+  z-index: -100;
+  width:720px;
+  height:auto;
+  margin-bottom: 5px;
+}
+@media (max-width: 720px) {
+  #video-background {
+    overflow: hidden;
+    z-index: -100;
+    width:480px;
+    height: auto;
+  }
+}
+@media (max-width: 480px) {
+  #video-background {
+    overflow: hidden;
+    z-index: -100;
+    width:100%;
+    height: auto;
+  }
+}
+
+/* style for displaying text over video */
+.vidtext_container {
+  position: absolute;
+  top: 15%; /* 110px; */
+  left: 4%; /* 50px; */
+  width: 400px;
+}
+
+/* transluscent text background for text with images: no longer used */
+.back_white {background-color: rgba(255, 255, 255, 0.1);}
+@media (max-width: 480px) {
+  .back_white {background-color: rgba(255, 255, 255, 0.3);}
+  }
+
+/* This makes table titles look better */
+.table_title {
+  /* text-align:center; */
+  margin-left: 40px;
+  margin-top:0px;
+  margin-bottom:4px;
+}
+
+/* following because fixed-top navbar overlays body content
+https://stackoverflow.com/a/11008050/9072894
+*/
+body { padding-top: 65px; }
+
+/* Default paragraph spacing is too far apart, this is when you want them closer */
+p.closer {
+  margin-bottom: 0.25em;
+}

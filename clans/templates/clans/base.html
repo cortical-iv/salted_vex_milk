@@ -10,7 +10,7 @@
     <!-- Latest compiled and minified CSS
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"> -->
 
-    <!-- style from  https://bootswatch.com/cyborg/ -->
+    <!-- Third-party bootstrap theme, cyborg, from  https://bootswatch.com/cyborg/ -->
     <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}"  type='text/css'>
    <!-- jQuery library -->
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -18,92 +18,10 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
    <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+  <!-- Custom style sheet -->
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 
 
-  <!--
-  <link rel="stylesheet" type="text/css" href="{% static 'salted_vex_milk/style.css' %}">
--->
-
-<style>
-  /* to fix navbar button going off to side on cell phone:
-   https://stackoverflow.com/questions/35881998/bootstrap-mobile-menu-button-goes-off-screen-on-phones*/
-  html,body
-  {
-      width: 100%;
-      height: 100%;
-      margin: 0px;
-      padding: 0px;
-      overflow-x: hidden;
-  }
-
-  /* Properties of the background video : note VID IS 720 px x 404 */
-  #video-background {
-    overflow: hidden;
-    z-index: -100;
-    width:720px;
-    height:auto;
-  }
-  @media (max-width: 720px) {
-    #video-background {
-      overflow: hidden;
-      z-index: -100;
-      width:480px;
-      height: auto;
-    }
-  }
-  @media (max-width: 480px) {
-    #video-background {
-      overflow: hidden;
-      z-index: -100;
-      width:100%;
-      height: auto;
-    }
-  }
-
-  /* for displaying text over video */
-  .vidtext_container {
-    position: absolute;
-    top: 22%; /* 110px; */
-    left: 4%; /* 50px; */
-    width: 400px;
-  }
-
-  /* text color for image foreground */
-  .movie_text {
-    color: rgba(255, 255, 255, 1);
-    /* text-shadow: 2px 2px 2px #FFF; */
-  }
-
-  /* transluscent text background over images/videos */
-  .back_white {background-color: rgba(255, 255, 255, 0.1);}
-  @media (max-width: 480px) {
-    .back_white {background-color: rgba(255, 255, 255, 0.3);}
-    }
-
-
-  .scrollme {
-    overflow-y: auto;
-  }
-
-  /* no idea why this is needed, but it is */
-  .table_title {
-    /* text-align:center; */
-    margin-left: 40px;
-    margin-top:0px;
-    margin-bottom:2px;
-  }
-
-  /* following because fixed-top navbar overlays body content
-  https://stackoverflow.com/a/11008050/9072894
-  */
-  body { padding-top: 65px; }
-
-
-  p.closer {
-    margin-bottom: 0.25em;
-  }
-
-</style>
 </head>
 
   <body>
@@ -114,7 +32,7 @@
       <!-- Brand (home button outside the collapsible part) -->
       <a class="navbar-brand" href="{% url 'clans:index' %}">Home</a>
 
-      <!-- Collapsible hambumberg button to show, when relevant -->
+      <!-- Collapsible menu button to show, when relevant -->
       <button class = "navbar-toggler" type="button"
               data-toggle="collapse" data-target="#collapsibleNavbar"
               aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -126,12 +44,30 @@
       <!-- Rest of navbar that can goes into the button, when narrow, -->
       <div class = "collapse navbar-collapse" id = "collapsibleNavbar">
         <ul class="navbar-nav mr-auto">  <!-- mr-auto = margin-right auto -->
-          <!-- Members (will be dropdown) -->
+          <!-- Members  -->
           <li class="nav-item">
             <a class="nav-link" href={% url 'members:members' %}>Members</a>
           </li>
 
-          <!-- clan dropdown -->
+          <!-- Leaderboards -->
+          <li class="nav-item dropdown">
+            <a class = "nav-link dropdown-toggle" id="leaderboardsDropdown" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Leaderboards</a>
+            <div class = "dropdown-menu" aria-labelledby="clanDropdown">
+              <a class = "dropdown-item"
+                 href ="#"
+                 target="_blank">PvP</a>
+              <a class = "dropdown-item"
+                 href ="#"
+                 target = "_blank">PvE</a>
+              <a class = "dropdown-item"
+              href ="#"
+              target = "_blank">Raid</a>
+            </div>
+          </li>
+
+          <!-- generic clan stuff dropdown -->
           <li class="nav-item dropdown">
             <a class = "nav-link dropdown-toggle" id="clanDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -177,14 +113,11 @@
    </div>
 
 
-    <!-- <div class = "page-header"> -->
       {% block header %} {% endblock header %}
-    <!-- </div>  -->
 
     <div class = "container-fluid">
         {% block content %}{% endblock content %}
    </div>
-
 
   </body>
 </html>

@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'd2api',
     'clans',
     'members',
+    'characters',
 
 
 ]

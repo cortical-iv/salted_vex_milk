@@ -12,6 +12,9 @@ class Member(models.Model):
     membership_type = models.IntegerField()
     has_played_d2 = models.BooleanField(default = False)
     updated = models.DateTimeField(auto_now=True)
+    max_light = models.IntegerField(blank=True, null=True)
+    minutes_played = models.IntegerField(blank=True, null=True)
+    date_last_played = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         unique_together = ('member_id', 'membership_type') #need both to uniquely identify players
