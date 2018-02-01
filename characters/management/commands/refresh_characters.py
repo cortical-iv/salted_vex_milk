@@ -31,14 +31,14 @@ class Command(BaseCommand):
         #Add all characters to db
         logger.info("refresh_characters: Retreiving character data.")
         members = Member.objects.all().order_by('date_joined')
-        for member in members:
-            logger.debug(f"Getting character data for {member.name}")
-            get_profile_urlargs = {'membership_type': member.membership_type,\
-                                   'member_id': member.member_id}
-            get_profile_params = {'components': '200'}
-            characters_profile = api.GetProfile(D2_HEADERS, url_arguments = get_profile_urlargs, \
-                                                request_parameters = get_profile_params)
+        for member in members[0:4]:
             if member.has_played_d2:
+                logger.debug(f"Getting character data for {member.name}")
+                get_profile_urlargs = {'membership_type': member.membership_type,\
+                                       'member_id': member.member_id}
+                get_profile_params = {'components': '200'}
+                characters_profile = api.GetProfile(D2_HEADERS, url_arguments = get_profile_urlargs, \
+                                                    request_parameters = get_profile_params)
                 member_chars, total_time, max_light, last_played  = characters_profile.extract_character_info()
                 member.max_light = max_light
                 member.minutes_played = total_time

@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'clans',
     'members',
     'characters',
+    'pvpstats',
 
 
 ]

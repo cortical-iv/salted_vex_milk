@@ -50,13 +50,14 @@
           </li>
 
           <!-- Leaderboards -->
+          {# <!-- for /pvpstats/kd/: "{% url 'pvpstats:pvpstats' %}kd/" --> #}
           <li class="nav-item dropdown">
             <a class = "nav-link dropdown-toggle" id="leaderboardsDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               Leaderboards</a>
+               Stats</a>
             <div class = "dropdown-menu" aria-labelledby="clanDropdown">
               <a class = "dropdown-item"
-                 href ="#"
+                 href = "{% url 'pvpstats:pvpstats' %}"
                  target="_blank">PvP</a>
               <a class = "dropdown-item"
                  href ="#"
@@ -67,43 +68,27 @@
             </div>
           </li>
 
-          <!-- generic clan stuff dropdown -->
+          <!-- generic info dropdown -->
           <li class="nav-item dropdown">
             <a class = "nav-link dropdown-toggle" id="clanDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               ImHelping</a>
+               Useful</a>
             <div class = "dropdown-menu" aria-labelledby="clanDropdown">
               <a class = "dropdown-item"
                  href ="https://www.the100.io/groups/372"
-                 target="_blank">The100</a>
+                 target="_blank">EC59 the100</a>
               <a class = "dropdown-item"
                  href ="https://ec59.slack.com/"
                  target = "_blank">Slack Channel</a>
               <a class = "dropdown-item"
-              href ="https://www.youtube.com/channel/UCuoWqSDZ2vz9g8rXjLR7ihw"
-              target = "_blank">Youtube Channel</a>
-            </div>
-          </li>
-
-          <!-- Generic destiny stuff (will be dropdown) -->
-          <li class="nav-item dropdown">
-            <a class = "nav-link dropdown-toggle" id="d2Dropdown" role="button"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               Destiny2</a>
-            <div class = "dropdown-menu" aria-labelledby="d2Dropdown">
+                href ="https://www.youtube.com/channel/UCuoWqSDZ2vz9g8rXjLR7ihw"
+                target = "_blank">Youtube Channel</a>
               <a class = "dropdown-item"
                  href ="https://www.bungie.net"
                  target="_blank">Bungie</a>
              <a class = "dropdown-item"
                 href ="https://destinyitemmanager.com/"
                 target = "_blank">Destiny Item Manager</a>
-              <a class = "dropdown-item"
-                 href ="https://www.reddit.com/r/DestinyTheGame/"
-                 target = "_blank">/r/DTG: The salt mine</a>
-             <a class = "dropdown-item"
-                href ="https://www.reddit.com/r/LowSodiumDestiny/"
-                target = "_blank">/r/LowSodiumDestiny</a>
-
             </div>
           </li>
 

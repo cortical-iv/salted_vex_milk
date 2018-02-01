@@ -23,6 +23,7 @@ def characters(request, name='cortical_iv'):
         updated = characters.first().updated
     else:
         updated = None
+
     context = {'member': member, 'characters': characters, 'updated': updated}
     return render(request, 'characters/characters.html', context)
 

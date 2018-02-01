@@ -1,0 +1,33 @@
+{% extends "clans/base.html" %}
+{% load render_table from django_tables2 %}
+
+{% block header %}
+  <h4>PvP Stats</h4>
+{% endblock header %}
+
+
+{% block  content %}
+  <!-- DROPDOWN MENU -->
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="pvpstatsDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      SELECT STAT
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#">K/D</a>
+      <a class="dropdown-item" href="#">Most Kills</a>
+      <a class="dropdown-item" href="#">Longest Killing Spree</a>
+      <a class="dropdown-item" href="#">Time Played</a>
+    </div> <!-- dropdown-menu -->
+  </div>  <!-- dropdown class -->
+
+
+  {% render_table pvpstats_table %}
+
+  <footer>
+    {% if updated %}
+      <i>PvP stats last updated {{updated}}.</i>
+    {% else %}
+      <i>Last update unknown.</i>
+    {% endif %}
+  </footer>
+{% endblock content %}

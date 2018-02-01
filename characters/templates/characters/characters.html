@@ -12,18 +12,20 @@
         <div class "col-sm-3">
             <div class="card text-white bg-secondary mb-3"
                  style="width: 15rem; margin-left:5px;margin-right:5px;">
+
               <img class="card-img-top mx-auto" alt="character emblem"
                    style="width:100px;height:100px;align:center;"
-                 src="https://www.bungie.net{{character.emblem_path}}">
+                 src="https://www.bungie.net{{character.emblem_path}}">           
               <div class="card-block">
                 <h4 class="card-title" align="center">{{character.character_class}} ({{character.light}})</h4>
                 <p class="card-text">{{character.gender}} {{character.race}} who has played {{character.minutes_played}} minutes total.
                 <p class="card-text"><i>Last played {{character.date_last_played|date:'M d, Y'}}.</i></p>
-              </div>
-            </div>
-        </div>
+              </div>  <!-- card block class -->
+
+            </div>  <!-- card  class -->
+        </div>  <!-- column class -->
         {% endfor %}
-    </div>
+    </div>  <!-- row class -->
 
 
     {% else %}

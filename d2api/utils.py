@@ -115,6 +115,58 @@ class Endpoint:
         return "Endpoint instance."
 
 
+class GetHistoricalStats(Endpoint):
+    """
+    Return tons of useful stats about a character (or set character_id = '0' for
+    all character data lumped together).
+        https://bungie-net.github.io/multi/operation_get_Destiny2-GetHistoricalStats.html
+    Url argument: modes ('?modes=X,Y,Z')
+        modes: activity type to return (raid: 4; PvP: 5; PvE 7)
+
+    Example call:
+        headers = {"X-API-Key": <your d2 key>}
+        stats_arguments = {'membership_type': '2', 'member_id': '4611686018459314819', 'character_id': '0'}
+        modes = {'modes': '5'}
+        pvp_stats = GetHistoricalStats(headers, url_arguments = stats_arguments, request_parameters = modes)
+    """
+    def __init__(self, headers, url_arguments = None, request_parameters = None):
+        super().__init__(headers, url_arguments, request_parameters)
+
+
+    def make_url(self):
+        membership_type = str(self.url_arguments['membership_type'])
+        member_id = str(self.url_arguments['member_id'])
+        character_id = str(self.url_arguments['character_id'])
+        url = f"{BASE_URL}{membership_type}/Account/{member_id}/Character/{character_id}/Stats/"
+        return url
+
+
+    def extract_pvp_stats(self):
+        member = Member.objects.get(member_id = self.url_arguments['member_id']) #foreign key
+        pvp_stats ={}
+        pvp_stats['member'] = member.id
+        try:
+            pvp_data = self.data['allPvP']['allTime']
+        except KeyError as e:
+            logger.info(f"{member.name} GetHistoricalStats.extract_pvp_stats(): no PvP stats. KeyError {e}")
+            pvp_stats['number_matches'] = 0
+            pvp_stats['seconds_played'] = int(0)
+            pvp_stats['kd'] = 0.0
+            pvp_stats['favorite_weapon'] = '-'
+            pvp_stats['longest_spree'] =  0
+            pvp_stats['most_kills'] = 0
+
+        else:
+            pvp_stats['seconds_played'] = int(pvp_data['secondsPlayed']['basic']['value'])  #convert to days, hours, minutes
+            pvp_stats['number_matches'] = int(pvp_data['activitiesEntered']['basic']['displayValue'])
+            pvp_stats['kd'] = float(pvp_data['killsDeathsRatio']['basic']['displayValue'])
+            pvp_stats['favorite_weapon'] = pvp_data['weaponBestType']['basic']['displayValue']
+            pvp_stats['longest_spree'] = int(pvp_data['longestKillSpree']['basic']['value'])
+            pvp_stats['most_kills'] = int(pvp_data['bestSingleGameKills']['basic']['value'])
+
+        return pvp_stats
+
+
 class SearchDestinyPlayer(Endpoint):
     """
     User card: minimal info like id and date joined. This is where you can get id from name.
