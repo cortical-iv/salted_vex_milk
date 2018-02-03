@@ -7,27 +7,20 @@ Currently deployed at a secret heroku site:
 http://svm-dev.herokuapp.com/members/
 
 ## To do (shorter term)
-- PvP stats:
-    - Start with default (either pvpstats/kd or pvpstats/all), then let user select.
-    - Add link to each user and bring to individual user page that shows all their stats. Maybe put this *below* their character cards? It would just be a two column table after all.
-    - Give option to filter by number of matches (>0, > 10, > 50, > 100)
-- Should just make 'characters' page a 'member' page, and have their stats, with characters as just one part of it. Should display total time played, other stats.
+- PvE stats: replicate what you did for pvp (what is greatness?)
+- Ultimately once done put raid/pvp/pve stats on character member page with character cards.
 
 ## To do (when bored)
 - Character app: set up refresh_characters to run on heroku.
 - Make better logging message when person hasn't played d2 it makes it seem catastrophic
-- Members page maybe have table-sm for smaller screens, but not for larger screens?
 - Change units of time displayed to days/hours/minutes instead of minutes (both on members screen and on character cards on characters.html).
-- ONce leaderboards are set, set up time played leaderboard?
 - Make sure there is consistgent naming for endpoint helper functions (extract_X) not (make_list) or whatever, make it consiste.
-- Add dropdown headers/dividers to the 'useful' dropdown (and change name of 'useful' to something more informative)
-- Add counter column to leaderboard tables: https://stackoverflow.com/questions/37694971/how-to-add-counter-column-in-django-tables2
-- Add page numbers to bottom of pages:
-https://stackoverflow.com/questions/16409236/displaying-page-numbers-with-django-tables2
 
+## To do (when done with stuff above)
+- Should just make 'characters' page a 'member' page, and have their stats, with characters as just one part of it. Should display total time played, other stats.
 
 ## To do (maybe)
-- Set up to show who is playing right now, with warning this could take a little while. Will require concurrency almost guaranteed: https://devcenter.heroku.com/articles/optimizing-dyno-usage
+- Set up to show who is playing right now (though not what they are doing :)), with warning this could take a little while. Will require concurrency almost guaranteed: https://devcenter.heroku.com/articles/optimizing-dyno-usage
 - x-browser testing:
     https://developer.mozilla.org/en-US/Apps/Fundamentals/Audio_and_video_delivery/cross_browser_video_player
 - Set up to develop on multiple computers (windows and ubuntu).

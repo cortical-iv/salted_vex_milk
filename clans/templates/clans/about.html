@@ -1,0 +1,35 @@
+{% extends "clans/base.html" %}
+{% load static %}
+<!--    context = {'member': member, 'characters': characters}, 'updated': blah -->
+{% block header %}
+
+{% endblock header %}
+
+{% block  content %}
+<!-- This design is from SO: https://stackoverflow.com/a/39229729/9072894 -->
+<div class="card text-white bg-secondary mb-3"
+     style="width: 20rem; margin-left:5px;margin-right:5px;">
+
+     <img class="card-img-top mx-auto" alt="clan image"
+        src="{% static  'clans/ec59.png'    %}">
+
+  <div class="card-block">
+    <h4 class="card-title" align="center">About</h4>
+    <p class="card-text">Salted Vex Milk was developed over a sixty-five year period starting in 2017 by cortical_iv with feedback from many members of EC59, and the generous help of many members of the Destiny developer community that works with the <a href = "https://github.com/Bungie-net/api" target="_blank">D2 API</a>.</p>
+
+    <p class="card-text"><a href="https://github.com/cortical-iv/salted_vex_milk" target ="_blank">The source code</a> is available at github. The project uses <a href="https://www.djangoproject.com/" target = "_blank">Django 2</a> for the back end and <a href="https://v4-alpha.getbootstrap.com/" target="_blank">Bootstrap4</a> for the front end. </p>
+
+    <p class="card-text">Clan information and user stats are set to update automatically once a day, so they are not up to date in real time. If anything at the site is broken or could be improved, please let me know. You can send me a message at ps4, or github (<i>cortical_iv</i> in both cases).</p>
+  </div>
+
+</div>  <!-- card  class -->
+
+
+
+
+
+
+
+
+
+{% endblock content %}

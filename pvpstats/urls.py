@@ -7,5 +7,6 @@ from . import views
 app_name = 'pvpstats'
 urlpatterns = [
         #Page to show all of a user's characters
-        path('', views.pvpstats, name = 'pvpstats'),
+        path('<str:stat>/', views.pvpstats, name = 'pvpstats'),
+        path('members/<str:name>/', views.memberpvp, name = 'memberpvp')
         ]

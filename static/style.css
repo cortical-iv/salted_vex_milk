@@ -47,7 +47,7 @@ footer {
 /* style for displaying text over video */
 .vidtext_container {
   position: absolute;
-  top: 15%; /* 110px; */
+  top: 22%; /* 110px; */
   left: 4%; /* 50px; */
   width: 400px;
 }
@@ -74,4 +74,12 @@ body { padding-top: 65px; }
 /* Default paragraph spacing is too far apart, this is when you want them closer */
 p.closer {
   margin-bottom: 0.25em;
+}
+
+
+/* for about page */
+.card-img-bottom {
+  color: #fff;
+  height: 20rem;
+  background-size: cover;
 }

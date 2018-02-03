@@ -15,6 +15,15 @@ class PvpStats(models.Model):
     favorite_weapon = models.CharField(max_length = 20)
     longest_spree = models.IntegerField()
     most_kills = models.IntegerField()
+    number_wins = models.IntegerField()
+    win_loss_ratio = models.FloatField()
+    longest_kill = models.FloatField()
+    suicides = models.IntegerField()
+    kills_per_match = models.FloatField()
+    deaths_per_match = models.FloatField()
+    greatness = models.FloatField()
+
+
 
     class Meta:
         verbose_name_plural = "PvP Stats"

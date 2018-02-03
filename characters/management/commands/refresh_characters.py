@@ -31,7 +31,7 @@ class Command(BaseCommand):
         #Add all characters to db
         logger.info("refresh_characters: Retreiving character data.")
         members = Member.objects.all().order_by('date_joined')
-        for member in members[0:4]:
+        for member in members:
             if member.has_played_d2:
                 logger.debug(f"Getting character data for {member.name}")
                 get_profile_urlargs = {'membership_type': member.membership_type,\

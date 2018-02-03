@@ -38,6 +38,7 @@ class Command(BaseCommand):
                 modes = {'modes': '5'}
                 pvp_historical_stats = api.GetHistoricalStats(D2_HEADERS, url_arguments = stats_urlargs, request_parameters = modes)
                 pvp_data = pvp_historical_stats.extract_pvp_stats()
+                logger.debug(pvp_data)
                 instance_kwargs = {'member': pvp_data['member']}
                 try:
                     api.bind_and_save(PvpStats, pvp_data, PvpStatsForm, **instance_kwargs)

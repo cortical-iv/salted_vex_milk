@@ -155,6 +155,13 @@ class GetHistoricalStats(Endpoint):
             pvp_stats['favorite_weapon'] = '-'
             pvp_stats['longest_spree'] =  0
             pvp_stats['most_kills'] = 0
+            pvp_stats['number_wins'] = int(0)
+            pvp_stats['win_loss_ratio'] = 0.0
+            pvp_stats['longest_kill'] = 0.0
+            pvp_stats['suicides'] = int(0)
+            pvp_stats['kills_per_match'] = 0.0
+            pvp_stats['deaths_per_match'] =   0.0
+            pvp_stats['greatness'] = self.extract_greatness(pvp_stats)
 
         else:
             pvp_stats['seconds_played'] = int(pvp_data['secondsPlayed']['basic']['value'])  #convert to days, hours, minutes
@@ -163,8 +170,40 @@ class GetHistoricalStats(Endpoint):
             pvp_stats['favorite_weapon'] = pvp_data['weaponBestType']['basic']['displayValue']
             pvp_stats['longest_spree'] = int(pvp_data['longestKillSpree']['basic']['value'])
             pvp_stats['most_kills'] = int(pvp_data['bestSingleGameKills']['basic']['value'])
-
+            pvp_stats['number_wins'] = int(pvp_data['activitiesWon']['basic']['value'])
+            #If they haven't lost, this can't be 'float'ed
+            try:
+                pvp_stats['win_loss_ratio'] = float(pvp_data['winLossRatio']['basic']['displayValue'])
+            except ValueError as e:
+                logger.error(f"ValueError for w/l ratio with error e: {e}")
+                logger.info(f"Value: {(pvp_data['winLossRatio']['basic']['displayValue'])}")
+                pvp_stats['win_loss_ratio'] = float(pvp_stats['number_wins'])
+            pvp_stats['longest_kill'] = float(pvp_data['longestKillDistance']['basic']['displayValue'])
+            pvp_stats['suicides'] = int(pvp_data['suicides']['basic']['value'])
+            pvp_stats['kills_per_match'] = float(pvp_data['kills']['pga']['displayValue'])
+            pvp_stats['deaths_per_match'] =  float(pvp_data['deaths']['pga']['displayValue'])
+            pvp_stats['greatness'] = self.extract_greatness(pvp_stats)
         return pvp_stats
+
+    def extract_greatness(self, pvp_stats):
+        """ Calculate greatness factor (TM) """
+        if pvp_stats['number_matches'] < 20:
+            experience_factor = 0.05
+        elif pvp_stats['number_matches'] < 50:
+            experience_factor = 0.8
+        else:
+            experience_factor = 1
+
+        try:
+            weighted_skill = 0.4*pvp_stats['kd']+ 0.15*pvp_stats['win_loss_ratio'] +\
+                        0.25*pvp_stats['longest_spree']/10 + 0.2*pvp_stats['most_kills']/20
+        except KeyError as e:
+            logger.error(f"KeyError in GetHistoricStats.extract_greatness(): {e}")
+            raise
+
+        greatness = experience_factor*weighted_skill
+        return greatness
+
 
 
 class SearchDestinyPlayer(Endpoint):

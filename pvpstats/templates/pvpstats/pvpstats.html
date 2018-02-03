@@ -2,7 +2,7 @@
 {% load render_table from django_tables2 %}
 
 {% block header %}
-  <h4>PvP Stats</h4>
+  <h5 class = "table_title">PvP Stats</h5>
 {% endblock header %}
 
 
@@ -13,15 +13,69 @@
       SELECT STAT
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">K/D</a>
-      <a class="dropdown-item" href="#">Most Kills</a>
-      <a class="dropdown-item" href="#">Longest Killing Spree</a>
-      <a class="dropdown-item" href="#">Time Played</a>
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='all' %}">All Stats</a>
+      <div class="dropdown-item" href="#">
+        <a class = "text-white" style = "text-decoration:none;"
+           href = "{% url 'pvpstats:pvpstats' stat='greatness' %}">Greatness</a>
+        <a href="#greatnessModal" class ="bt bt-sm bt-secondary"
+           data-toggle="modal" style="margin-left:5px;font-size:smaller;">[What's this?]</a>
+      </div>
+
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='kd' %}">K/D</a>
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='longest_spree' %}">
+        Longest Killing Spree</a>
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='most_kills' %}">
+        Maximum Number of Kills</a>
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='kills_per_match' %}">
+        Kills per Match</a>
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='deaths_per_match' %}">
+        Deaths per Match</a>
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='number_wins' %}">
+        Number of Wins</a>
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='win_loss_ratio' %}">
+        Win/Loss Ratio</a>
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='suicides' %}">
+        Number of Misadventures</a>
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='favorite_weapon' %}">
+        Favorite PvP Weapon</a>
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='longest_kill' %}">
+        Longest Kill Distance</a>
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='seconds_played' %}">
+        Time in PvP</a>
     </div> <!-- dropdown-menu -->
   </div>  <!-- dropdown class -->
 
+  <div class="modal fade" id = "greatnessModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">What is Greatness?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Greatness combines four measures (such as k/d) into a single-number that summarizes your greatness in the Crucible. It is calibrated so that a really good value is 1.0.</p>
+
+          <p style="white-space: pre-line">The formula is: <b>Greatness = Skill x Experience</b>.
+
+          Skill formula:
+          0.4*kd + 0.25*(spree/10) + 0.2*(max_kills/20) + 0.15*win_loss
+
+          Experience:
+          A number between 0.05 and 1, depending on the number of matches you have played (0.05 for 0 to 19 matches; 0.8 for 20 to 49 matches; 1 for 50+ matches).
+        </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   {% render_table pvpstats_table %}
+
+
 
   <footer>
     {% if updated %}

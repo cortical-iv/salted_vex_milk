@@ -8,4 +8,5 @@ app_name = 'clans'
 urlpatterns = [
         #Home page
         path('', views.index, name = 'index'),
+        path('about/', views.about, name = 'about'),
         ]

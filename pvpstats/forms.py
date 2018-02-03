@@ -11,14 +11,8 @@ from .models import PvpStats
 class PvpStatsForm(forms.ModelForm):
     class Meta:
         model = PvpStats
-        fields =  ['member',  'number_matches', 'seconds_played', 'kd', 'favorite_weapon', 'longest_spree', 'most_kills']
+        fields =  ['member',  'number_matches', 'greatness', 'seconds_played', 'kd', 'favorite_weapon',
+                   'longest_spree', 'most_kills', 'number_wins', 'win_loss_ratio',
+                   'longest_kill', 'suicides', 'kills_per_match', 'deaths_per_match']
 
 
-
-#    member = models.OneToOneField(Member, on_delete = models.CASCADE)
-#    updated = models.DateTimeField(auto_now=True)
-#    seconds_played =  models.IntegerField()
-#    kd = models.FloatField()
-#    favorite_weapon = models.CharField(max_length = 20)
-#    longest_spree = models.IntegerField()
-#    most_kills = models.IntegerField()

@@ -46,25 +46,27 @@
         <ul class="navbar-nav mr-auto">  <!-- mr-auto = margin-right auto -->
           <!-- Members  -->
           <li class="nav-item">
-            <a class="nav-link" href={% url 'members:members' %}>Members</a>
+            <a class="nav-link" href="{% url 'members:members' %}">Members</a>
           </li>
 
           <!-- Leaderboards -->
-          {# <!-- for /pvpstats/kd/: "{% url 'pvpstats:pvpstats' %}kd/" --> #}
           <li class="nav-item dropdown">
             <a class = "nav-link dropdown-toggle" id="leaderboardsDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                Stats</a>
             <div class = "dropdown-menu" aria-labelledby="clanDropdown">
               <a class = "dropdown-item"
-                 href = "{% url 'pvpstats:pvpstats' %}"
-                 target="_blank">PvP</a>
+                 href = "{% url 'pvpstats:pvpstats' stat='kd' %}">
+                 PvP
+               </a>
               <a class = "dropdown-item"
-                 href ="#"
-                 target = "_blank">PvE</a>
+                 href ="#">
+                 PvE
+               </a>
               <a class = "dropdown-item"
-              href ="#"
-              target = "_blank">Raid</a>
+                 href ="#">
+                 Raid
+               </a>
             </div>
           </li>
 
@@ -72,8 +74,10 @@
           <li class="nav-item dropdown">
             <a class = "nav-link dropdown-toggle" id="clanDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               Useful</a>
+               More</a>
             <div class = "dropdown-menu" aria-labelledby="clanDropdown">
+              <a class = "dropdown-item"
+                 href ="{% url 'clans:about' %}">About</a>
               <a class = "dropdown-item"
                  href ="https://www.the100.io/groups/372"
                  target="_blank">EC59 the100</a>
@@ -89,6 +93,7 @@
              <a class = "dropdown-item"
                 href ="https://destinyitemmanager.com/"
                 target = "_blank">Destiny Item Manager</a>
+
             </div>
           </li>
 

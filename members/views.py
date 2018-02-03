@@ -4,6 +4,8 @@ from django.shortcuts import render
 from django_tables2 import RequestConfig
 from .models import Member
 from .tables import MemberTable
+from clans.models import Clan
+from d2api.constants import GROUP_ID
 
 
 
@@ -23,7 +25,7 @@ def members(request):
     member_table = MemberTable(all_members)
     RequestConfig(request, paginate={'per_page':25}).configure(member_table)
     logger_memberview.debug(f"Rendering members page in members.views w/refresh datetime: {latest_update}")
-
-    context = {'member_table': member_table, 'updated': latest_update}
+    clan = Clan.objects.get(clan_id = GROUP_ID)
+    context = {'member_table': member_table, 'updated': latest_update, 'clan': clan}
     return render(request, 'members/members.html', context)
 

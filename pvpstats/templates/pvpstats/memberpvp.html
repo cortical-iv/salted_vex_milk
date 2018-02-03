@@ -2,16 +2,15 @@
 {% load render_table from django_tables2 %}
 
 {% block header %}
-  <h5 class = "table_title">{{clan.name}} Members</h5>
+    <h5>{{member.name}}'s PvP stats</h5>
 {% endblock header %}
 
 {% block  content %}
-   {% render_table member_table %}
-
+  {% render_table memberpvp_table %}
 
   <footer>
     {% if updated %}
-      <i>Last updated {{updated}}.</i>
+      <i>PvP stats last updated {{updated}}.</i>
     {% else %}
       <i>Last update unknown.</i>
     {% endif %}

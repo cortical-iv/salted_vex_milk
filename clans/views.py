@@ -26,3 +26,5 @@ def index(request):
         context = {}
     return render(request, 'clans/index.html', context) # 'index.html', {'update_clan_form': update_clan_form})
 
+def about(request):
+    return render(request, 'clans/about.html')
