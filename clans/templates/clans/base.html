@@ -53,16 +53,12 @@
           <li class="nav-item dropdown">
             <a class = "nav-link dropdown-toggle" id="leaderboardsDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               Stats</a>
+               Leaderboards</a>
             <div class = "dropdown-menu" aria-labelledby="clanDropdown">
               <a class = "dropdown-item"
-                 href = "{% url 'pvpstats:pvpstats' stat='kd' %}">
-                 PvP
-               </a>
+                 href = "{% url 'pvpstats:pvpstats' stat='kd' %}">PvP</a>
               <a class = "dropdown-item"
-                 href ="#">
-                 PvE
-               </a>
+                 href = "{% url 'pvestats:pvestats' stat='kd' %}">PvE</a>
               <a class = "dropdown-item"
                  href ="#">
                  Raid
@@ -77,23 +73,23 @@
                More</a>
             <div class = "dropdown-menu" aria-labelledby="clanDropdown">
               <a class = "dropdown-item"
-                 href ="{% url 'clans:about' %}">About</a>
-              <a class = "dropdown-item"
                  href ="https://www.the100.io/groups/372"
-                 target="_blank">EC59 the100</a>
+                 target="_blank">the100</a>
               <a class = "dropdown-item"
                  href ="https://ec59.slack.com/"
-                 target = "_blank">Slack Channel</a>
+                 target = "_blank">Slack</a>
               <a class = "dropdown-item"
                 href ="https://www.youtube.com/channel/UCuoWqSDZ2vz9g8rXjLR7ihw"
-                target = "_blank">Youtube Channel</a>
+                target = "_blank">Youtube</a>
               <a class = "dropdown-item"
                  href ="https://www.bungie.net"
                  target="_blank">Bungie</a>
              <a class = "dropdown-item"
                 href ="https://destinyitemmanager.com/"
                 target = "_blank">Destiny Item Manager</a>
-
+             <div class="dropdown-divider"></div>
+             <a class = "dropdown-item"
+               href ="{% url 'clans:about' %}">About</a>
             </div>
           </li>
 

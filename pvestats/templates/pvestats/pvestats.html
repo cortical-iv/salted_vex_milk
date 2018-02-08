@@ -1,0 +1,35 @@
+{% extends "clans/base.html" %}
+{% load render_table from django_tables2 %}
+
+{% block header %}
+  <h5 class = "table_title">PvE Leaderboard</h5>
+{% endblock header %}
+
+
+{% block  content %}
+  <!-- DROPDOWN MENU -->
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="pvpstatsDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "margin-left:3em;">
+      SELECT STAT
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='all' %}">All Stats</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='kd' %}">K/D</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='longest_spree' %}">
+        Longest Killing Spree</a>
+    </div> <!-- dropdown-menu -->
+  </div>  <!-- dropdown class -->
+
+
+  {% render_table pvestats_table %}
+
+
+
+  <footer>
+    {% if updated %}
+      <i>PvE stats last updated {{updated}}.</i>
+    {% else %}
+      <i>Last update unknown.</i>
+    {% endif %}
+  </footer>
+{% endblock content %}

@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'members',
     'characters',
     'pvpstats',
+    'pvestats',
 
 
 ]

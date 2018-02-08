@@ -2,14 +2,14 @@
 {% load render_table from django_tables2 %}
 
 {% block header %}
-  <h5 class = "table_title">PvP Stats</h5>
+  <h5 class = "table_title">PvP Leaderboard</h5>
 {% endblock header %}
 
 
 {% block  content %}
   <!-- DROPDOWN MENU -->
   <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="pvpstatsDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="pvpstatsDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "margin-left:3em;">
       SELECT STAT
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -40,6 +40,12 @@
         Favorite PvP Weapon</a>
       <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='longest_kill' %}">
         Longest Kill Distance</a>
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='trials_number_matches' %}">
+        Trials # Matches</a>
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='trials_kd' %}">
+        Trials K/D</a>
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='trials_win_loss_ratio' %}">
+        Trials Win/Loss Ratio</a>
       <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='seconds_played' %}">
         Time in PvP</a>
     </div> <!-- dropdown-menu -->
@@ -55,17 +61,35 @@
           </button>
         </div>
         <div class="modal-body">
-          <p>Greatness combines four measures (such as k/d) into a single-number that summarizes your greatness in the Crucible. It is calibrated so that a really good value is 1.0.</p>
+          <p>Greatness combines multiple measures from Crucible into a single-number that summarizes your greatness in the Crucible. It is calibrated so that a really good value is 1.0.</p>
 
-          <p style="white-space: pre-line">The formula is: <b>Greatness = Skill x Experience</b>.
+          <p style="white-space: pre-line">The general formula is: <span class="light_bold">Greatness = Skill x Experience</span>.
 
-          Skill formula:
-          0.4*kd + 0.25*(spree/10) + 0.2*(max_kills/20) + 0.15*win_loss
+          <span class = "light_bold">Skill calculation</span>
+          <em>Overall PvP</em>
+              0.4*kd + 0.2*win_loss + 0.1*spree/10 + 0.1*max_kills/20
 
-          Experience:
-          A number between 0.05 and 1, depending on the number of matches you have played (0.05 for 0 to 19 matches; 0.8 for 20 to 49 matches; 1 for 50+ matches).
+          <em>Trials</em>
+              0.1*kd/0.5 + 0.1*win_loss/0.4
+
+          <span class = "light_bold">Experience calculation</span>
+          Experience is given a number between 0.05 and 1, and depends on the number of matches you have played. This way, if you have played just one PvP match, you can't truly be great.
+
+          <em>PvP</em>
+          &lt;20 matches: 0.05
+          20-49 matches: 0.8
+          &gt;=50 matches: 1.0
+
+           <em>Trials</em>
+           &lt;10: 0.05
+           10-24: 0.8
+           &gt;=25: 1.0
+
+          Using the above definitions, greatness is calculated as:
+          <span class = "light_bold">crucible_skill*crucible_experience + pvp_skill*pvp_experience</span>
         </p>
         </div>
+
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>

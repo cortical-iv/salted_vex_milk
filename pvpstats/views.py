@@ -7,9 +7,10 @@ from .models import PvpStats
 import pvpstats.tables as stats_tables
 #from .tables import PvpStatsTable
 
-PVPSTATS_OPTIONS = ['greatness', 'seconds_played', 'number_wins', 'win_loss_ratio',
+PVPSTATS_OPTIONS = ['greatness', 'seconds_played', 'win_loss_ratio',
                'kills_per_match', 'deaths_per_match', 'kd', 'longest_spree',
-               'most_kills', 'favorite_weapon', 'longest_kill', 'suicides']
+               'most_kills', 'favorite_weapon', 'suicide_rate',
+               'trials_number_matches', 'trials_kd', 'trials_win_loss_ratio']
 
 """
 Set up logger: for now just print everything to stdout.
@@ -41,8 +42,9 @@ def pvpstats(request, stat = 'kd'):
 
 def memberpvp(request, name = 'cortical_iv'):
     """
-    Controls display of individual member pvp stats:
-    you were going to have al ink on the pvpstats page to show this
+    Controls display of individual member pvp stats.
+    NOT USED:
+    You were going to have al ink on the pvpstats page to show this
     but it is completely redundant if they are clicking on that row
     they already have that data!
     """

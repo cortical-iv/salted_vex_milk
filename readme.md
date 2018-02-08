@@ -6,18 +6,60 @@ Uses the third-party bootstrap4 theme [Cyborg](https://bootswatch.com/cyborg/), 
 Currently deployed at a secret heroku site:
 http://svm-dev.herokuapp.com/members/
 
+## Management commands that need to run daily
+- clan_refresh [set up to run daily]
+    Basic clan info like how many members, motto, etc.
+- member_refresh [set up to run daily]
+    basic member info like last time they played and when they joined clan.
+- character_refresh [not yet set up]
+    Basic info about each character for each member of clan. Class, time played, light level. Note this is used to update member table with total time played (sums all values from characters), last time played, and highest light level.
+- pvpstats_refresh [not yet set up]
+    pvp stats for each member of clan.
+- pvestats_refresh [not yet set up]
+    pve stats for each member of clan.
+
 ## To do (shorter term)
-- PvE stats: replicate what you did for pvp (what is greatness?)
+- Organize layout of files in spyder.
+- character pages: total time played is being displayed as minutes. Put in the format. Can just convert in the view and send on over. PhilsDirtyBurger will be a good corner case.
+- put highest light on member page?
+- pve stats needs to be fixed all the fuck up:
+    - square away the floats in util like you did for pvp.
+    - save/display the time variables as d/h/m like elsewhere
+    - Everything is rates, so no noeed to write average or include #s (like number of suicides)
+    - Clean up current columns (no need for # activities, activities cleared: and add stuff you want like strikes/nightfalls/prestige nfs/patrols or whatever).
+    - Add to dropdown
+    - Automate generation of dropdown menu (just give list of stats in context menu you already have that variable!): do that for pvp too.
+    - Generate 'greatness' measure.
+- refactor time functions into core app theyu shouldn't be just hanging in beef jerkey.
+- Just make all stats pga. except stuff that can't be like num matches/ratios.
+    - Be sure to explain this in page explaining stats (things like suicides and orbs are rates (suicides/game)) -- push greatness explanation there and only have very brief explanation in modal dialog.
+- pvestats app (15 stats max!):
+    - order thigns in a reasonable way in utils, fix it all up make it pretty.
+    - Then fix strikes/heroic strikes more importantly nightfall/prestige nightfalls
+        (nobody doesn't do heroic strikes: it's more about nightfalls/prestige nightfalls)
+    - run refresh_pvestats
+    - replicate this in the table/dropdown
+    - looko over data
+    - create a greatness measure
+    - dance baby, dance
+
 - Ultimately once done put raid/pvp/pve stats on character member page with character cards.
+- secondsPlayed versus totalActivityDurationSeconds vs minutes played on characters? What is all this for different endpoints and such? You should really figure this shit out.
+- Change to suicides per match in crucible in addition to total suicides
+- All these time units are sort of fubar: some are seconds, some are minutes, some are in string and displayed as 5m 30 s (e.g., average lifespan in pve). You need to get your shit together and put all this in one format! Ultimately it has to be in numbers so it can be sorted.
 
 ## To do (when bored)
-- Character app: set up refresh_characters to run on heroku.
+- Members.time_played: note compare to time wasted on destiny, which seems to be just PvE time played, and PvP time played spent in activity. This includes ALL time logged into characters doing anything. Note also includes AFK time, so if you do that a lot....At least explain this in about. LOok at time wasted about page it is really good.
+- Permission to use figre. Get more crisp, small, version of ec59 image.
+- Make sure units in pve and pvp are the same (e.g., suicide pga/total)
+- Set up refresh_characters to run on heroku.
 - Make better logging message when person hasn't played d2 it makes it seem catastrophic
-- Change units of time displayed to days/hours/minutes instead of minutes (both on members screen and on character cards on characters.html).
 - Make sure there is consistgent naming for endpoint helper functions (extract_X) not (make_list) or whatever, make it consiste.
 
 ## To do (when done with stuff above)
-- Should just make 'characters' page a 'member' page, and have their stats, with characters as just one part of it. Should display total time played, other stats.
+- Consider a mega management command that runs all the listed management commands. Why have them all run separately?
+- Put some kind of image on stats pages (pvp pve raid icons). Good visual indicator of what is up.
+- Did I need a separate character app? Well, it is definitely a separate model so why not. But maybe not a separate page: make 'characters' page part of a 'member' page, and have their stats, with characters as just one part of it. Should display total time played, other stats.
 
 ## To do (maybe)
 - Set up to show who is playing right now (though not what they are doing :)), with warning this could take a little while. Will require concurrency almost guaranteed: https://devcenter.heroku.com/articles/optimizing-dyno-usage

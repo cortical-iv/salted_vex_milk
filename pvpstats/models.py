@@ -18,10 +18,13 @@ class PvpStats(models.Model):
     number_wins = models.IntegerField()
     win_loss_ratio = models.FloatField()
     longest_kill = models.FloatField()
-    suicides = models.IntegerField()
+    suicide_rate = models.FloatField(null=True)
     kills_per_match = models.FloatField()
     deaths_per_match = models.FloatField()
     greatness = models.FloatField()
+    trials_number_matches = models.IntegerField(null=True)
+    trials_kd = models.FloatField(null=True)
+    trials_win_loss_ratio = models.FloatField(null=True)
 
 
 

@@ -58,6 +58,12 @@ footer {
   .back_white {background-color: rgba(255, 255, 255, 0.3);}
   }
 
+/* for highlighting stuff in modal dialogs */
+.light_bold {
+    color: lightgray;
+    font-weight bolder;
+}
+
 /* This makes table titles look better */
 .table_title {
   /* text-align:center; */
