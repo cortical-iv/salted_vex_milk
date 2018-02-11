@@ -8,9 +8,10 @@ import pvpstats.tables as stats_tables
 #from .tables import PvpStatsTable
 
 PVPSTATS_OPTIONS = ['greatness', 'seconds_played', 'win_loss_ratio',
-               'kills_per_match', 'deaths_per_match', 'kd', 'longest_spree',
-               'most_kills', 'favorite_weapon', 'suicide_rate',
+               'kills_pga', 'deaths_pga', 'kd', 'longest_spree',
+               'most_kills', 'favorite_weapon', 'suicides_pga',
                'trials_number_matches', 'trials_kd', 'trials_win_loss_ratio']
+
 
 """
 Set up logger: for now just print everything to stdout.

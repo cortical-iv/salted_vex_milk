@@ -14,11 +14,90 @@
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='all' %}">All Stats</a>
-      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='kd' %}">K/D</a>
+      <div class="dropdown-item" href="#">
+        <a class = "text-white" style = "text-decoration:none;"
+           href = "{% url 'pvestats:pvestats' stat='greatness' %}">Greatness</a>
+        <a href="#greatnessModal" class ="bt bt-sm bt-secondary"
+           data-toggle="modal" style="margin-left:5px;font-size:smaller;">[What's this?]</a>
+      </div>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='number_story_missions' %}">
+        Number of Story Missions</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='number_strikes' %}">
+        Number of Strikes</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='number_nightfalls' %}">
+        Number of Nightfalls</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='number_raid_clears' %}">
+        Number of Raid Clears</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='seconds_played' %}">
+        Time in PvE</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='longest_single_life' %}">
+        Longest Single Lifes</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='average_life' %}">
+        Average Lifespan</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='kills_pga' %}">
+        Kills per Activity</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='deaths_pga' %}">
+        Deaths per Activity</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='kd' %}">
+        K/D</a>
       <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='longest_spree' %}">
         Longest Killing Spree</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='most_precision_kills' %}">
+        Maximum Precision Kills</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='precision_kills_pga' %}">
+        Precision Kills per Activity</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='longest_kill' %}">
+        Longest Kill Distance</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='suicides_pga' %}">
+        Suicides per Activity</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='favorite_weapon' %}">
+        Favorite PvE Weapon</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='assists_pga' %}">
+        Assists per Activity</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='resurrections_received_pga' %}">
+        Resurrections Received per Activity</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='resurrections_performed_pga' %}">
+        Resurrections Performed per Activity</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='orbs_dropped_pga' %}">
+        Orbs Dropped per Activity</a>
+      <a class="dropdown-item" href= "{% url 'pvestats:pvestats' stat='orbs_gathered_pga' %}">
+        Orbs Gathered per Activity</a>
     </div> <!-- dropdown-menu -->
   </div>  <!-- dropdown class -->
+
+
+  <div class="modal fade" id = "greatnessModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">What is PvE Greatness?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Greatness combines multiple measures into a single-number that summarizes your PvE prowess. It is calibrated so that anything above 1.0 is really good.</p>
+
+          <p>While, like the PvP measure, it puts some emphasis on your ability to kill stuff, it puts extra emphasis on your ability to finish difficult tasks (nightfalls and raids) and work with teammates (assists, drop orbs, and resurrections).</p>
+
+          <p style="white-space: pre-line">The general formula is: <span class="light_bold">Greatness = Basic + Nightfall + Raid</span>.
+
+          <em>Basic</em>
+             0.2*kd + 0.15*spree + 0.15*precision_kills + 0.15*assists +
+             0.1*resurrections + 0.1*orbs - 0.1*suicides
+          This is weighted by how many strikes and story missions you have done (your experience): if you have done more than 200, you get a weighting factor of 1.
+
+          <em>Nightfalls and Raids</em>
+          These are solely counted by number of clears, with up to 0.15 contribution from raids if you have done more than 5, and up to 0.1 if you have done more than 10 nightfalls.
+        </p>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
   {% render_table pvestats_table %}

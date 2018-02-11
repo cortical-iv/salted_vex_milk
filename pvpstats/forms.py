@@ -13,7 +13,7 @@ class PvpStatsForm(forms.ModelForm):
         model = PvpStats
         fields =  ['member',  'number_matches', 'greatness', 'seconds_played', 'kd', 'favorite_weapon',
                    'longest_spree', 'most_kills', 'number_wins', 'win_loss_ratio',
-                   'longest_kill', 'suicide_rate', 'kills_per_match', 'deaths_per_match',
+                   'longest_kill', 'suicides_pga', 'kills_pga', 'deaths_pga',
                    'trials_number_matches', 'trials_kd', 'trials_win_loss_ratio']
 
 

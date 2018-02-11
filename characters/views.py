@@ -3,6 +3,7 @@ import logging
 
 from members.models import Member
 from .models import Character
+from salted_vex_milk.utils import render_minutes
 
 
 """

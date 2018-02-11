@@ -20,34 +20,34 @@
         <a href="#greatnessModal" class ="bt bt-sm bt-secondary"
            data-toggle="modal" style="margin-left:5px;font-size:smaller;">[What's this?]</a>
       </div>
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='seconds_played' %}">
+        Time in PvP</a>
 
+
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='kills_pga' %}">
+        Kills per Match</a>
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='deaths_pga' %}">
+        Deaths per Match</a>
       <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='kd' %}">K/D</a>
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='win_loss_ratio' %}">
+        Win/Loss Ratio</a>
+
       <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='longest_spree' %}">
         Longest Killing Spree</a>
       <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='most_kills' %}">
         Maximum Number of Kills</a>
-      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='kills_per_match' %}">
-        Kills per Match</a>
-      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='deaths_per_match' %}">
-        Deaths per Match</a>
-      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='number_wins' %}">
-        Number of Wins</a>
-      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='win_loss_ratio' %}">
-        Win/Loss Ratio</a>
-      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='suicides' %}">
-        Number of Misadventures</a>
+      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='suicides_pga' %}">
+        Suicides per Match</a>
       <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='favorite_weapon' %}">
         Favorite PvP Weapon</a>
-      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='longest_kill' %}">
-        Longest Kill Distance</a>
+
       <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='trials_number_matches' %}">
         Trials # Matches</a>
       <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='trials_kd' %}">
         Trials K/D</a>
       <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='trials_win_loss_ratio' %}">
         Trials Win/Loss Ratio</a>
-      <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='seconds_played' %}">
-        Time in PvP</a>
+
     </div> <!-- dropdown-menu -->
   </div>  <!-- dropdown class -->
 
@@ -55,7 +55,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">What is Greatness?</h5>
+          <h5 class="modal-title">What is PvP Greatness?</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

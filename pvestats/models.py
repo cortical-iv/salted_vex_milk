@@ -9,15 +9,17 @@ class PveStats(models.Model):
     """
     member = models.OneToOneField(Member, on_delete = models.CASCADE)
     updated = models.DateTimeField(auto_now=True)
+    greatness = models.FloatField(null = True)
+    number_strikes = models.IntegerField(null=True)
+    number_story_missions = models.IntegerField(null=True)
+    number_nightfalls = models.IntegerField(null=True)
+    number_prestige_nightfalls = models.IntegerField(null=True)
+    number_raid_clears = models.IntegerField(null=True)
 
-    number_activities = models.IntegerField(null=True)
-    activities_cleared = models.IntegerField(null=True)
-    heroic_public_events = models.IntegerField(null=True)
-    adventures = models.IntegerField(null=True)
 
     seconds_played =  models.IntegerField(null=True)
     longest_single_life = models.IntegerField(null=True)
-    average_life = models.FloatField(null=True)
+    average_life = models.IntegerField(null=True)
 
     kills_pga = models.FloatField(null=True)
     deaths_pga = models.FloatField(null=True)
@@ -29,6 +31,7 @@ class PveStats(models.Model):
     longest_kill = models.FloatField(null=True)
     favorite_weapon = models.CharField(max_length = 20, null=True)
 
+    assists_pga = models.FloatField(null=True)
     suicides_pga = models.FloatField(null=True)
     suicides = models.IntegerField(null=True)
     resurrections_received_pga = models.FloatField(null=True)

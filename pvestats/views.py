@@ -6,9 +6,9 @@ from .models import PveStats
 import pvestats.tables as stats_tables
 
 
-PVESTATS_OPTIONS = ['updated', 'number_activities', 'activities_cleared', 'heroic_public_events', 'adventures',
+PVESTATS_OPTIONS = ['updated', 'greatness', 'number_story_missions', 'number_strikes', 'number_nightfalls', 'number_raid_clears',
  'seconds_played', 'longest_single_life', 'average_life', 'kills_pga', 'deaths_pga', 'kd', 'longest_spree',
- 'most_precision_kills', 'precision_kills_pga', 'longest_kill', 'favorite_weapon', 'suicides_pga', 'suicides',
+ 'most_precision_kills', 'precision_kills_pga', 'longest_kill', 'favorite_weapon', 'assists_pga',  'suicides_pga', 'assists_pga',
  'resurrections_received_pga', 'resurrections_performed_pga', 'orbs_dropped_pga', 'orbs_gathered_pga']
 
 
@@ -35,6 +35,6 @@ def pvestats(request, stat = 'kd'):
         to_exclude = tuple(set(PVESTATS_OPTIONS) - set(stat.split()) )
         logger.debug(f"Excluding {to_exclude}.")
         pvestats_table = stats_tables.PveStatsTable(all_stats, order_by = '-'+stat, exclude = to_exclude)
-    RequestConfig(request, paginate={'per_page':25}).configure(pvestats_table)
+    RequestConfig(request, paginate={'per_page':15}).configure(pvestats_table)
     context = {'pvestats_table': pvestats_table, 'updated': latest_update}
     return render(request, 'pvestats/pvestats.html', context)

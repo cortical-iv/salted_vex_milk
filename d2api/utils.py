@@ -148,10 +148,10 @@ class GetHistoricalStats(Endpoint):
             pve_data = self.data['allPvE']['allTime']
         except KeyError as e:
             logger.info(f"{member.name} GetHistoricalStats.extract_pve_stats(): no PvE stats. KeyError {e}")
-            pve_stats['number_activities'] = 0
-            pve_stats['activities_cleared'] = 0
-            pve_stats['heroic_public_events'] = 0
-            pve_stats['adventures'] = 0
+            pve_stats['number_story_missions'] = 0
+            pve_stats['number_strikes'] = 0
+            pve_stats['number_nightfalls'] = 0
+            pve_stats['number_raid_clears'] = 0
 
             pve_stats['seconds_played'] = 0
             pve_stats['longest_single_life'] = 0
@@ -166,7 +166,7 @@ class GetHistoricalStats(Endpoint):
             pve_stats['longest_kill'] = 0.0
             pve_stats['favorite_weapon'] = '-'
 
-
+            pve_stats['assists_pga'] = 0.0
             pve_stats['suicides_pga'] = 0.0
             pve_stats['suicides'] = 0
             pve_stats['resurrections_received_pga'] = 0.0
@@ -174,34 +174,70 @@ class GetHistoricalStats(Endpoint):
             pve_stats['orbs_gathered_pga'] = 0.0
             pve_stats['orbs_dropped_pga'] = 0.0
 
+            pve_stats['greatness'] = 0.0
+
         else:
-            pve_stats['number_activities'] = int(pve_data['activitiesEntered']['basic']['displayValue'])
-            pve_stats['activities_cleared'] = int(pve_data['activitiesCleared']['basic']['displayValue'])
-            pve_stats['heroic_public_events'] = int(pve_data['heroicPublicEventsCompleted']['basic']['displayValue'])
-            pve_stats['adventures'] = int(pve_data['adventuresCompleted']['basic']['displayValue'])
-
-            pve_stats['seconds_played'] = int(pve_data['secondsPlayed']['basic']['value'])  #convert to days, hours, minutes
+            pve_stats['seconds_played'] = int(pve_data['secondsPlayed']['basic']['value'])
             pve_stats['longest_single_life'] = int(pve_data['longestSingleLife']['basic']['value'])
-            pve_stats['average_life'] = pve_data['averageLifespan']['basic']['value']
+            pve_stats['average_life'] = int(pve_data['averageLifespan']['basic']['value'])
 
-            pve_stats['kills_pga'] = float(pve_data['kills']['pga']['displayValue'])
-            pve_stats['deaths_pga'] =  float(pve_data['deaths']['pga']['displayValue'])
-            pve_stats['kd'] = float(pve_data['killsDeathsRatio']['basic']['displayValue'])
+            pve_stats['kills_pga'] = pve_data['kills']['pga']['value']
+            pve_stats['deaths_pga'] =  pve_data['deaths']['pga']['value']
+            pve_stats['kd'] = pve_data['killsDeathsRatio']['basic']['value']
             pve_stats['longest_spree'] = int(pve_data['longestKillSpree']['basic']['value'])
             pve_stats['most_precision_kills'] = int(pve_data['mostPrecisionKills']['basic']['value'])
-            pve_stats['precision_kills_pga'] = float(pve_data['precisionKills']['pga']['displayValue'])
-            pve_stats['longest_kill'] = float(pve_data['longestKillDistance']['basic']['displayValue'])
+            pve_stats['precision_kills_pga'] = pve_data['precisionKills']['pga']['value']
+            pve_stats['longest_kill'] = pve_data['longestKillDistance']['basic']['value']
             pve_stats['favorite_weapon'] = pve_data['weaponBestType']['basic']['displayValue']
 
-
-            pve_stats['suicides_pga'] = float(pve_data['suicides']['pga']['displayValue'])
+            pve_stats['assists_pga'] = pve_data['assists']['pga']['value']
+            logger.info(f"pga assists: {pve_stats['assists_pga']}")
+            pve_stats['suicides_pga'] = pve_data['suicides']['pga']['value']
             pve_stats['suicides'] = int(pve_data['suicides']['basic']['displayValue'])
-            pve_stats['resurrections_received_pga'] = float(pve_data['resurrectionsReceived']['pga']['displayValue'])
-            pve_stats['resurrections_performed_pga'] = float(pve_data['resurrectionsPerformed']['pga']['displayValue'])
-            pve_stats['orbs_gathered_pga'] = float(pve_data['orbsGathered']['pga']['displayValue'])
-            pve_stats['orbs_dropped_pga'] = float(pve_data['orbsDropped']['pga']['displayValue'])
+            pve_stats['resurrections_received_pga'] = pve_data['resurrectionsReceived']['pga']['value']
+            pve_stats['resurrections_performed_pga'] = pve_data['resurrectionsPerformed']['pga']['value']
+            pve_stats['orbs_gathered_pga'] = pve_data['orbsGathered']['pga']['value']
+            pve_stats['orbs_dropped_pga'] = pve_data['orbsDropped']['pga']['value']
 
-#        pve_stats['greatness'] = self.extract_greatness(pve_stats)
+            #Story missions
+            try:
+                story_data = self.data['story']['allTime']
+            except KeyError as e:
+                logger.info(f"{member.name} GetHistoricalStats.extract_pve_stats(): no story mission data. KeyError {e}")
+                pve_stats['number_story_missions'] = 0
+            else:
+                logger.info('getting story missions')
+                pve_stats['number_story_missions'] = story_data['activitiesCleared']['basic']['value']
+
+            #Strikes
+            try:
+                strike_data = self.data['allStrikes']['allTime']
+            except KeyError as e:
+                logger.info(f"{member.name} GetHistoricalStats.extract_pve_stats(): no strikes. KeyError {e}")
+                pve_stats['number_strikes'] = 0
+            else:
+                pve_stats['number_strikes'] = strike_data['activitiesCleared']['basic']['value']
+
+            #Nightfall
+            try:
+                nightfall_data = self.data['nightfall']['allTime']
+            except KeyError as e:
+                logger.info(f"{member.name} GetHistoricalStats.extract_pve_stats(): no nightfalls. KeyError {e}")
+                pve_stats['number_nightfalls'] = 0
+            else:
+                pve_stats['number_nightfalls'] = nightfall_data['activitiesCleared']['basic']['value']
+
+            #Raid clears
+            try:
+                raid_data =  self.data['raid']['allTime']
+            except KeyError as e:
+                logger.info(f"{member.name} GetHistoricalStats.extract_pve_stats(): no raid data. KeyError {e}")
+                pve_stats['number_raid_clears'] = 0
+            else:
+                pve_stats['number_raid_clears'] = raid_data['activitiesCleared']['basic']['value']
+
+            pve_stats['greatness'] = self.extract_pve_greatness(pve_stats)
+            logger.info(f"pve stats greatness: {pve_stats['greatness']}")
         return pve_stats
 
 
@@ -222,9 +258,9 @@ class GetHistoricalStats(Endpoint):
             pvp_stats['number_wins'] = int(0)
             pvp_stats['win_loss_ratio'] = 0.0
             pvp_stats['longest_kill'] = 0.0
-            pvp_stats['suicide_rate'] = int(0)
-            pvp_stats['kills_per_match'] = 0.0
-            pvp_stats['deaths_per_match'] =   0.0
+            pvp_stats['suicides_pga'] = int(0)
+            pvp_stats['kills_pga'] = 0.0
+            pvp_stats['deaths_pga'] =   0.0
             pvp_stats['trials_number_matches'] = 0
             pvp_stats['trials_kd'] = 0.0
             pvp_stats['trials_win_loss_ratio'] = 0.0
@@ -242,10 +278,10 @@ class GetHistoricalStats(Endpoint):
             except ValueError as e:  #no losses
                 pvp_stats['win_loss_ratio'] = float(pvp_stats['number_wins'])
             pvp_stats['longest_kill'] = pvp_data['longestKillDistance']['basic']['value']
-            pvp_stats['suicide_rate'] = pvp_data['suicides']['pga']['value']
-            logger.debug(pvp_stats['suicide_rate'] )
-            pvp_stats['kills_per_match'] = pvp_data['kills']['pga']['value']
-            pvp_stats['deaths_per_match'] =  pvp_data['deaths']['pga']['value']
+            pvp_stats['suicides_pga'] = pvp_data['suicides']['pga']['value']
+            logger.debug(pvp_stats['suicides_pga'] )
+            pvp_stats['kills_pga'] = pvp_data['kills']['pga']['value']
+            pvp_stats['deaths_pga'] =  pvp_data['deaths']['pga']['value']
             #Trials data
             try:
                 trials_data = self.data['trialsofthenine']['allTime']
@@ -294,16 +330,59 @@ class GetHistoricalStats(Endpoint):
         greatness = experience_factor*weighted_skill + trials_experience_factor*weighted_trials_skill
         return greatness
 
-#    def extract_pve_greatness(self, pve_stats):
-#        """ Calculate greatness factor (TM) """
-#        try:
-#            greatness =
-#
-#        except KeyError as e:
-#            logger.error(f"KeyError in GetHistoricStats.extract_pve_greatness(): {e}")
-#            raise
-#
-#        return greatness
+    def extract_pve_greatness(self, pve_stats):
+        """ Calculate greatness factor (TM) for pve"""
+        logger.debug(pve_stats)
+
+        #General component
+        num_basics = pve_stats['number_story_missions'] + pve_stats['number_strikes']
+        if num_basics < 50:
+            experience_factor_basic = 0.05
+        elif num_basics < 200:
+            experience_factor_basic = 0.8
+        else:
+            experience_factor_basic = 1.0
+        try:
+            basic_skill = 0.15*(max([pve_stats['longest_spree']/300, 1.1])) +\
+                          0.15*(max([pve_stats['precision_kills_pga']/25, 1.1])) +\
+                          0.2*(max([pve_stats['kd']/35, 1.1])) +\
+                          0.15*(max(pve_stats['assists_pga']/30, 1.1)) +\
+                          0.1*pve_stats['resurrections_performed_pga']/1.2 +\
+                          0.1*pve_stats['orbs_dropped_pga']/7 +\
+                          -0.1*pve_stats['suicides_pga']/10
+
+
+        except KeyError as e:
+            logger.debug(f"KeyError in GetHistoricStats.extract_pve_greatness(): {e}")
+            raise
+        else:
+            basic_contribution = experience_factor_basic * basic_skill
+
+        #Raid component
+        num_raid_clears = pve_stats['number_raid_clears']
+        if num_raid_clears == 0:
+            raid_contribution = 0
+        elif num_raid_clears == 1 :
+            raid_contribution = 0.05
+        elif num_raid_clears < 5:
+            raid_contribution = 0.1
+        else:
+            raid_contribution = 0.15
+
+        #Nightfall
+        num_nightfalls = pve_stats['number_nightfalls']
+        if num_nightfalls == 0:
+            nightfall_contribution = 0
+        elif num_nightfalls < 10:
+            nightfall_contribution =  0.05
+        else:
+            nightfall_contribution = 0.1
+
+
+        #Nightfall component
+        greatness = basic_contribution + raid_contribution + nightfall_contribution
+        logger.info(greatness)
+        return greatness
 
 class SearchDestinyPlayer(Endpoint):
     """

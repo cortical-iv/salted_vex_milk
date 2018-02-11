@@ -35,7 +35,7 @@ class Command(BaseCommand):
             if member.has_played_d2:
                 logger.debug(f"Getting pve stats for {member.name}")
                 stats_urlargs = {'membership_type': member.membership_type, 'member_id': member.member_id, 'character_id': '0'}
-                modes = {'modes': '7'}
+                modes = {'modes': '4,7,2,16,18'}
                 pve_historical_stats = api.GetHistoricalStats(D2_HEADERS, url_arguments = stats_urlargs, request_parameters = modes)
                 pve_data = pve_historical_stats.extract_pve_stats()
                 #logger.debug(pve_data)

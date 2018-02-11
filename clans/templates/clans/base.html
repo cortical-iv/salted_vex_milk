@@ -20,8 +20,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
   <!-- Custom style sheet -->
   <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-
-
+  <!-- favicon -->
+  <link rel="icon" href="{% static 'clans/favicon.ico' %}">
 </head>
 
   <body>
@@ -59,10 +59,6 @@
                  href = "{% url 'pvpstats:pvpstats' stat='kd' %}">PvP</a>
               <a class = "dropdown-item"
                  href = "{% url 'pvestats:pvestats' stat='kd' %}">PvE</a>
-              <a class = "dropdown-item"
-                 href ="#">
-                 Raid
-               </a>
             </div>
           </li>
 

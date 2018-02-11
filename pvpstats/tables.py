@@ -9,7 +9,7 @@ import logging
 
 import django_tables2 as tables
 from .models import PvpStats
-from salted_vex_milk.utils import seconds_to_days, FloatColumn
+from salted_vex_milk.utils import render_seconds, FloatColumn
 
 """
 Set up logger: for now just print everything to stdout.
@@ -27,9 +27,9 @@ class PvpStatsTable(tables.Table):
     longest_spree = tables.Column(verbose_name = 'Longest Spree', attrs= {"td": {"align":"center"} })
     favorite_weapon = tables.Column(verbose_name = 'Favorite',  attrs= {"td": {"align":"center"} })
     win_loss_ratio = FloatColumn(verbose_name = 'W/L', attrs= {"td": {"align":"center"} })
-    kills_per_match = FloatColumn(verbose_name = 'Kills', attrs= {"td": {"align":"center"} })
-    deaths_per_match = FloatColumn(verbose_name = 'Deaths', attrs= {"td": {"align":"center"} })
-    suicide_rate = FloatColumn(verbose_name = "Suicides", attrs= {"td": {"align":"center"} })
+    kills_pga = FloatColumn(verbose_name = 'Kills', attrs= {"td": {"align":"center"} })
+    deaths_pga = FloatColumn(verbose_name = 'Deaths', attrs= {"td": {"align":"center"} })
+    suicides_pga = FloatColumn(verbose_name = "Suicides", attrs= {"td": {"align":"center"} })
     trials_number_matches = tables.Column(verbose_name = 'Trials Matches', attrs= {"td": {"align":"center"} })
     trials_kd = FloatColumn(verbose_name = 'Trials K/D', attrs= {"td": {"align":"center"} })
     trials_win_loss_ratio = FloatColumn(verbose_name = 'Trials W/L', attrs= {"td": {"align":"center"} })
@@ -37,31 +37,17 @@ class PvpStatsTable(tables.Table):
     seconds_played = tables.Column(verbose_name = "Time Played", attrs= {"td": {"align":"center"} })
 
     def render_seconds_played(self, value):
-        time_logged = seconds_to_days(value)
-        #logger.debug(time_logged)
-        days = time_logged[0]
-        hours = time_logged[1]
-        minutes = time_logged[2]
-        time_played = ''
-        if value > 0:
-            if days > 0:
-                time_played += str(days) + 'd '
-            if hours > 0:
-                time_played += str(hours) + 'h '
-            time_played += str(minutes) + 'm'
-        else:
-            time_played = '0'
-        return time_played
+        return render_seconds(value)
 
 
     class Meta:
         model = PvpStats
         template = 'django_tables2/bootstrap.html'
         attrs = {'class': 'table table-striped table-hover table-sm table-responsive text-nowrap'}  #note table-bordered makes things really slow
-        fields =  ['member', 'number_matches', 'greatness', 'seconds_played', 'win_loss_ratio',
-                   'kills_per_match', 'deaths_per_match', 'kd', 'suicide_rate', 'longest_spree',
-                   'most_kills', 'favorite_weapon',
-                   'trials_number_matches', 'trials_kd', 'trials_win_loss_ratio']
+        fields =  ['member', 'number_matches', 'greatness', 'seconds_played', 'kills_pga',
+                   'deaths_pga', 'kd', 'win_loss_ratio', 'longest_spree', 'most_kills',
+                   'suicides_pga', 'favorite_weapon', 'trials_number_matches', 'trials_kd',
+                   'trials_win_loss_ratio']
 
 
 
