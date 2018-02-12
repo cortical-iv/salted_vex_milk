@@ -35,6 +35,6 @@ def pvestats(request, stat = 'kd'):
         to_exclude = tuple(set(PVESTATS_OPTIONS) - set(stat.split()) )
         logger.debug(f"Excluding {to_exclude}.")
         pvestats_table = stats_tables.PveStatsTable(all_stats, order_by = '-'+stat, exclude = to_exclude)
-    RequestConfig(request, paginate={'per_page':15}).configure(pvestats_table)
+    RequestConfig(request, paginate={'per_page':10}).configure(pvestats_table)
     context = {'pvestats_table': pvestats_table, 'updated': latest_update}
     return render(request, 'pvestats/pvestats.html', context)

@@ -92,7 +92,7 @@ class Endpoint:
             msg1 = f"JSONDecodeError in Endpoint.get_data()."
             msg2 = "Response does not contain json-encoded data.\n"
             msg3 = f"URL: {self.url}.\nError: '{jsonError}'"
-            msg = msg1 + msg2 + msg3
+            msg = msg1 + msg2 + msg3 + msg3
             logger.exception(msg)
             raise
 
@@ -105,7 +105,8 @@ class Endpoint:
             error_message = response_json['Message']
             msg1 = f"KeyError in Endpoint.get_data().\nURL: {self.url}.\n"
             msg2 = f"Error code {error_code}: {error_status}.\nMessage: {error_message}.\n"
-            msg = msg1 + msg2
+            msg3 = "For bungie data this usually means you got a bungie error, like the user has not played d2.\n"
+            msg = msg1 + msg2 + msg3
             logger.warning(msg)
             data = response_json
         return data

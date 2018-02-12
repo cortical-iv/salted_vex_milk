@@ -23,7 +23,7 @@ def members(request):
     all_members = Member.objects.all().order_by('date_joined')
     latest_update = all_members.latest('updated').updated
     member_table = MemberTable(all_members)
-    RequestConfig(request, paginate={'per_page':25}).configure(member_table)
+    RequestConfig(request, paginate={'per_page':10}).configure(member_table)
     logger_memberview.debug(f"Rendering members page in members.views w/refresh datetime: {latest_update}")
     clan = Clan.objects.get(clan_id = GROUP_ID)
     context = {'member_table': member_table, 'updated': latest_update, 'clan': clan}

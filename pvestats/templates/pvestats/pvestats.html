@@ -1,15 +1,24 @@
 {% extends "clans/base.html" %}
 {% load render_table from django_tables2 %}
+{% load static %}
 
 {% block header %}
-  <h5 class = "table_title">PvE Leaderboard</h5>
+<div class="d-flex flex-row align-items-center">
+  <div class="p-2">
+    <a href= "{% url 'pvestats:pvestats' stat='all' %}" style = "text-decoration:none;">
+      <img alt="pvestats icon"
+       src="{% static  'pvestats/pve_icon.png' %}" style = "width:75px;">
+     </a>
+  </div>
+  <div class="p-2"><h5>PvE Leaderboard</h5></div>
+</div>
 {% endblock header %}
 
 
 {% block  content %}
   <!-- DROPDOWN MENU -->
   <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="pvpstatsDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "margin-left:3em;">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="pvpstatsDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style = "margin-left:2em;margin-bottom: 3px;">
       SELECT STAT
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

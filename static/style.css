@@ -64,6 +64,14 @@ footer {
     font-weight bolder;
 }
 
+/* making dropdown scrollable and fit on screen*/
+.dropdown-menu {
+    position: fixed;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 1040;
+}
+
 /* This makes table titles look better */
 .table_title {
   /* text-align:center; */

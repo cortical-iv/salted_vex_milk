@@ -33,7 +33,7 @@ class Command(BaseCommand):
         members = Member.objects.all().order_by('date_joined')
         for member in members:
             if member.has_played_d2:
-                logger.info(f"Getting pvp stats for {member.name}")
+                logger.info(f"refresh_pvpstats: getting pvp stats for {member.name}")
                 stats_urlargs = {'membership_type': member.membership_type, 'member_id': member.member_id, 'character_id': '0'}
                 modes = {'modes': '5,39'}
                 pvp_historical_stats = api.GetHistoricalStats(D2_HEADERS, url_arguments = stats_urlargs, request_parameters = modes)

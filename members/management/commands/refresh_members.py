@@ -44,7 +44,7 @@ class Command(BaseCommand):
         for member in members.member_list:
             name = member['name']
             membership_type = member['membership_type']
-            logger.debug(f"Processing {name}.")
+            logger.info(f"refresh_members: processing {name}.")
 
             #Add has_played_d2 attribute to member
             get_profile_params = {'components': '100'}

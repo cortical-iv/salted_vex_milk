@@ -21,7 +21,7 @@ Set up logger: for now just print everything to stdout.
 logging.basicConfig(format = '%(asctime)s - %(levelname)s - %(message)s',
                     datefmt =' %m/%d/%y %H:%M:%S')
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 
 class Command(BaseCommand):
@@ -33,7 +33,7 @@ class Command(BaseCommand):
         members = Member.objects.all().order_by('date_joined')
         for member in members:
             if member.has_played_d2:
-                logger.debug(f"Getting character data for {member.name}")
+                logger.info(f"refresh_characters: getting character data for {member.name}")
                 get_profile_urlargs = {'membership_type': member.membership_type,\
                                        'member_id': member.member_id}
                 get_profile_params = {'components': '200'}

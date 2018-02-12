@@ -19,10 +19,7 @@ http://svm-dev.herokuapp.com/members/
     pve stats for each member of clan.
 
 ## To do
-- Make better logging message when person hasn't played d2 it makes it seem catastrophic
-- Put pvp/pve stats on character member page in separate cards.
-- Put some kind of image on stats pages (pvp pve raid icons). Good visual indicator of what is up.
-- Set up all refresh commands to run on heroku: why not just set up a mega command that updates *everything*? That's all you care about right? Put it in the core app.
+- Correct landing page stat for pvp/pve?
 
 ## Final refactoring walkthrough
 - Make sure order in 'all' tables is same as order in dropdowns
@@ -30,8 +27,14 @@ http://svm-dev.herokuapp.com/members/
 - Make sure there is consistgent naming for endpoint helper functions (extract_X) not (make_list) or whatever, make it consiste.
 - Set logging settings to be reasonable.
 
+## Deploy
+- Deploy to heroku (migrate etc)
+- run refresh database there
+- Set up megarefresh command to run on heroko, and not all the individual commands (remove those)
+- Test on phone on two browsers.
 
 ## To do (maybe, or next project)
+- redirect pvpstats/ to pvpstats/blah/
 - It is super inefficient to have to change the list of stats in tables, models, forms, utils, views, and template dropdown when you make a single change in your stat(s). This is a gross violation of DRY. It would be *really* nice to fix this.
 - Set up to develop on multiple computers (windows and ubuntu).
 - Prestige nightfalls: check getactivityhistory for one of bruin's characters:

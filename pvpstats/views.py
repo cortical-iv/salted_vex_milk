@@ -36,7 +36,7 @@ def pvpstats(request, stat = 'kd'):
         to_exclude = tuple(set(PVPSTATS_OPTIONS) - set(stat.split()) )
         logger.debug(f"Excluding {to_exclude}.")
         pvpstats_table = stats_tables.PvpStatsTable(all_stats, order_by = '-'+stat, exclude = to_exclude)
-    RequestConfig(request, paginate={'per_page':25}).configure(pvpstats_table)
+    RequestConfig(request, paginate={'per_page':10}).configure(pvpstats_table)
     context = {'pvpstats_table': pvpstats_table, 'updated': latest_update}
     return render(request, 'pvpstats/pvpstats.html', context)
 

@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'characters',
     'pvpstats',
     'pvestats',
+    'salted_vex_milk',
 
 
 ]
