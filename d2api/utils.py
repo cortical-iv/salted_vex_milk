@@ -192,7 +192,7 @@ class GetHistoricalStats(Endpoint):
             pve_stats['favorite_weapon'] = pve_data['weaponBestType']['basic']['displayValue']
 
             pve_stats['assists_pga'] = pve_data['assists']['pga']['value']
-            logger.info(f"pga assists: {pve_stats['assists_pga']}")
+            logger.debug(f"pga assists: {pve_stats['assists_pga']}")
             pve_stats['suicides_pga'] = pve_data['suicides']['pga']['value']
             pve_stats['suicides'] = int(pve_data['suicides']['basic']['displayValue'])
             pve_stats['resurrections_received_pga'] = pve_data['resurrectionsReceived']['pga']['value']
@@ -204,7 +204,7 @@ class GetHistoricalStats(Endpoint):
             try:
                 story_data = self.data['story']['allTime']
             except KeyError as e:
-                logger.info(f"{member.name} GetHistoricalStats.extract_pve_stats(): no story mission data. KeyError {e}")
+                logger.debug(f"{member.name} GetHistoricalStats.extract_pve_stats(): no story mission data. KeyError {e}")
                 pve_stats['number_story_missions'] = 0
             else:
                 logger.info('getting story missions')
@@ -214,7 +214,7 @@ class GetHistoricalStats(Endpoint):
             try:
                 strike_data = self.data['allStrikes']['allTime']
             except KeyError as e:
-                logger.info(f"{member.name} GetHistoricalStats.extract_pve_stats(): no strikes. KeyError {e}")
+                logger.debug(f"{member.name} GetHistoricalStats.extract_pve_stats(): no strikes. KeyError {e}")
                 pve_stats['number_strikes'] = 0
             else:
                 pve_stats['number_strikes'] = strike_data['activitiesCleared']['basic']['value']
@@ -223,7 +223,7 @@ class GetHistoricalStats(Endpoint):
             try:
                 nightfall_data = self.data['nightfall']['allTime']
             except KeyError as e:
-                logger.info(f"{member.name} GetHistoricalStats.extract_pve_stats(): no nightfalls. KeyError {e}")
+                logger.debug(f"{member.name} GetHistoricalStats.extract_pve_stats(): no nightfalls. KeyError {e}")
                 pve_stats['number_nightfalls'] = 0
             else:
                 pve_stats['number_nightfalls'] = nightfall_data['activitiesCleared']['basic']['value']
@@ -232,7 +232,7 @@ class GetHistoricalStats(Endpoint):
             try:
                 raid_data =  self.data['raid']['allTime']
             except KeyError as e:
-                logger.info(f"{member.name} GetHistoricalStats.extract_pve_stats(): no raid data. KeyError {e}")
+                logger.debug(f"{member.name} GetHistoricalStats.extract_pve_stats(): no raid data. KeyError {e}")
                 pve_stats['number_raid_clears'] = 0
             else:
                 pve_stats['number_raid_clears'] = raid_data['activitiesCleared']['basic']['value']
@@ -287,7 +287,7 @@ class GetHistoricalStats(Endpoint):
             try:
                 trials_data = self.data['trialsofthenine']['allTime']
             except KeyError as e:
-                logger.info(f"{member.name} GetHistoricalStats.extract_pvp_stats has not done trials. KeyError {e}.")
+                logger.debug(f"{member.name} GetHistoricalStats.extract_pvp_stats has not done trials. KeyError {e}.")
                 pvp_stats['trials_number_matches'] = 0
                 pvp_stats['trials_kd'] = 0.0
                 pvp_stats['trials_win_loss_ratio'] = 0.0
@@ -382,7 +382,7 @@ class GetHistoricalStats(Endpoint):
 
         #Nightfall component
         greatness = basic_contribution + raid_contribution + nightfall_contribution
-        logger.info(greatness)
+        logger.debug(f"Greatness: {greatness}")
         return greatness
 
 class SearchDestinyPlayer(Endpoint):
@@ -451,7 +451,7 @@ class GetProfile(Endpoint):
             logger.error(msg)
             raise TypeError(msg)
         elif not self.has_played_d2():
-            logger.info('Character has not played d2, so no characters.')
+            logger.debug('Member has not played d2, so no characters.')
             return None
         else:
             member = Member.objects.get(member_id = self.url_arguments['member_id']) #foreign key
@@ -539,14 +539,14 @@ class GetMembersOfGroup(Endpoint):
     """
     def __init__(self, headers, url_arguments = None, request_parameters = None):
         super().__init__(headers, url_arguments, request_parameters)
-        self.member_list = self.make_clan_list()
+        self.member_list = self.extract_clan_list()
 
     def make_url(self):
         group_id = self.url_arguments['group_id']
         url = f"{BASE_URL_GROUP}{group_id}/Members/?currentPage=1"
         return url
 
-    def make_clan_list(self):
+    def extract_clan_list(self):
         """
         Makes list of dictionaries, one for each member: this is for insertion
         of user data into a form.
@@ -554,7 +554,7 @@ class GetMembersOfGroup(Endpoint):
         try:
             self.data['results']
         except KeyError:
-            logger.error("GetMembersOfGroup.make_clan_list(): No results in GetMembersOfGroup instance.")
+            logger.error("GetMembersOfGroup.extract_clan_list(): No results in GetMembersOfGroup instance.")
             return
 
         clan = Clan.objects.get(clan_id = GROUP_ID)

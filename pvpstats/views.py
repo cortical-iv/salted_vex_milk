@@ -1,4 +1,8 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+
 import logging
 from django_tables2 import RequestConfig
 
@@ -41,6 +45,16 @@ def pvpstats(request, stat = 'kd'):
     return render(request, 'pvpstats/pvpstats.html', context)
 
 
+def pvp_redirect(request):
+    """
+    Redirects to pve main landing page. Used information from this helpful site:
+    https://overiq.com/django/1.10/redirecting-urls-in-django/
+    """
+    return HttpResponseRedirect(reverse('pvpstats:pvpstats', kwargs = {'stat': 'kd'}))
+
+
+
+#The following is a cool solution to a problem, but I am  not going to use it
 def memberpvp(request, name = 'cortical_iv'):
     """
     Controls display of individual member pvp stats.

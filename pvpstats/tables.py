@@ -24,7 +24,7 @@ class PvpStatsTable(tables.Table):
     number_matches = tables.Column(verbose_name = 'Matches', attrs= {"td": {"align":"center"} })
     kd = FloatColumn(verbose_name = 'K/D', attrs= {"td": {"align":"center"} })
     most_kills = tables.Column(verbose_name = 'Max Kills', attrs= {"td": {"align":"center"} })
-    longest_spree = tables.Column(verbose_name = 'Longest Spree', attrs= {"td": {"align":"center"} })
+    longest_spree = tables.Column(verbose_name = 'Spree', attrs= {"td": {"align":"center"} })
     favorite_weapon = tables.Column(verbose_name = 'Favorite',  attrs= {"td": {"align":"center"} })
     win_loss_ratio = FloatColumn(verbose_name = 'W/L', attrs= {"td": {"align":"center"} })
     kills_pga = FloatColumn(verbose_name = 'Kills', attrs= {"td": {"align":"center"} })

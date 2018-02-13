@@ -40,6 +40,7 @@ SECRET_KEY = get_env_variable('SECRET_KEY')
 D2_KEY =  get_env_variable('D2_KEY')
 DEBUG = get_env_variable('DEBUG')
 
+
 logger.debug(f"Debug setting: {DEBUG}")
 
 
@@ -85,7 +86,7 @@ ROOT_URLCONF = 'salted_vex_milk.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [], #os.path.join(BASE_DIR, 'salted_vex_milk/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

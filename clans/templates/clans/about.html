@@ -6,30 +6,29 @@
 {% endblock header %}
 
 {% block  content %}
-<!-- This design is from SO: https://stackoverflow.com/a/39229729/9072894 -->
-<div class="card text-white bg-secondary mb-3"
+<div class="card bg-dark mb-3"
      style="width: 20rem; margin-left:5px;margin-right:5px;">
 
      <img class="card-img-top mx-auto" alt="clan image"
-        src="{% static  'clans/ec59.png'    %}">
+        src="{% static  'clans/ec59.png' %}" style = "width:300px;">
 
   <div class="card-block">
-    <h4 class="card-title" align="center">About</h4>
+    <h4 class="card-title" align="center" style = "color:white;">About</h4>
     <p class = "card-text"
-    <p class="card-text">Salted Vex Milk was developed over a sixty year period starting in 2017 by cortical_iv with feedback from many members of EC59, and technical help from the Destiny developer community.</p>
+    <p class="card-text">Salted Vex Milk was developed over a sixty-four year period starting in 2017 by cortical_iv with feedback from members of EC59, and technical help from the Destiny 2 developer community.</p>
 
-    <p class = "card-text">The app scrapes Bungie's servers each night to pull stats about the clan. To allow for direct comparison between people with different numbers of matches, statistics are expressed in terms of per-game averages when possible.</p>
+    <p class = "card-text">  The <a href="{% url 'members:members' %}">Members</a> page has basic info about each clan member, such as how much time they have played Destiny 2. Each member's name is a link to a page about their different D2 characters.</p>
 
-    <p class="card-text">If anything at the site is broken or needs improvement, please let me know. You can send me a message at our slack channel or github (<i>cortical_iv</i> in both cases). <a href="https://github.com/cortical-iv/salted_vex_milk" target ="_blank">The source code</a> is available at github. The project uses <a href="https://www.djangoproject.com/" target = "_blank">Django 2</a> for the back end, and <a href="https://v4-alpha.getbootstrap.com/" target="_blank">Bootstrap4</a> for the front end. </p>
+    <p class = "card-text">For the <a href = "{% url 'pvpstats:pvpstats' stat='kd' %}">PvP</a> and <a href = "{% url 'pvestats:pvestats' stat='number_nightfalls' %}">PvE</a> leaderboards, there is a dropdown menu of stats such as k/d. For both PvP and PvE there is also a <em>Greatness</em> measure, which is a combination of multiple statistics: if your Greatness is 1 or higher, then you are kicking ass. You can sort leaderboards by clicking on the stat at the top: clicking again reverses the order. Stats are expressed in per-game averages when possible.</p>
 
-    <p class = "card-text">Thanks to JokerRed628 for supplying the image on this page. This page is not affiliated with Bungie.</p>
-  </div>
+    <p class = "card-text">Thanks to JokerRed628 for supplying the image on this page. Thanks to Jessamyn Smith at Codementor for helping me figure out the trickier parts of Django development.</p>
 
-</div>  <!-- card  class -->
+    <p class = "card-text"><img alt="salt shaker image" src="{% static  'clans/salt.png' %}" style="height:75px;margin:5px;" align="right">Salted Vex Milk is not affiliated with Bungie. Or Reddit, the Salt King.</p>
 
+    <p class="card-text">If you have suggestions or bug reports, please send me a message at our slack channel or github (<i>cortical_iv</i> in both cases). Note We pull data from Bungie's servers at 4am Eastern each night, so stats may not reflect your most recent pwnage. <a href="https://github.com/cortical-iv/salted_vex_milk" target ="_blank">The source code</a> is available at github. The project uses <a href="https://www.djangoproject.com/" target = "_blank">Django 2</a> for the back end, and <a href="https://v4-alpha.getbootstrap.com/" target="_blank">Bootstrap4</a> for the front end. </p>
 
-
-
+  </div>  <!--  card block -->
+</div> <!-- card -->
 
 
 

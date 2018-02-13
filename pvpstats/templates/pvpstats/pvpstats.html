@@ -17,10 +17,7 @@
 
 
 {% block  content %}
-  <!-- DROPDOWN MENU -->
-
-
-
+  <!-- PVP DROPDOWN MENU -->
   <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="pvpstatsDropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
     style = "margin-left:3em;margin-bottom:3px;">
@@ -36,7 +33,6 @@
       </div>
       <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='seconds_played' %}">
         Time in PvP</a>
-
 
       <a class="dropdown-item" href= "{% url 'pvpstats:pvpstats' stat='kills_pga' %}">
         Kills per Match</a>

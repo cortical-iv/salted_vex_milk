@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 import logging
 from django_tables2 import RequestConfig
 
@@ -18,7 +21,7 @@ Set up logger: for now just print everything to stdout.
 logging.basicConfig(format = '%(asctime)s - %(levelname)s - %(message)s',
                     datefmt =' %m/%d/%y %H:%M:%S')
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 # Create your views here.
 def pvestats(request, stat = 'kd'):
@@ -38,3 +41,11 @@ def pvestats(request, stat = 'kd'):
     RequestConfig(request, paginate={'per_page':10}).configure(pvestats_table)
     context = {'pvestats_table': pvestats_table, 'updated': latest_update}
     return render(request, 'pvestats/pvestats.html', context)
+
+
+def pve_redirect(request):
+    """
+    Redirects to pve main landing page. Used information from this helpful site:
+    https://overiq.com/django/1.10/redirecting-urls-in-django/
+    """
+    return HttpResponseRedirect(reverse('pvestats:pvestats', kwargs = {'stat': 'number_nightfalls'}))

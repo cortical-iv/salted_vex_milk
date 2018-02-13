@@ -8,4 +8,6 @@ app_name = 'pvestats'
 urlpatterns = [
         #Page to show user's pve stats
         path('<str:stat>/', views.pvestats, name = 'pvestats'),
+        #Redirect to main landing page when they do not specify a stat
+        path('', views.pve_redirect, name = 'pve_redirect')
         ]
