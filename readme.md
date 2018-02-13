@@ -1,11 +1,13 @@
 # Salted Vex Milk
-Stats and more for Echo Company 59 clan in D2, displayed using Django 2.0 for the back end, and bootstrap4 for the front end. The site includes pve/pvp leaderboards, basic information about the clan and its members, and some links to helpful stuff that people in the clan use. Developed using the third-party bootstrap4 theme [Cyborg](https://bootswatch.com/cyborg/). Renders sortable tables with [django-tables2](https://django-tables2.readthedocs.io/en/latest/pages/tutorial.html).
+Stats and more for Echo Company 59 clan in D2. Created with Django 2.0 for the back end and Bootstrap4 for the front end. The site includes pve/pvp leaderboards, basic information about the clan and its members, and some links that people in the clan might find helpful.
+
+Uses the third-party bootstrap theme [Cyborg](https://bootswatch.com/cyborg/) and renders tables using [django-tables2](https://django-tables2.readthedocs.io/en/latest/pages/tutorial.html).
 
 Currently deployed at a secret heroku site:
 http://svm-dev.herokuapp.com/members/
 
 
-## Some setup information
+## Some notes on setup
 - Project expects your your django secret key, destiny 2 api key, and debug variable as environment variables (named `SECRET_KEY`, `D2_KEY`, and `DEBUG` respectively), which are retrieved in `settings.py` using the `get_env_variable` function).
 - In `/d2api/constants.py`, set the `GROUP_ID` to the value of the clan you want to build for.
 - Set up database settings in `settings.py`, and create database for local use, if needed. Currently uses postgres.
@@ -13,18 +15,14 @@ http://svm-dev.herokuapp.com/members/
 
 
 ## To do
-- redirect pvpstats/ to pvpstats/kd/ and pvestats/ to pvestats/number_strokes/. This should be relatively simple, no? At the very least, if it isn't simple, it should be somethign I knwo how to do.
-- Clean up this readme: what does it need?
-
-## Deploy
 - Tomorrow see if it ran at 4am your time.
 - Deploy to heroku (migrate etc)
 - run refresh database there make sure logger settings are reasonable.
 - Test on phone on two browsers.
 - Change wekkars.com over to final name (saltedvexmilk) right now it is at svm-dev: http://www.wekkars.com/
 
-## Maybe someday
-- 404 error custom page(s) set up redirect or whatever, maybe with pic of guardian misadventuring.
+## Wish list
+- Create custom 404 error custom page(s) set up redirect or whatever, maybe with pic of guardian misadventure.
 - It is super inefficient to have to change the list of stats in tables, models, forms, utils, views, and template dropdown when you make a single change in your stat(s). This is a gross violation of DRY. It would be *really* nice to fix this.
 - Prestige nightfalls: check getactivityhistory for each character. Need characterid, userid, membershiptype, count (100 or whatever), mode (17=heroic), page (starts with 0). Heroic completion *percentage* would be cool to have. Basically can't look at 'completed' that is 1 if they time out, need to look at score. Frankly, don't do this yet. Bungie is looking into making it easier: https://github.com/Bungie-net/api/issues/304
 - x-browser testing:
@@ -83,8 +81,8 @@ http://svm-dev.herokuapp.com/members/
       |-- bootstrap.min.css (cyborg custom bootstrap4 theme)
       |-- style.css (home-grown styles for the pages)
 
-##Acknowledgments
-Thanks to [Jessamyn Smith](https://www.codementor.io/jessamynsmith) at codementor who helped me navigate the Django labyrinthe while making this project. Thanks to members of EC59 for general advice about the site. Thanks to the Destiny2 developer community, who is incredibly helpful. Thanks to Bungie for making a great game and API.
+## Acknowledgments
+Thanks to [Jessamyn Smith](https://www.codementor.io/jessamynsmith) at codementor who helped me navigate the Django labyrinth while making this project. Thanks to members of EC59 for general advice about the site, and to the Destiny2 developer community, who are incredibly helpful. Thanks to Bungie for making a great game and API.
 
 ### Questions for future
 - load static versus load staticfiles in a template? I seem to never need load staticfiles
