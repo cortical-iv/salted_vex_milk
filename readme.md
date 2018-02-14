@@ -6,14 +6,13 @@ Stats and more for Echo Company 59 clan in D2. Created with Django 2.0 for the b
 - In `/d2api/constants.py`, set the `GROUP_ID` to the value of the clan you want to build for.
 - Set up database settings in `settings.py`, and create database for local use, if needed. Currently uses postgres.
 - To update the info in each model, run `python manage.py refresh_database` from your virtual environment. This is also the command you would enter in your scheduler at heroku.
+- When deploying, set DEBUG to false, or at heroku to the empty string.
 
 ## To do for beta deploy
 - Tomorrow see if it ran at 4am
-- Set DEBUG to false.
-- Update this and blast off.
+- Update this and tell people.
 
 ## Wish list
-- Custom 404 page.
 - When stats change, currently have to change the list of stats in tables/models/forms/utils/views/template dropdown.
 - Add prestige nightfalls. Bungie may add this endpoint: https://github.com/Bungie-net/api/issues/304
 - Do proper x-browser testing:  https://developer.mozilla.org/en-US/Apps/Fundamentals/Audio_and_video_delivery/cross_browser_video_player
