@@ -2,10 +2,11 @@
 {% load static %}
 
 {% block header %}
-<h4>Misadventure. (404)</h4>
-
-<img alt="salt shaker image" src="{% static  'salted_vex_milk/misadventure.png' %}"
-     style="height:600px;">
-
+  <h4 class = "table_title">Sorry that page doesn't exist (404).</h4>
+  <a href="{% url 'clans:index' %}">
+  <img alt="misadventure image"
+       src="{% static  'salted_vex_milk/misadventure.png' %}"
+       style="height:600px;">
+  </a>
 
 {% endblock header %}

@@ -9,13 +9,16 @@ Stats and more for Echo Company 59 clan in D2. Created with Django 2.0 for the b
 - When deploying, set DEBUG to false, or at heroku to the empty string.
 
 ## To do for beta deploy
-- Tomorrow see if it ran at 4am
+- Update directory structure with templates/static structures for each module.
+- This fucking shit with the requests timing out is crazy.
+- Adjustable number of rows.
 - Update this and tell people.
 
 ## Wish list
-- When stats change, currently have to change the list of stats in tables/models/forms/utils/views/template dropdown.
+- Add row number to each row.
 - Add prestige nightfalls. Bungie may add this endpoint: https://github.com/Bungie-net/api/issues/304
-- Do proper x-browser testing:  https://developer.mozilla.org/en-US/Apps/Fundamentals/Audio_and_video_delivery/cross_browser_video_player
+- When stats change, currently have to change the list of stats in tables/models/forms/utils/views/template dropdown.
+- Make number of rows variable. This is actually nontrivial.
 
 
 ### Project structure (folders in project root directory)
@@ -31,6 +34,8 @@ Stats and more for Echo Company 59 clan in D2. Created with Django 2.0 for the b
       |-- management/  (management function to refresh clan)
       |   |-- commands/  
       |       |-- refresh_clans.py  (updates clan info)
+	  |-- templates/
+
       |-- static/  (movies in multiple formats for index.html -- and an image for loser browsers)
           |-- clans/
               |-- waterfall_color.mp4

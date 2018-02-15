@@ -12,6 +12,7 @@ from salted_vex_milk.utils import render_seconds_to_seconds, render_seconds
 from salted_vex_milk.utils import FloatColumn
 
 class PveStatsTable(tables.Table):
+    member = tables.LinkColumn(viewname = 'characters:characters', kwargs = {"name": tables.A('member.name')})
     greatness= FloatColumn(verbose_name = 'Greatness',  attrs= {"td": {"align":"center"} })
     number_story_missions = tables.Column(verbose_name = "Story Missions", attrs= {"td": {"align":"center"} })
     number_strikes = tables.Column(verbose_name = "Strikes", attrs= {"td": {"align":"center"} })

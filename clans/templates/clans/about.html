@@ -19,9 +19,9 @@
 
     <p class = "card-text">  The <a href="{% url 'members:members' %}">Members</a> page has basic info about each clan member, such as how much time they have played Destiny 2. Each member's name is a link to a page that contains info about their different D2 characters.</p>
 
-    <p class = "card-text">For the <a href = "{% url 'pvpstats:pvpstats' stat='kd' %}">PvP</a> and <a href = "{% url 'pvestats:pvestats' stat='number_nightfalls' %}">PvE</a> leaderboards, there is a dropdown menu of stats such as k/d. For both PvP and PvE there is also a <em>Greatness</em> measure, which is a combination of multiple statistics: if your Greatness is 1 or higher, then you are kicking ass. You can sort leaderboards by clicking on the stat at the top: clicking again reverses the order. Stats are expressed in per-game averages when possible.</p>
+    <p class = "card-text">For the <a href = "{% url 'pvpstats:pvpstats' stat='kd' %}">PvP</a> and <a href = "{% url 'pvestats:pvestats' stat='number_nightfalls' %}">PvE</a> leaderboards, there is a dropdown menu of stats such as k/d. For both PvP and PvE there is also a <em>Greatness</em> measure, which is a combination of multiple statistics: if your Greatness is 1 or higher, then you are kicking ass. You can sort based on a stat by clicking its name at the top of the leaderboard: clicking on it again will reverse the order. Stats are expressed in per-game averages when possible.</p>
 
-    <p class = "card-text"><a href = "https://www.reddit.com/r/DestinyTheGame/" target="_blank"><img alt="salt shaker image" src="{% static  'clans/salt.png' %}" style="height:75px;margin:5px;" align="right"></a>Salted Vex Milk is not affiliated with Bungie. Or Reddit, the Salt King.</p>
+    <p class = "card-text"><a href = "https://www.reddit.com/r/DestinyTheGame/" target="_blank"><img alt="salt shaker image" src="{% static  'clans/salt.png' %}" style="height:75px;margin:5px;" align="right"></a>Salted Vex Milk is not affiliated with Bungie, or the <em>true</em> God of Salt, Destiny the Game.</p>
 
     <p class="card-text">If you have suggestions or bug reports, please send me a message at our slack channel or github (<i>cortical_iv</i> in both cases). Note data is pulled from Bungie's servers at 4am Eastern each night, so stats may not reflect your most recent pwnage.</p>
 

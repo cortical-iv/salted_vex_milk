@@ -11,7 +11,7 @@ from .models import Member
 from salted_vex_milk.utils import render_minutes
 
 class MemberTable(tables.Table):
-    name = tables.LinkColumn('characters:characters', kwargs = {"name": tables.A('name')})
+    name = tables.LinkColumn(viewname = 'characters:characters', kwargs = {"name": tables.A('name')})
     date_joined = tables.DateTimeColumn(verbose_name = 'Joined', format = 'M d Y')
     date_last_played = tables.DateTimeColumn(verbose_name = 'Last Played', format ='M d Y')
     minutes_played = tables.Column(verbose_name = 'Time Played', attrs= {"td": {"align":"center"}})

@@ -6,7 +6,7 @@ from .models import Member
 from .tables import MemberTable
 from clans.models import Clan
 from d2api.constants import GROUP_ID
-from django.conf import settings
+
 
 """
 Set up logger: for now just print everything to stdout.
@@ -20,8 +20,7 @@ logger.setLevel(logging.DEBUG)
 # Create your views here.
 def members(request):
     """Page showing member information"""
-    logger.debug(f"DEBUG: {settings.DEBUG}")
-    all_members = Member.objects.all().order_by('date_joined')
+    all_members = Member.objects.all().order_by('-date_last_played')
     latest_update = all_members.latest('updated').updated
     member_table = MemberTable(all_members)
     RequestConfig(request, paginate={'per_page':10}).configure(member_table)
