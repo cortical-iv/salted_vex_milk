@@ -1,15 +1,15 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-
-
 import logging
 from django_tables2 import RequestConfig
+
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.http import Http404
+from django.urls import reverse
 
 from members.models import Member
 from .models import PvpStats
 import pvpstats.tables as stats_tables
-#from .tables import PvpStatsTable
+
 
 PVPSTATS_OPTIONS = ['greatness', 'seconds_played', 'win_loss_ratio',
                'kills_pga', 'deaths_pga', 'kd', 'longest_spree',
@@ -29,6 +29,8 @@ logger.setLevel(logging.INFO)
 def pvpstats(request, stat = 'kd'):
     """Controlling display of pvp stats"""
     all_stats = PvpStats.objects.all()
+    if not all_stats:
+        raise Http404("No pvpstats yet")
     latest_update = all_stats.latest('updated').updated
     logger.debug(f"stat: {stat}")
     if stat == 'all':

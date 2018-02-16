@@ -1,9 +1,10 @@
-from django.shortcuts import render
 import logging
+
+from django.shortcuts import render, get_object_or_404
+from django.http import Http404
 
 from members.models import Member
 from .models import Character
-from salted_vex_milk.utils import render_minutes
 
 
 """
@@ -17,8 +18,10 @@ logger.setLevel(logging.DEBUG)
 # Create your views here.
 def characters(request, name='cortical_iv'):
     """Page showing member information"""
-    member = Member.objects.get(name=name)
+    member = get_object_or_404(Member, name = name) 
     characters = Character.objects.filter(member=member.id)
+    if not characters:
+        raise Http404(f"No character data for {name} yet.")
     logger.debug(f"Checking member {name} and joined {member.date_joined}. They have {len(characters)} characters.")
     if member.has_played_d2:
         updated = characters.first().updated

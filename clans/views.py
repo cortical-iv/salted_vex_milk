@@ -1,7 +1,6 @@
-from django.shortcuts import render
-
 import logging
 
+from django.shortcuts import render, get_object_or_404
 
 from .models import Clan
 from d2api.constants import GROUP_ID
@@ -19,11 +18,8 @@ logger_clanview.setLevel(logging.INFO)
 def index(request):
     """Home page for salted vex milk"""
     logger_clanview.debug("Rendering home page in clans.views")
-    try:
-        clan_instance = Clan.objects.get(clan_id = GROUP_ID)
-        context = {'clan': clan_instance}
-    except:
-        context = {}
+    clan_instance = get_object_or_404(Clan, clan_id = GROUP_ID)
+    context = {'clan': clan_instance}
     return render(request, 'clans/index.html', context) # 'index.html', {'update_clan_form': update_clan_form})
 
 def about(request):

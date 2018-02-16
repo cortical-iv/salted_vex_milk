@@ -32,7 +32,7 @@ Set up logger: for now just print everything to stdout.
 logging.basicConfig(format = '%(asctime)s - %(levelname)s - %(message)s',
                     datefmt =' %m/%d/%y %H:%M:%S')
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 
 """
@@ -58,11 +58,9 @@ class Endpoint:
         self.url_initial = self.make_url()
         self.request_params = request_parameters
         self.headers = headers
-        logger.debug("about to make request")
         self.response = self.make_request()
         self.request_duration = self.response.elapsed.total_seconds()
         self.url = self.response.url
-        logger.debug("about to get_data()")
         self.data = self.get_data()
 
     def make_url(self):
@@ -71,17 +69,11 @@ class Endpoint:
 
     def make_request(self):
         try:
-            logger.debug("in make_request")
             if self.request_params:
-                logger.debug(f"request_params? {self.request_params}")
-                logger.debug(f"url initial: {self.url_initial}")
-                logger.debug(f"Headers: {self.headers}")
                 response = requests.get(self.url_initial, headers = self.headers, \
-                                        params = self.request_params, timeout = 2)
-                logger.debug("got response")
+                                        params = self.request_params, timeout = 30)
             else:
-                logger.debug("Get response now")
-                response = requests.get(self.url_initial, headers = self.headers, timeout = 2)
+                response = requests.get(self.url_initial, headers = self.headers, timeout = 30)
             if not response.ok:
                 response.raise_for_status()
 
@@ -90,7 +82,6 @@ class Endpoint:
             logger.exception(msg)
             raise
         else:
-            logger.debug("return response")
             return response
 
     def get_data(self):
@@ -216,7 +207,7 @@ class GetHistoricalStats(Endpoint):
                 logger.debug(f"{member.name} GetHistoricalStats.extract_pve_stats(): no story mission data. KeyError {e}")
                 pve_stats['number_story_missions'] = 0
             else:
-                logger.info('getting story missions')
+                logger.debug('getting story missions')
                 pve_stats['number_story_missions'] = story_data['activitiesCleared']['basic']['value']
 
             #Strikes
@@ -437,7 +428,6 @@ class GetProfile(Endpoint):
         membership_type = str(self.url_arguments['membership_type'])
         member_id = str(self.url_arguments['member_id'])
         url = f"{BASE_URL}{membership_type}/Profile/{member_id}/"
-        logger.debug(f"Making url in GetProfile: {url}")
         return url
 
     def has_played_d2(self):

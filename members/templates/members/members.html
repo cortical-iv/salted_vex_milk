@@ -6,14 +6,18 @@
 {% endblock header %}
 
 {% block  content %}
+  {% if updated %}
    {% render_table member_table %}
+   {% else %}
+   There is no member data yet.
+   {% endif %}
 
 
   <footer>
     {% if updated %}
       <i>Member info last updated {{updated}}.</i>
     {% else %}
-      <i>Last update unknown.</i>
+      <i>Last update: never.</i>
     {% endif %}
   </footer>
 {% endblock content %}

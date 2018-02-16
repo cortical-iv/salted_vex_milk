@@ -1,9 +1,10 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-
 import logging
 from django_tables2 import RequestConfig
+
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.http import Http404
+from django.urls import reverse
 
 from .models import PveStats
 import pvestats.tables as stats_tables
@@ -25,8 +26,10 @@ logger.setLevel(logging.INFO)
 
 # Create your views here.
 def pvestats(request, stat = 'kd'):
-    """Controlling display of pve stats"""
+    """Controlling display of pve stats"""   
     all_stats = PveStats.objects.all()
+    if not all_stats:
+        raise Http404("No pve stats yet.")
     latest_update = all_stats.latest('updated').updated
     logger.debug(f"stat: {stat}")
     if stat == 'all':

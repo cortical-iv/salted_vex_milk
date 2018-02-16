@@ -7,11 +7,12 @@ Stats and more for Echo Company 59 clan in D2. Created with Django 2.0 for the b
 - Set up database settings in `settings.py`, and create database for local use, if needed. Currently uses postgres.
 - To update the info in each model, run `python manage.py refresh_database` from your virtual environment. This is also the command you would enter in your scheduler at heroku.
 - When deploying, set DEBUG to false, or at heroku to the empty string.
+- Natural refresh order for database: clans->members->characters->pvestats->pvpstats
 
 ## To do for beta deploy
 - Update directory structure with templates/static structures for each module.
-- This fucking shit with the requests timing out is crazy.
 - Adjustable number of rows.
+- Make sure nothing weird after deploy now that you've added those 404 pages in!
 - Update this and tell people.
 
 ## Wish list
