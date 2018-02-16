@@ -7,21 +7,22 @@
 
 {% block  content %}
   {% if updated %}
-    <h5>{{member.name}}'s Characters</h5>
+    <h4>{{member.name}}'s Characters</h4>
     <div class="row">
       {% for character in characters %}
         <div class "col-sm-3">
-            <div class="card text-white bg-secondary mb-3"
-                 style="width: 15rem; margin-left:5px;margin-right:5px;">
+            <div class="card bg-dark mb-3"
+                 style="width: 16rem; margin-left:5px;margin-right:5px;">
 
               <img class="card-img-top mx-auto" alt="character emblem"
                    style="width:100px;height:100px;align:center;margin-top:10px;"
                  src="https://www.bungie.net{{character.emblem_path}}">
               <div class="card-body">
-                <h4 class="card-title" align="center">{{character.character_class}} ({{character.light}})</h4>
+                <h4 class="card-title" style ="color:white;">
+                  {{character.character_class}} ({{character.light}})
+                </h4>
                 <p class="card-text">Level {{character.level}} {{character.gender|lower}} {{character.race}} has played
-                for {{character.minutes_played|minute_format}}.</p>
-                <p class="card-text"><i>Last played {{character.date_last_played|date:'M d, Y'}}.</i></p>
+                for {{character.minutes_played|minute_format}}. Last played {{character.date_last_played|date:'M j Y, g:i A'}}.</p>
               </div>  <!-- card block class -->
             </div>  <!-- card  class -->
         </div>  <!-- column class -->

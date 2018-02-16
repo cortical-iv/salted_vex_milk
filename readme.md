@@ -11,7 +11,6 @@ Stats and more for Echo Company 59 clan in D2. Created with Django 2.0 for the b
 
 ## To do for beta deploy
 - Make sure nothing weird after deploy now that you've added those 404 pages in!
-- Make sure it updated.
 - Final readme update and tell people.
 
 ## Wish list

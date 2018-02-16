@@ -2,11 +2,12 @@
 {% load static %}
 
 {% block header %}
-  <h4 class = "table_title">Sorry that page doesn't exist (404).</h4>
+  <h5 class = "table_title">That page doesn't exist (404).</h5>
   <a href="{% url 'clans:index' %}">
   <img alt="misadventure image"
        src="{% static  'salted_vex_milk/misadventure.png' %}"
        style="height:600px;">
   </a>
+  <h5 class = "table_title">Please contact cortical_iv if you think this is an error.</h5>
 
 {% endblock header %}
