@@ -6,6 +6,7 @@ Created on Sat Jan 20 14:35:32 2018
 @author: eric
 """
 import logging
+import itertools
 
 import django_tables2 as tables
 from .models import PvpStats
@@ -40,7 +41,7 @@ class PvpStatsTable(tables.Table):
     def render_seconds_played(self, value):
         return render_seconds(value)
 
-
+    
     class Meta:
         model = PvpStats
         template = 'django_tables2/bootstrap.html'

@@ -10,23 +10,27 @@ Stats and more for Echo Company 59 clan in D2. Created with Django 2.0 for the b
 - Natural refresh order for database: clans->members->characters->pvestats->pvpstats
 
 ## To do for beta deploy
-- Update directory structure with templates/static structures for each module.
-- Adjustable number of rows.
 - Make sure nothing weird after deploy now that you've added those 404 pages in!
-- Update this and tell people.
+- Make sure it updated.
+- Final readme update and tell people.
 
 ## Wish list
-- Add row number to each row.
+- Add last time played pvp and pve to leaderboards.
+- Adjustable number of rows: keep at 10 but give user a dropdown menu that feeds it in through the url or via a get request. https://stackoverflow.com/a/35518016/9072894
 - Add prestige nightfalls. Bungie may add this endpoint: https://github.com/Bungie-net/api/issues/304
 - When stats change, currently have to change the list of stats in tables/models/forms/utils/views/template dropdown.
 - Make number of rows variable. This is actually nontrivial.
 
 
 ### Project structure (folders in project root directory)
-	salted_vex_milk
+	salted_vex_milk (core app also contains settings, urls.py, etc)
       |-- management/  (runs all other management commands)
       |   |-- commands/  
       |       |-- refresh_database.py  (runs all other refresh commands updates entire db)
+	  	|-- templates/salted_vex_milk/
+			|   |-- 404.html    
+			|-- static/salted_vex_milk/
+			    |-- misadventure.png (404 image)
 
     clans/  (app for Clan model: generic clan info like motto)    
       |-- models.py  (the Clan model)    
@@ -35,19 +39,25 @@ Stats and more for Echo Company 59 clan in D2. Created with Django 2.0 for the b
       |-- management/  (management function to refresh clan)
       |   |-- commands/  
       |       |-- refresh_clans.py  (updates clan info)
-	  |-- templates/
-
-      |-- static/  (movies in multiple formats for index.html -- and an image for loser browsers)
-          |-- clans/
-              |-- waterfall_color.mp4
-              |-- waterfall_color.webm
-              |-- waterfall_color.ogv
-              |-- waterfall_color.jpg
+			|-- templates/clans/
+			|   |-- base.html    
+			|   |-- index.html   
+			|   |-- about.html   
+			|-- static/clans/
+          |-- waterfall_color.mp4
+          |-- waterfall_color.webm
+          |-- waterfall_color.ogv
+          |-- waterfall_color.jpg
+					|-- ec59.png (for about page)
+          |-- favicon.ico  (site favicon)
+          |-- salt.png (alt icon for about page)			
 
     members/  (app for Member model: generic info like id)     
       |-- models.py  (the Member model)    
       |-- forms.py  (ModelForm for Member model)    
-      |-- urls.py  (main page for members is /members.html)     
+      |-- urls.py  (main page for members is /members.html)  
+			|-- templates/members/
+			|   |-- members.html		   
       |-- management/  (management function to refresh members)
           |-- commands/
               |-- refresh_members.py  (updates member info)
@@ -57,16 +67,27 @@ Stats and more for Echo Company 59 clan in D2. Created with Django 2.0 for the b
       |-- forms.py  (PveStatsForm for PveStats model)    
       |-- urls.py  (pages for pve stats are /pvestats/<stat>/)     
       |-- management/  (management function to refresh stats)
-          |-- commands/
-              |-- refresh_pvestats.py  (updates stats for each member info)
+      |   |-- commands/
+      |       |-- refresh_pvestats.py  (updates stats for each member info)
+			|-- templates/pvestats/
+			|   |-- pvestats.html
+			|-- static/pvestats/
+          |-- pve_icon.png  (little image for top of leaderboard)
+
+
 
     pvpstats/  (app for PvpStats model: stats from pvp like k/d and trials matches)     
       |-- models.py  (the PvpStats model)    
       |-- forms.py  (PvpStatsForm for PvpStats model)    
       |-- urls.py  (main page for pvp stats are /pvpstats/<stat>/)     
       |-- management/  (management function to refresh stats)
-          |-- commands/
-              |-- refresh_pvpstats.py  (updates stats for each member info)  
+      |   |-- commands/
+      |       |-- refresh_pvpstats.py  (updates stats for each member info)  
+			|-- templates/pvpstats/
+			|   |-- pvpstats.html
+			|   |-- memberpvp.html (not used single player stat table)
+			|-- static/pvpstats/
+          |-- pvp_icon.png  (little image for top of leaderboard)
 
     d2api/  (core app for creating/processing requests)for future   
       |-- utils.py  (the business logic, esp the api handler)    
