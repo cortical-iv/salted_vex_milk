@@ -15,11 +15,10 @@ Stats and more for Echo Company 59 clan in D2. Created with Django 2.0 for the b
 - Final readme update and tell people.
 
 ## Wish list
-- Add last time played pvp and pve to leaderboards.
+- Add last time played pvp/pve to leaderboards: would involve GetActivityHistory over all characters, count=1 (most recent), mode (either pvp or pve) and page=0. Then parse activities,period which is easy to parse as a datetime like all the others. Best to quickly do it while updating characters rather than while updating pvp/pve stats.
 - Adjustable number of rows: keep at 10 but give user a dropdown menu that feeds it in through the url or via a get request. https://stackoverflow.com/a/35518016/9072894
 - Add prestige nightfalls. Bungie may add this endpoint: https://github.com/Bungie-net/api/issues/304
-- When stats change, currently have to change the list of stats in tables/models/forms/utils/views/template dropdown.
-- Make number of rows variable. This is actually nontrivial.
+- When stats change, currently have to change the list of stats in tables/models/forms/utils/views/template dropdown, violating DRY.
 
 
 ### Project structure (folders in project root directory)
