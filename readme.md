@@ -39,13 +39,13 @@ Stats and more for Echo Company 59 clan in D2. Created with Django 2.0 for the b
 			|   |-- index.html   
 			|   |-- about.html   
 			|-- static/clans/
-          |-- waterfall_color.mp4
-          |-- waterfall_color.webm
-          |-- waterfall_color.ogv
-          |-- waterfall_color.jpg
-					|-- ec59.png (for about page)
-          |-- favicon.ico  (site favicon)
-          |-- salt.png (alt icon for about page)			
+		        |-- waterfall_color.mp4
+		        |-- waterfall_color.webm
+		        |-- waterfall_color.ogv
+		        |-- waterfall_color.jpg
+		        |-- ec59.png (for about page)
+		        |-- favicon.ico  (site favicon)
+		        |-- salt.png (alt icon for about page)			
 
     members/  (app for Member model: generic info like id)     
       |-- models.py  (the Member model)    
