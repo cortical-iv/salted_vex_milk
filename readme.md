@@ -9,9 +9,6 @@ Stats and more for Echo Company 59 clan in D2. Created with Django 2.0 for the b
 - When deploying, set DEBUG to false, or at heroku to the empty string.
 - Natural refresh order for database: clans->members->characters->pvestats->pvpstats
 
-## To do for beta deploy
-- Make sure nothing weird after deploy now that you've added those 404 pages in!
-- Final readme update and tell people.
 
 ## Wish list
 - Add last time played pvp/pve to leaderboards: would involve GetActivityHistory over all characters, count=1 (most recent), mode (either pvp or pve) and page=0. Then parse activities,period which is easy to parse as a datetime like all the others. Best to quickly do it while updating characters rather than while updating pvp/pve stats.
