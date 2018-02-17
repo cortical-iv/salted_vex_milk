@@ -11,6 +11,7 @@ Stats and more for Echo Company 59 clan in D2. Created with Django 2.0 for the b
 
 
 ## Wish list
+- Instead of modal popup, make greatness description separate page
 - Add last time played pvp/pve to leaderboards: would involve GetActivityHistory over all characters, count=1 (most recent), mode (either pvp or pve) and page=0. Then parse activities,period which is easy to parse as a datetime like all the others. Best to quickly do it while updating characters rather than while updating pvp/pve stats.
 - Adjustable number of rows: keep at 10 but give user a dropdown menu that feeds it in through the url or via a get request. https://stackoverflow.com/a/35518016/9072894
 - Add prestige nightfalls. Bungie may add this endpoint: https://github.com/Bungie-net/api/issues/304
